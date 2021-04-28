@@ -16,3 +16,20 @@ Type in (Linux) command line.
 	wsl
 	dos2unix installation.sh
 	sh installation.sh
+
+## Afterwards installation
+### Create database
+	sudo passwd postgres
+	su - postgres
+	createdb gis_db
+	psql gis_db
+	\du
+	CREATE EXTENSION postgis;
+	\q
+	exit
+
+### Get into postgres and check databases
+	su - postgres
+	psql
+	\du+
+	\l+
