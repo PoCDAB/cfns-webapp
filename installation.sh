@@ -99,3 +99,12 @@ if [ ! -d "$_POSTGIS" ]; then
 else
     echo "FOLDER '$_POSTGIS' ALREADY FOUND"
 fi
+
+# Install dependency for: django
+sudo apt-get install -y python3-django python3-pip
+pip3 install -r requirements.txt
+
+# change password hashing of postgresql
+filename="/etc/postgresql/12/main/pg_hba.conf"
+sudo sed -i "s/local   all             postgres                                peer/local   all             postgres                                trust/" $filename
+sudo service postgresql restart

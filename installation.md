@@ -33,3 +33,13 @@ Type in (Linux) command line.
 	psql
 	\du+
 	\l+
+
+### Make superuser
+	python3 manage.py createsuperuser
+
+> Username: admin
+> Email: daniel.geerts@rws.nl
+> Password: admin
+
+### Run app
+	python3 manage.py runserver

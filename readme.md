@@ -4,6 +4,18 @@ Webapplication made in Django, with GeoDjango and as database: PostgreSQL extent
 ## Install required software:
 Follow [installation.md](installation.md)
 
+Create database:
+
+	createdb gis_db
+	psql gis_db
+	> CREATE EXTENSION postgis;
+
+Then migrate:
+
+	cd geodjango/
+	python3 manage.py makemigrations
+	python3 manage.py migrate
+
 ## Start up project:
 #### Activate environment:
 Go into linux (type 'wsl' in Windows)
