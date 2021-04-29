@@ -77,7 +77,7 @@ else
 fi
 
 # Install dependency for: POSTGIS
-sudo apt install -y postgresql-12 postgresql-client-12 libpq-dev libxml2-dev postgis
+sudo apt install -y postgresql-12 postgresql-server-dev-12 postgresql-client-12 libpq-dev libxml2-dev postgis
 
 # Replace a line in postgresql.conf
 filename="/etc/postgresql/12/main/postgresql.conf"
@@ -96,6 +96,7 @@ if [ ! -d "$_POSTGIS" ]; then
     sudo ./configure --without-protobuf
     sudo make
     sudo make install
+    cd ..
 else
     echo "FOLDER '$_POSTGIS' ALREADY FOUND"
 fi

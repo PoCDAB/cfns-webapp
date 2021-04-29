@@ -1,17 +1,21 @@
-# CFNS webapp
-Webapplication made in Django, with GeoDjango and as database: PostgreSQL extented with PostGIS. This MarkDown file will help with the required software installation of this project.
-
+# INSTAllATION GUIDE
 GO GET A COUPLE CUPS OF COFFEE. THIS INSTALLATION MAY TAKE THE MAJORITY OF YOUR WORKDAY.
 
+Blijf alert tijdens de installatie, zo af en toe vraagt de command prompt om uw wachtwoord in te voeren.
+
 ## First time installation
+### To install dos2unix
+	sudo apt-get update
+	sudo apt-get install dos2unix
+
 ### Linux (Ubuntu):
-Go to correct folder in Linux command line.
+Go to the correct folder in the Linux command line.
 
 	dos2unix installation.sh
 	sh installation.sh
 
 ### WSL (Windows Subsystem for Linux (Ubuntu)):
-Type in (Linux) command line.
+Type in the (Linux) command line.
 
 	wsl
 	dos2unix installation.sh
@@ -23,7 +27,6 @@ Type in (Linux) command line.
 	su - postgres
 	createdb gis_db
 	psql gis_db
-	\du
 	CREATE EXTENSION postgis;
 	\q
 	exit
@@ -34,12 +37,20 @@ Type in (Linux) command line.
 	\du+
 	\l+
 
+### check postgresql (database) status
+	service postgresql status
+
 ### Make superuser
+	cd geodjango/
 	python3 manage.py createsuperuser
 
 > Username: admin
 > Email: daniel.geerts@rws.nl
 > Password: admin
+
+### migrate
+	python3 manage.py makemigrations
+	python3 manage.py migrate
 
 ### Run app
 	python3 manage.py runserver

@@ -80,6 +80,7 @@ DATABASES = {
          'ENGINE': 'django.contrib.gis.db.backends.postgis',
          'NAME': 'gis_db',
          'USER': 'postgres',
+         'PORT': '5433',
     },
 }
 
