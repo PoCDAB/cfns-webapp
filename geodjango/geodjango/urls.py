@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib.gis import admin
 from django.conf.urls import url, include
+from django.shortcuts import redirect
+from django.conf.urls.static import static
+from django.conf import settings
+from webapp import views
 
 urlpatterns = [
-    url(r'admin/', admin.site.urls, name='admin'),
-]
+    url(r'^admin', admin.site.urls, name='admin'),
+    url(r'^$', views.home_page, name='home'),
+    url(r'^worldborders', views.world_borders_page, name = 'world_borders'),
+    url(r'^api', views.api_page, name = 'api' ),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

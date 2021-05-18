@@ -1,0 +1,28 @@
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% load fontawesome_5 %}
+
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    {% block head %}
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      {% bootstrap_css %}
+      {% fontawesome_5_static %}
+      <title>CFNS</title>
+    {% endblock %}
+  </head>
+  {% include "header.html" %}
+  <body>
+    {% block body %}
+      Body Content
+    {% endblock %}
+
+    {% bootstrap_jquery %}
+    {% bootstrap_javascript %}
+  </body>
+  {% include "footer.html" %}
+</html>

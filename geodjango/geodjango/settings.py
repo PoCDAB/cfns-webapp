@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'world',
+    'bootstrap4',
+    'fontawesome_5',
+    'webapp',
 ]
 
 MIDDLEWARE = [

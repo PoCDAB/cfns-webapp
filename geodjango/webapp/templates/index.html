@@ -1,0 +1,16 @@
+{% extends "home_base.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+        <h2>Home page of the CFNS webapp</h2>
+        <div class="row">
+            <div class="col-sm">
+                <p><a href = "{% url 'admin:index' %}">Click Here</a> for the admin panel</p>
+            </div>
+            <div class="col-sm">
+                <p><a href = "{% url 'world_borders' %}">Click Here</a> to view all the world borders</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

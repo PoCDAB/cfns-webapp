@@ -50,7 +50,7 @@ Type in the (Linux) command line.
 
 ### migrate
 	python3 manage.py makemigrations
-	python3 manage.py makemigrations world
+	python3 manage.py makemigrations webapp
 	python3 manage.py migrate
 
 ### Run app
@@ -58,7 +58,7 @@ Type in the (Linux) command line.
 
 ### If 'World borders' (127.0.0.1/admin) is empty. Do:
 	python3 manage.py shell
-	from world import load
+	from webapp import load
 	load.run()
 	exit()
 	python3 manage.py runserver
