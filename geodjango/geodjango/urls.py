@@ -20,6 +20,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 from webapp import views
 
+# Errors handlers
+handler404 = 'webapp.views.handler404'
+handler500 = 'webapp.views.handler500'
+
 urlpatterns = [
     url(r'^admin', admin.site.urls, name='admin'),
     url(r'^$', views.home_page, name='home'),
