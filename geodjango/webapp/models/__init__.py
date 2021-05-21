@@ -1,3 +1,5 @@
 # __init__.py
-from .fontawesomeModel import Category
+from .user import User
+from .ais import AIS
+from .fontawesomeModel import FontAwesomeIcon
 from .worldborderModel import WorldBorder

@@ -13,21 +13,32 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib.gis import admin
 from django.conf.urls import url, include
 from django.shortcuts import redirect
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import get_user_model
+User = get_user_model()
+from rest_framework import routers, serializers, viewsets
+
 from webapp import views
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'ais', views.AisViewSet)
 
 # Errors handlers
 handler404 = 'webapp.views.handler404'
 handler500 = 'webapp.views.handler500'
 
 urlpatterns = [
-    url(r'^admin', admin.site.urls, name='admin'),
+    url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^$', views.home_page, name='home'),
-    url(r'^worldborders', views.world_borders_page, name = 'world_borders'),
-    url(r'^api', views.api_page, name = 'api' ),
+    url(r'^worldborders/', views.world_borders_page, name='world_borders'),
+    url(r'^api/V1/', include(router.urls), name='api-root'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
