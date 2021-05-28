@@ -1,6 +1,5 @@
 from django.contrib.auth.models import Group
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from django.contrib.auth.models import User
 from .models import AIS
 from rest_framework import serializers
 

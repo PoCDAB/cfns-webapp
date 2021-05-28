@@ -82,8 +82,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-AUTH_USER_MODEL = 'webapp.User'
-
 WSGI_APPLICATION = 'geodjango.wsgi.application'
 
 
@@ -137,4 +135,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-

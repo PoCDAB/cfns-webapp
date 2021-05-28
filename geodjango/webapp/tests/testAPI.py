@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.test import Client
 from django.urls import reverse
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from django.contrib.auth.models import User
 
 # Create your tests here.
 def API_POST_AIS_TEST(TestCase):

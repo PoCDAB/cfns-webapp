@@ -19,8 +19,7 @@ from django.conf.urls import url, include
 from django.shortcuts import redirect
 from django.conf.urls.static import static
 from django.conf import settings
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
 from webapp import views

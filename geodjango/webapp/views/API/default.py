@@ -1,6 +1,4 @@
-from django.contrib.auth.models import Group
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from django.contrib.auth.models import Group, User
 from rest_framework import viewsets
 from rest_framework import permissions
 from ...serializers import UserSerializer, GroupSerializer
