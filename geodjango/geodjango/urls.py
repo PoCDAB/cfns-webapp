@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^login/$', views.loginView, name='login'),
     url(r'^logout/$', views.loggedoutView, name='logout'),
     url(r'^profile/$', views.profileView, name='profile'),
+    url(r'^geoview/$', views.geomapView, name='geoview'),
     url(r'^api/V1/', include(router.urls), name='api-root'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

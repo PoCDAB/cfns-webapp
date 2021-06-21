@@ -1,6 +1,5 @@
 {% load static %}
 {% load bootstrap4 %}
-{% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {% load fontawesome_5 %}
 
@@ -16,22 +15,25 @@
     {% bootstrap_css %}
     {% fontawesome_5_static %}
     
-    {% block head %}
+    {% block title %}
       <title>CFNS</title>
+    {% endblock %}
+    
+    {% block head %}
     {% endblock %}
   </head>
   <body>
-    {% include "header.html" %}
-    <main class="Site-content">
-      <div class="container">
+    <div class="container-fluid wrapper">
+      {% include "header.html" %}
+      <main class="site-content container">
         {% block body %}
           <p>This should be replaced!</p>
         {% endblock %}
-      </div>
 
-      {% bootstrap_jquery %}
-      {% bootstrap_javascript %}
-    </main>
-    {% include "footer.html" %}
+        {% bootstrap_jquery %}
+        {% bootstrap_javascript %}
+      </main>
+      {% include "footer.html" %}
+    </div>
   </body>
 </html>

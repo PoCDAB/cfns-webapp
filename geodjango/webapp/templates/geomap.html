@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load leaflet_tags %}
+
+{% block title %}
+  <title>Geoview</title>
+{% endblock %}
+
+{% block head %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
+
+{% block body %}
+
+{% leaflet_map "geoview" %}
+
+{% endblock %}

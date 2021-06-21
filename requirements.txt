@@ -3,3 +3,4 @@ psycopg2-binary==2.8.6
 django-bootstrap4==3.0.1
 django-fontawesome-5==1.0.18
 djangorestframework==3.12.2
+django-leaflet==0.28.1

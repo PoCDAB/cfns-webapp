@@ -1,36 +1,41 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block head %}
+{% block title %}
   <title>Login</title>
 {% endblock %}
 
 {% block body %}
-    <div class="row h-100 justify-content-md-center align-items-center">
-        <div class="col-auto">
-          <form method="post" class="form-group  text-center">
-            {% csrf_token %}
-            <table class="w-100">
-              <tr>
-                <td class="text-right">Gebruikersnaam:</td>
-                <td>{{ form.username }}</td>
-              </tr>
-              <tr>
-                <td class="text-right">Wachtwoord:</td>
-                <td>{{ form.password }}</td>
-              </tr>
-            </table>
-            </br>
-            <button type="submit" class="btn btn-primary">Inloggen</button>
-            <input type="hidden" name="next" value="{{ next }}" />
-          </form>
-        
-        {% if form.errors %}
-          <div  class="alert alert-danger" role="alert">
-            Uw gebruikersnaam en/of wachtwoord komt niet overeen. Probeer opnieuw.
-          </div>
-        {% endif %}
+<div class="row justify-content-md-center align-items-center mb-5">
+  <div class="col-auto">
+    <h3>Login bij CFNS geoviewer</h3>
+  </div>
+</div>
+<div class="row justify-content-md-center align-items-center">
+  <div class="col-auto">
+    <form method="post" class="form-group  text-center">
+      {% csrf_token %}
+      <table class="w-100">
+        <tr>
+          <td class="text-right">Gebruikersnaam:</td>
+          <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+          <td class="text-right">Wachtwoord:</td>
+          <td>{{ form.password }}</td>
+        </tr>
+      </table>
+      </br>
+      <button type="submit" class="btn btn-primary">Inloggen</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    
+    {% if form.errors %}
+      <div  class="alert alert-danger" role="alert">
+        Uw gebruikersnaam en/of wachtwoord komt niet overeen. Probeer opnieuw.
       </div>
-    </div>
+    {% endif %}
+  </div>
+</div>
   
 {% endblock %}
