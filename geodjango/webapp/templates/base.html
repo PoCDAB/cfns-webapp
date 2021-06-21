@@ -1,0 +1,37 @@
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% load fontawesome_5 %}
+
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static '/img/CFNS_icon.ico' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+
+    {% bootstrap_css %}
+    {% fontawesome_5_static %}
+    
+    {% block head %}
+      <title>CFNS</title>
+    {% endblock %}
+  </head>
+  <body>
+    {% include "header.html" %}
+    <main class="Site-content">
+      <div class="container">
+        {% block body %}
+          <p>This should be replaced!</p>
+        {% endblock %}
+      </div>
+
+      {% bootstrap_jquery %}
+      {% bootstrap_javascript %}
+    </main>
+    {% include "footer.html" %}
+  </body>
+</html>

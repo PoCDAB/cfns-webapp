@@ -1,16 +1,22 @@
-{% extends "home_base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block body %}
-    <div class="container">
-        <h2>Home page of the CFNS webapp</h2>
-        <div class="row">
-            <div class="col-sm">
-                <p><a href = "{% url 'admin:index' %}">Click Here</a> for the admin panel</p>
-            </div>
-            <div class="col-sm">
-                <p><a href = "{% url 'world_borders' %}">Click Here</a> to view all the world borders</p>
-            </div>
-        </div>
-    </div>
+    <h2>Home page of the Connectivity Fieldlab North Sea webapp</h2>
+    </br>
+    <p>
+        The initiative for a fieldlab first arose during a project for the Coastguard Netherlands in 2017 and 2018, called Breedband Noordzee (Broadband North Sea).
+        It examined the possibilities to be expected over the next five years to obtain broadband connectivity at sea.
+        The study defined broadband solutions for the maritime environment and broadly identified the Coast Guard's current and future needs for digital connectivity.
+    </p>
+    <p>
+        In addition to satellite connections, Wi-Fi, DAB+ and VDES, 5G in the 700 MHz band was identified as an important contender to provide a lot of the required broadband in near future for the operational area of the Coast Guard, maybe even for the entire Dutch continental shelf.
+        Extra attention was paid to the territorial waters, for which, according to this study, 5G coverage could (technically) easily be obtained for the public mobile networks from land, when this long-range spectrum would become available in 2020.
+    </p>
+    <p>
+        In 2018, RWS-Sea and Delta(, part of the Dutch Ministry of Infrastructure and Water Management -see organogram -) took on the task of making a more specific inventory of the Coastguard's connectivity needs and broadend the scope (I&W-) department-wide, primarily aimed at support of its public tasks. This has resulted in a study entitled "Outlook for the Information Provisioning North Sea 2020-2040" (download here, in Dutch).
+        The sensors used to protect the coast and water quality, Air Traffic Control and other sensors are included in the scope, and also the decommissioning of the oil and gas platforms that are still hosting most of these.
+        Rijkswaterstaat produced a very informative and nice looking infographics for the intended Connectivity Fieldlab North Sea, you can download here.
+        Do you join us?
+    </p>
 {% endblock %}

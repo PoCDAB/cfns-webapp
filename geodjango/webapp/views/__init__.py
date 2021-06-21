@@ -1,6 +1,7 @@
 # __init__.py
-from .homepage import home_page
-from .worldborderspage import world_borders_page
+from .homeView import homeView
+from .loginView import loginView, loggedoutView
+from .profileView import profileView
 from .errors import *
 
 # API

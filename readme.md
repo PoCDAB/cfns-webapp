@@ -8,8 +8,7 @@ Follow [installation.md](installation.md)
 #### Activate environment:
 Go into linux (type 'wsl' in Windows)
 
-	1. python3 -m venv env
-	2. source env/bin/activate
+	1. source env/bin/activate
 
 #### Update packages:
 	1. pip3 install -r requirements.txt

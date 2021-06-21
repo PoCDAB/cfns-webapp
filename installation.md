@@ -4,6 +4,12 @@ GO GET A COUPLE CUPS OF COFFEE. THIS INSTALLATION MAY TAKE THE MAJORITY OF YOUR 
 Blijf alert tijdens de installatie, zo af en toe vraagt de command prompt om uw wachtwoord in te voeren.
 
 ## First time installation
+
+Go into linux (type 'wsl' in Windows)
+
+	1. python3 -m venv env
+	1. source env/bin/activate
+
 ### To install dos2unix
 	sudo apt-get update
 	sudo apt-get install dos2unix

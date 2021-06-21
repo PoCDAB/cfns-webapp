@@ -36,8 +36,10 @@ handler500 = 'webapp.views.handler500'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
-    url(r'^$', views.home_page, name='home'),
-    url(r'^worldborders/', views.world_borders_page, name='world_borders'),
+    url(r'^$', views.homeView, name='home'),
+    url(r'^login/$', views.loginView, name='login'),
+    url(r'^logout/$', views.loggedoutView, name='logout'),
+    url(r'^profile/$', views.profileView, name='profile'),
     url(r'^api/V1/', include(router.urls), name='api-root'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
