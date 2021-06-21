@@ -46,18 +46,18 @@ Type in the (Linux) command line.
 ### check postgresql (database) status
 	service postgresql status
 
-### Make superuser
-	cd geodjango/
-	python3 manage.py createsuperuser
-
-> Username: admin
-> Email: daniel.geerts@rws.nl
-> Password: admin
-
 ### migrate
+	cd geodjango/
 	python3 manage.py makemigrations
 	python3 manage.py makemigrations webapp
 	python3 manage.py migrate
+
+#### Make superuser
+	python3 manage.py createsuperuser
+
+> Username: admin
+> Email: *name*@rws.nl
+> Password: admin
 
 ### Run app
 	python3 manage.py runserver
