@@ -26,9 +26,7 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         decoded['encodedAIS'] = encodedAIS
         print('==================================')
         print(validated_data['message'])
-        message = NMEAMessage(validated_data['message'])
         msg = decode_msg(validated_data['message'])
-        print(message)
         print(msg)
         print('==================================')
         if 'shipname' in msg:
