@@ -46,4 +46,4 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = AIS
-        fields = ['id', 'received_from', 'message', 'created_at', 'updated_at']
+        fields = ['id', 'received_from', 'received_at', 'message', 'created_at', 'updated_at']
