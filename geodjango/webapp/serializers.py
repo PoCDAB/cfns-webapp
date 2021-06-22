@@ -27,6 +27,9 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         decoded['encodedAIS'] = encodedAIS
         print('==================================')
         msg = decode_msg(validated_data['message'])
+        for i in validated_data:
+            print(i, validated_data[i])
+        print('+++++++++++++++++++++++++++++++')
         print(type(validated_data['received_at']))
         print(type(datetime.strptime(validated_data['received_at'])))
         print('==================================')
