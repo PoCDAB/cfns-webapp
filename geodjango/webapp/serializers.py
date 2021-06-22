@@ -4,7 +4,7 @@ from django.contrib.gis.geos import Point
 from rest_framework import serializers
 from .models import AIS
 from .models import aisDecoded
-from pyais import decode_msg
+from pyais import NMEAMessage, decode_msg
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,7 +24,13 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         encodedAIS = AIS.objects.create(**validated_data)
         decoded = {}
         decoded['encodedAIS'] = encodedAIS
+        print('==================================')
+        print(validated_data['message'])
+        message = NMEAMessage(validated_data['message'])
         msg = decode_msg(validated_data['message'])
+        print(message)
+        print(msg)
+        print('==================================')
         if 'shipname' in msg:
             decoded['name'] = msg['shipname']
         if 'lat' and 'lon' in msg:
