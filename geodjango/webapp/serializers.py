@@ -25,14 +25,7 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         encodedAIS = AIS.objects.create(**validated_data)
         decoded = {}
         decoded['encodedAIS'] = encodedAIS
-        print('==================================')
         msg = decode_msg(validated_data['message'])
-        for i in validated_data:
-            print(i, validated_data[i])
-        print('+++++++++++++++++++++++++++++++')
-        print(type(validated_data['received_at']))
-        print(type(datetime.strptime(validated_data['received_at'])))
-        print('==================================')
         if 'shipname' in msg:
             decoded['name'] = msg['shipname']
         if 'lat' and 'lon' in msg:
@@ -40,7 +33,7 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         if 'course' in msg:
             decoded['course'] = msg['course']
         decoded['received_from'] = validated_data['received_from']
-        decoded['received_at'] = datetime.strptime(validated_data['received_at'])
+        decoded['received_at'] = validated_data['received_at']
         aisDecoded.objects.create(**decoded)
         return encodedAIS
 
