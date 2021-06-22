@@ -27,6 +27,8 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         decoded['encodedAIS'] = encodedAIS
         print('==================================')
         msg = decode_msg(validated_data['message'])
+        print(type(validated_data['received_at']))
+        print(type(datetime.strptime(validated_data['received_at'])))
         print('==================================')
         if 'shipname' in msg:
             decoded['name'] = msg['shipname']
