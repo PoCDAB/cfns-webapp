@@ -1,5 +1,6 @@
 from django.contrib import admin
 from ..models.ais import AIS
+from ..models.aisDecoded import aisDecoded
 
 class AISAdmin(admin.ModelAdmin):
 
@@ -18,4 +19,23 @@ class AISAdmin(admin.ModelAdmin):
 
     class Meta:
         model = AIS
+        fields = '__all__'
+
+class aisDecodedAdmin(admin.ModelAdmin):
+
+    list_display = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
+    list_filter = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
+
+    fieldsets = [
+        ('Encoded AIS', {'fields': ['encodedAIS','received_from', 'received_at']}),
+        ('Decoded AIS', {'fields': ['MMSI', 'name', 'geom', 'course']}),
+    ]
+
+    search_fields = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
+    ordering = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
+    readonly_fields = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
+    filter_horizontal = ()
+
+    class Meta:
+        model = aisDecoded
         fields = '__all__'

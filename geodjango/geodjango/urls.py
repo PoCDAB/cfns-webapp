@@ -22,13 +22,13 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
-from webapp import views
+from webapp import views, API
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register(r'ais', views.AisViewSet)
+router.register(r'users', API.UserViewSet)
+router.register(r'groups', API.GroupViewSet)
+router.register(r'ais', API.AisViewSet)
 
 # Errors handlers
 handler404 = 'webapp.views.handler404'

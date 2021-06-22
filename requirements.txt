@@ -4,3 +4,5 @@ django-bootstrap4==3.0.1
 django-fontawesome-5==1.0.18
 djangorestframework==3.12.2
 django-leaflet==0.28.1
+wheel==0.36.2
+pyais==1.6.1
