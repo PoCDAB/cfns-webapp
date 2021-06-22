@@ -26,6 +26,8 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         decoded = {}
         decoded['encodedAIS'] = encodedAIS
         msg = decode_msg(validated_data['message'])
+        if 'MMSI' in msg:
+            decoded['MMSI'] = msg['MMSI']
         if 'shipname' in msg:
             decoded['name'] = msg['shipname']
         if 'lat' and 'lon' in msg:

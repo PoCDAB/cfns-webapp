@@ -11,14 +11,13 @@ class aisDecoded(BaseModel):
         primary_key=True,
     )
 
-    MMSI = models.IntegerField()
+    MMSI = models.IntegerField(null=True)
     name = models.CharField(
         max_length=128,
+        null=True
     )
-
-    geom = gismodels.PointField()
-    course = models.FloatField()
-
+    geom = gismodels.PointField(null=True)
+    course = models.FloatField(null=True)
     objects = GeoManager()
 
     received_from = models.CharField(
