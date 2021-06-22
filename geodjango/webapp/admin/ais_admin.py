@@ -23,17 +23,17 @@ class AISAdmin(admin.ModelAdmin):
 
 class aisDecodedAdmin(admin.ModelAdmin):
 
-    list_display = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
-    list_filter = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
+    list_display = ('encodedAIS', 'mmsi', 'name', 'geom', 'course', 'received_from', 'received_at')
+    list_filter = ('encodedAIS', 'mmsi', 'name', 'geom', 'course', 'received_from', 'received_at')
 
     fieldsets = [
         ('Encoded AIS', {'fields': ['encodedAIS','received_from', 'received_at']}),
-        ('Decoded AIS', {'fields': ['MMSI', 'name', 'geom', 'course']}),
+        ('Decoded AIS', {'fields': ['mmsi', 'name', 'geom', 'course']}),
     ]
 
-    search_fields = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
-    ordering = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
-    readonly_fields = ('encodedAIS', 'MMSI', 'name', 'geom', 'course', 'received_from', 'received_at')
+    search_fields = ('encodedAIS', 'mmsi', 'name', 'geom', 'course', 'received_from', 'received_at')
+    ordering = ('encodedAIS', 'mmsi', 'name', 'geom', 'course', 'received_from', 'received_at')
+    readonly_fields = ('encodedAIS', 'mmsi', 'name', 'geom', 'course', 'received_from', 'received_at')
     filter_horizontal = ()
 
     class Meta:

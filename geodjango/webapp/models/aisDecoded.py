@@ -11,7 +11,7 @@ class aisDecoded(BaseModel):
         primary_key=True,
     )
 
-    MMSI = models.IntegerField(null=True)
+    mmsi = models.IntegerField(null=True)
     name = models.CharField(
         max_length=128,
         null=True
