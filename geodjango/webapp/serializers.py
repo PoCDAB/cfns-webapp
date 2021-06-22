@@ -37,6 +37,6 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         aisDecoded.objects.create(**decoded)
         return encodedAIS
 
-    #class Meta:
-        #model = AIS
-        #fields = ['id', 'received_from', 'message', 'created_at', 'updated_at']
+    class Meta:
+        model = AIS
+        fields = ['id', 'received_from', 'message', 'created_at', 'updated_at']
