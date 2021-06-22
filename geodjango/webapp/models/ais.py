@@ -14,7 +14,7 @@ class AIS(BaseModel):
     message = models.CharField(
         max_length=256,
     )
-    
+
     class Meta:
         verbose_name = 'Encoded AIS message'
         verbose_name_plural = 'Encoded AIS messages'

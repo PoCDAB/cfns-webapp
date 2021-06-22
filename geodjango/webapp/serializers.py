@@ -1,6 +1,7 @@
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.contrib.gis.geos import Point
+from datetime import datetime
 from rest_framework import serializers
 from .models import AIS
 from .models import aisDecoded
@@ -25,9 +26,7 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         decoded = {}
         decoded['encodedAIS'] = encodedAIS
         print('==================================')
-        print(validated_data['message'])
         msg = decode_msg(validated_data['message'])
-        print(msg)
         print('==================================')
         if 'shipname' in msg:
             decoded['name'] = msg['shipname']
@@ -36,8 +35,7 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
         if 'course' in msg:
             decoded['course'] = msg['course']
         decoded['received_from'] = validated_data['received_from']
-        decoded['received_at'] = validated_data['received_at']
-        decoded['received_at'] = validated_data['received_at']
+        decoded['received_at'] = datetime.strptime(validated_data['received_at'])
         aisDecoded.objects.create(**decoded)
         return encodedAIS
 
