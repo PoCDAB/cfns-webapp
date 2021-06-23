@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.core.serializers import serialize
+from django.http import HttpResponse
+from ..models import aisDecoded
 
 from ..forms import GeoviewForm
 
@@ -14,3 +17,7 @@ def geomapView(request):
     else:
         form = GeoviewForm()
     return render(request, 'geomap.html', {'form': form})
+
+def decoded_ais_dataset(request):
+    decoded_ais_messages = serialize('geojson', aisDecoded.objects.all())
+    return HttpResponse(decoded_ais_messages, content_type='json')

@@ -1,9 +1,15 @@
-function main_map_init (map, options) {
+
+function map_init (map, options) {
     // Use Leaflet API here
-    var dataurl = '{% url "ais-data" %}';
-    // Download GeoJSON via Ajax
-    $.getJSON(dataurl, function (data) {
-        // Add GeoJSON layer
-        L.geoJson(data).addTo(map);
+    var datasets = new L.GeoJSON.AJAX("{% url 'ais-data' %}", {
+
     });
-  }
+
+    datasets.addTo(map);
+
+    // Download GeoJSON via Ajax
+    //$.getJSON(dataurl, function (data) {
+        // Add GeoJSON layer
+       // L.geoJson(data).addTo(map);
+    //});
+}

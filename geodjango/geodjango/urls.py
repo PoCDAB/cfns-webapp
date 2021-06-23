@@ -46,5 +46,5 @@ urlpatterns = [
     url(r'^profile/$', views.profileView, name='profile'),
     url(r'^geoview/$', views.geomapView, name='geoview'),
     url(r'^api/V1/', include(router.urls), name='api-root'),
-    url(r'^ais-data.geojson$', GeoJSONLayerView.as_view(model=aisDecoded), name='ais-data')
+    url(r'^ais-data$', views.decoded_ais_dataset, name='ais-data')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
