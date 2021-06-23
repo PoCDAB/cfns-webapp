@@ -11,7 +11,6 @@
     {% leaflet_js %}
     {% leaflet_css %}
     <link rel="stylesheet" type="text/css" href="{% static '/css/geoview.css' %}">
-    <script type="text/javascript" src="{% static '/js/geoview.js' %}"></script>
     <script type="text/javascript" src="{% static '/js/leaflet.ajax.js' %}"></script>
 
 {% endblock %}
@@ -29,6 +28,22 @@
       </form>
     </div>
     <div class="col-lg-10">
+      <script>     
+        function map_init (map, options) {
+          // Use Leaflet API here
+          var datasets = new L.GeoJSON.AJAX("{% url 'ais-data' %}", {
+
+          });
+
+          datasets.addTo(map)
+
+          // Download GeoJSON via Ajax
+          //$.getJSON(dataurl, function (data) {
+              // Add GeoJSON layer
+            // L.geoJson(data).addTo(map);
+          //});
+        }
+      </script>
       {% leaflet_map "geoview" callback="window.map_init" %}
     </div>
   </div>
