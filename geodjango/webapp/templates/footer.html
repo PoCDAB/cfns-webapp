@@ -1,12 +1,14 @@
 {% load static %}
 {% load fontawesome_5 %}
 
-<footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">&copy; {% now "Y" %} - Connectivity Fieldlab North Sea</div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4">Made by Daniël Geerts</div>
+<footer class="footer mt-auto bg-light h-auto">
+    <div class="container-fluid h-auto">
+        <div class="d-flex flex-wrap">
+            <div class="col-lg-4 py-5 ">&copy; {% now "Y" %} - Connectivity Fieldlab North Sea</div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-2"><img class="img-fluid" src="{% static '/img/RWS-logo-site.png' %}" alt="Rijkswaterstaat Logo"></div>
+            <div class="col-lg-2 py-5 text-right">Made by Daniël Geerts</div>
+
         </div>
     </div>
 </footer>
