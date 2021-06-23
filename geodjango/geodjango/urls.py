@@ -22,6 +22,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
+from djgeojson.views import GeoJSONLayerView
+
+from webapp.models import aisDecoded
+
 from webapp import views, API
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -42,5 +46,5 @@ urlpatterns = [
     url(r'^profile/$', views.profileView, name='profile'),
     url(r'^geoview/$', views.geomapView, name='geoview'),
     url(r'^api/V1/', include(router.urls), name='api-root'),
+    url(r'^ais-data.geojson$', GeoJSONLayerView.as_view(model=aisDecoded), name='ais-data')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

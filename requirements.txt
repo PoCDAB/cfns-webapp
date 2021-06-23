@@ -6,3 +6,4 @@ djangorestframework==3.12.2
 django-leaflet==0.28.1
 wheel==0.36.2
 pyais==1.6.1
+django-geojson==3.2.0

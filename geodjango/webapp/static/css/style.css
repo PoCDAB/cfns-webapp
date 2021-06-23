@@ -22,7 +22,7 @@ main {
     flex: 1;
     margin: 50px 0px;
     overflow:auto;
-    min-height: calc(100% - 270px);
+    min-height: calc(100% - 360px);
 }
 
 footer {

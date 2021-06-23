@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'fontawesome_5',
     'webapp',
     'leaflet',
+    'djgeojson',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Leaflet config
+LEAFLET_CONFIG = {
+    'SPATIAL_EXTENT': (-3.5, 50.5, 8.0, 62.0), # max west, max south, max east, max north
+    'DEFAULT_CENTER': (52.5, 3.5),
+    'DEFAULT_ZOOM': 7,
+    'MIN_ZOOM': 6,
+    'MAX_ZOOM': 16,
+    'DEFAULT_PRECISION': 6,
+    'ATTRIBUTION_PREFIX': 'Powered by CFNS'
+}
