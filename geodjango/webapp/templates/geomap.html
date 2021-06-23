@@ -11,7 +11,9 @@
     {% leaflet_js %}
     {% leaflet_css %}
     <link rel="stylesheet" type="text/css" href="{% static '/css/geoview.css' %}">
-    <script src="{% static '/js/geoview.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/geoview.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/leaflet.ajax.js' %}"></script>
+
 {% endblock %}
 
 {% block body %}
