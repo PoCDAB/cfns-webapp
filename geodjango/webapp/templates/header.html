@@ -35,8 +35,10 @@
     </div>
 
     <ul class="nav col-12 col-lg-1 justify-content-center mb-md-0">
+      {% if user.is_superuser %}
         <li><a href="{% url 'admin:index' %}" class="nav-link px-2 text-white">Admin panel</a></li>
         <li><a href="{% url 'api-root' %}" class="nav-link px-2 text-white">API</a></li>
+      {% endif %}
     </ul>
   </div>
 </header>
