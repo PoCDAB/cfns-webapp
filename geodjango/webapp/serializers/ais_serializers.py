@@ -1,24 +1,10 @@
-from django.contrib.auth.models import Group
-from django.contrib.auth.models import User
+from rest_framework import serializers
 from django.contrib.gis.geos import Point
 from datetime import datetime
 from rest_framework import serializers
-from .models import AIS
-from .models import aisDecoded
 from pyais import NMEAMessage, decode_msg
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'url', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['id', 'url', 'name']
-
+from ..models import AIS
+from ..models import aisDecoded
 
 class AISSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):

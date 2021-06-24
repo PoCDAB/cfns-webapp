@@ -29,22 +29,27 @@ from webapp.models import aisDecoded
 from webapp import views, API
 
 # Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
-router.register(r'users', API.UserViewSet)
-router.register(r'groups', API.GroupViewSet)
-router.register(r'ais', API.AisViewSet)
+# This way we setup the API urls
+api_router = routers.DefaultRouter()
+api_router.register(r'users', API.UserViewSet)
+api_router.register(r'groups', API.GroupViewSet)
+api_router.register(r'ais', API.AisViewSet)
+api_router.register(r'dab', API.DabViewSet)
 
 # Errors handlers
 handler404 = 'webapp.views.handler404'
 handler500 = 'webapp.views.handler500'
 
+# All containing urls in the application
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^api/V1/', include(api_router.urls), name='api-root'),
     url(r'^$', views.homeView, name='home'),
     url(r'^login/$', views.loginView, name='login'),
     url(r'^logout/$', views.loggedoutView, name='logout'),
     url(r'^profile/$', views.profileView, name='profile'),
     url(r'^geoview/$', views.geomapView, name='geoview'),
-    url(r'^api/V1/', include(router.urls), name='api-root'),
-    url(r'^ais-data$', views.decoded_ais_dataset, name='ais-data')
+    #datasets
+    url(r'^ais-data/$', views.decoded_ais_dataset, name='ais-data'),
+    url(r'^dab-data/$', views.dab_dataset, name='dab-data'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
