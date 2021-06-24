@@ -6,7 +6,8 @@ class DABAdmin(admin.ModelAdmin):
     list_filter = ()
 
     fieldsets = [
-        (None, {'fields': ['id', 'message_id', 'message_type', 'message', 'ship_id']}),
+        ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
+        ("DAB Model", {'fields': ['message_id', 'message_type', 'message', 'ship_id']}),
     ]
 
     search_fields = ('id', 'message_id', 'message_type', 'message', 'ship_id')

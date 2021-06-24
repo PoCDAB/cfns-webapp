@@ -5,10 +5,12 @@ from .baseModel import BaseModel
 from .ais import AIS
 
 class aisDecoded(BaseModel):
+    id = models.AutoField(primary_key=True)
+
     encodedAIS = models.OneToOneField(
         AIS,
         on_delete=models.CASCADE,
-        primary_key=True,
+        null=True
     )
 
     mmsi = models.IntegerField(null=True)
@@ -19,11 +21,6 @@ class aisDecoded(BaseModel):
     geom = gismodels.PointField(null=True)
     course = models.FloatField(null=True)
     objects = GeoManager()
-
-    received_from = models.CharField(
-        max_length=128,
-    )
-    received_at = models.DateTimeField()
 
     def __unicode__(self):
         return self.name
