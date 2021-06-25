@@ -26,7 +26,7 @@
     <div class="container-fluid wrapper">
       {% include "header.html" %}
 
-      {% block fullbody %}
+      {% block body-fluid %}
         <main class="site-content container">
           {% block body %}
             <p>This should be replaced!</p>
@@ -35,7 +35,7 @@
           {% bootstrap_jquery %}
           {% bootstrap_javascript %}
         </main>
-      {% endblock fullbody %}
+      {% endblock body-fluid %}
 
       {% include "footer.html" %}
     </div>

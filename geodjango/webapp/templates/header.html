@@ -14,10 +14,9 @@
     </a>
 
     <ul class="d-flex nav col-12 col-lg-4 justify-content-start">
-      <li><a href="{% url 'home' %}" class="nav-link px-2 text-secondary">Home</a></li>
-      <li><a href="{% url 'geoview' %}" class="nav-link px-2 text-white">GEO view</a></li>
-      <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-      <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
+      {% for key, value in nav_menu.items %}
+        <li><a href="{% url key %}" {% if request.resolver_match.url_name == key %}class="nav-link px-2 text-secondary"{% else %}class="nav-link px-2 text-white"{% endif %}>{{ value }}</a></li>
+      {% endfor %}
     </ul>
 
     <div class="col-12 col-lg-1 mb-md-0 text-center">
