@@ -6,3 +6,15 @@
 .django-leaflet-raw-textarea {
     width: 100%;
 }
+
+form table label {
+    width: 100%;
+    height: 100%;
+    padding: 10px 10px 10px 0px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+form table input {
+    cursor: pointer;
+}
