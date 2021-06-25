@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  <title>Send DAB+</title>
+{% endblock %}
+
+{% block body %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="Submit">
+</form>
+
+{% if info_msg %}
+    {{ info_msg }}
+{% endif %}
+
+{% endblock %}

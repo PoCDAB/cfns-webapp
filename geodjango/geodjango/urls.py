@@ -49,6 +49,7 @@ urlpatterns = [
     url(r'^logout/$', views.loggedoutView, name='logout'),
     url(r'^profile/$', views.profileView, name='profile'),
     url(r'^geoview/$', views.geomapView, name='geoview'),
+    url(r'^send-dab/$', views.send_dab_view, name='send-dab'),
     #datasets
     url(r'^ais-data/$', views.decoded_ais_dataset, name='ais-data'),
     url(r'^dab-data/$', views.dab_dataset, name='dab-data'),

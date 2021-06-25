@@ -3,6 +3,8 @@ from .homeView import homeView
 from .loginView import loginView, loggedoutView
 from .profileView import profileView
 from .geomapView import geomapView
+from .sendDabView import send_dab_view
+
 from .errors import *
 
 # datasets (for the GIS/geomap)

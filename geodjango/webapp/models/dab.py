@@ -5,7 +5,7 @@ from .baseModel import BaseModel
 class DAB(BaseModel):
     id = models.AutoField(primary_key=True)
 
-    message_id = models.IntegerField()
+    message_id = models.IntegerField(null=True)
     message_type = models.IntegerField()
     message = models.CharField(max_length=256)
     ship_id = models.CharField(max_length=256)
