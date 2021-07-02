@@ -1,9 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from ..forms import SendDABForm
 from ..models import DAB
 
+@login_required(login_url='/login/')
 def send_dab_view(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':

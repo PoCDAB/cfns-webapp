@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from ..forms import GeoviewForm
 
 # Retrieve (filterd) AIS dataset from the database for the GIS
+@login_required(login_url='/login/')
 def geomapView(request):
     if request.method == 'POST':
         form = GeoviewForm(request.POST)
