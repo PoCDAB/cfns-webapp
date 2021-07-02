@@ -63,7 +63,7 @@
                 //"</br>mmsi: " + feature.properties?.mmsi.toString() +
                 //"</br>Schipnaam: " + feature.properties?.name.toString() +
                 //"</br>" + feature.properties?.updated_at.toString()
-                layer.bindPopup(JSON.stringify(feature.properties,null,'</br>'))
+                JSON.stringify(feature.properties,null,'</br>')
               );
             }
           }).addTo(map);
