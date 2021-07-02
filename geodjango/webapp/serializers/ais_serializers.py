@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from django.contrib.gis.geos import Point
-from datetime import datetime
-from rest_framework import serializers
 from pyais import decode_msg
 from ..models import AIS
 from ..models import aisDecoded

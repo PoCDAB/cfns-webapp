@@ -57,7 +57,15 @@
         function map_init (map, options) {
           // Use Leaflet API here
           var datasets = new L.GeoJSON.AJAX("{% url 'ais-data' %}", {
-
+            onEachFeature: function(feature, layer) {
+              layer.bindPopup(
+                "<b>AIS</b>" +
+                "</br>mmsi: " + feature.properties.mmsi.toString() +
+                "</br>Schipnaam: " + feature.properties.name.toString() +
+                "</br>" + feature.properties.updated_at.toString()
+                 + JSON.stringify(feature.properties,null,'</br>')
+              )
+            }
           }).addTo(map);
         }
       </script>
