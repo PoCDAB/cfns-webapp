@@ -79,10 +79,10 @@
               onEachFeature: function (feature, layer) {
                 layer.bindPopup(
                 "<div class='text-center'><b class='text-center'>AIS</b></div>" +
-                "</br><b>MMSI:</b> " + (feature.properties?.mmsi?.toString() || "<i>Niet bekend</i>")  +
+                "<b>MMSI:</b> " + (feature.properties?.mmsi?.toString() || "<i>Niet bekend</i>")  +
                 "</br><b>Schipnaam:</b> " + (feature.properties?.name?.toString() || "<i>Niet bekend</i>") +
                 "</br><b>Koers:</b> " + (feature.properties?.course?.toString() || "<i>Niet bekend</i>") +
-                "</br><b>Laatste ping:</b> </br>" + (feature.properties?.updated_at?.toString() || "<i>Niet bekend</i>") 
+                "</br><b>Laatste ping:</b> " + (feature.properties?.updated_at?.toString() || "<i>Niet bekend</i>") 
 
               )}
           }).addTo(map);
