@@ -1,5 +1,5 @@
 from django.db import models
-from .baseModel import BaseModel
+from .base_model import BaseModel
 
 # Database Model for the DAB+ messages
 class DAB(BaseModel):

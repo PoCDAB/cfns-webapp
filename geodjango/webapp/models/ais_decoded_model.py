@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.gis.db import models as gismodels
 from django.db.models import Manager as GeoManager
-from .baseModel import BaseModel
-from .ais import AIS
+from .base_model import BaseModel
+from .ais_model import AIS
 
-class aisDecoded(BaseModel):
+class AISDecoded(BaseModel):
     id = models.AutoField(primary_key=True)
 
     encodedAIS = models.OneToOneField(
@@ -14,7 +14,7 @@ class aisDecoded(BaseModel):
     )
 
     mmsi = models.IntegerField(null=True)
-    name = models.CharField('Achternaam',
+    name = models.CharField('Schipnaam',
         max_length=128,
         blank=True,
         null=True

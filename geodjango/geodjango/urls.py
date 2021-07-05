@@ -16,23 +16,17 @@ Including another URLconf
 
 from django.contrib.gis import admin
 from django.conf.urls import url, include
-from django.shortcuts import redirect
 from django.conf.urls.static import static
 from django.conf import settings
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
-
-from djgeojson.views import GeoJSONLayerView
-
-from webapp.models import aisDecoded
+from rest_framework import routers
 
 from webapp import views, API, datasets
 
 # Routers provide an easy way of automatically determining the URL conf.
 # This way we setup the API urls
 api_router = routers.DefaultRouter()
-api_router.register(r'users', API.UserViewSet)
-api_router.register(r'groups', API.GroupViewSet)
+# api_router.register(r'users', API.UserViewSet)
+# api_router.register(r'groups', API.GroupViewSet)
 api_router.register(r'ais', API.AisViewSet)
 api_router.register(r'dab', API.DabViewSet)
 

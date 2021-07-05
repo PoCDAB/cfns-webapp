@@ -1,11 +1,11 @@
 # __init__.py
-from .homeView import homeView
-from .loginView import loginView, loggedoutView
-from .profileView import profileView
-from .geomapView import geomapView
-from .sendDabView import send_dab_view
-from .aboutView import aboutView
-from .contactView import contactView
+from .home_view import homeView
+from .about_view import aboutView
+from .contact_view import contactView
+from .login_view import loginView, loggedoutView
+from .profile_view import profileView
+from .geomap_view import geomapView
+from .send_dab_view import send_dab_view
 
 from .errors import *
 

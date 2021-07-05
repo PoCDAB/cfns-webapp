@@ -1,6 +1,6 @@
 from django.contrib import admin
-from ..models.ais import AIS
-from ..models.aisDecoded import aisDecoded
+from ..models.ais_model import AIS
+from ..models.ais_decoded_model import AISDecoded
 
 class AISAdmin(admin.ModelAdmin):
 
@@ -21,7 +21,7 @@ class AISAdmin(admin.ModelAdmin):
         model = AIS
         fields = '__all__'
 
-class aisDecodedAdmin(admin.ModelAdmin):
+class AISDecodedAdmin(admin.ModelAdmin):
 
     list_display = ('id', 'encodedAIS', 'mmsi', 'name', 'geom', 'course')
     list_filter = ()
@@ -37,5 +37,5 @@ class aisDecodedAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
     class Meta:
-        model = aisDecoded
+        model = AISDecoded
         fields = '__all__'

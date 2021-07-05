@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ..models.dab import DAB
+from ..models.dab_model import DAB
 
 class DABAdmin(admin.ModelAdmin):
     list_display = ('id', 'message_id', 'message_type', 'message', 'ship_id')

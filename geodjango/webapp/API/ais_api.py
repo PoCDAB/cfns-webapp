@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 from ..serializers import AISSerializer
-from ..models.ais import AIS
+from ..models.ais_model import AIS
  
 class AisViewSet(viewsets.ModelViewSet):
     """

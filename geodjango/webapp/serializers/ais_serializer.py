@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.gis.geos import Point
 from pyais import decode_msg
 from ..models import AIS
-from ..models import aisDecoded
+from ..models import AISDecoded
 
 class AISSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
@@ -18,7 +18,7 @@ class AISSerializer(serializers.HyperlinkedModelSerializer):
             decoded['geom'] = Point(msg['lon'], msg['lat'])
         if 'course' in msg:
             decoded['course'] = msg['course']
-        aisDecoded.objects.create(**decoded)
+        AISDecoded.objects.create(**decoded)
         return encodedAIS
 
     class Meta:

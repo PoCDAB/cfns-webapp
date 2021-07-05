@@ -1,5 +1,5 @@
 from django.db import models
-from .baseModel import BaseModel
+from .base_model import BaseModel
 from django.utils import timezone
 
 class AIS(BaseModel):

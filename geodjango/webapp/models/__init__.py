@@ -1,5 +1,6 @@
 # __init__.py
-from .ais import AIS
-from .aisDecoded import aisDecoded
-from .dab import DAB
-from .fontawesomeModel import FontAwesomeIcon
+from .ais_model import AIS
+from .ais_decoded_model import AISDecoded
+from .dab_model import DAB
+from .fontawesome_model import FontAwesomeIcon
+from .geo_notification_model import geoNotification

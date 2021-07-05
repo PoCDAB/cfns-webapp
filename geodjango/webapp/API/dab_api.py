@@ -3,7 +3,7 @@ from rest_framework import permissions
 from django.contrib.auth.models import User
 
 from ..serializers import DABSerializer
-from ..models.dab import DAB
+from ..models.dab_model import DAB
  
 class DabViewSet(viewsets.ModelViewSet):
     """
