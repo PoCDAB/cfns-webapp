@@ -78,7 +78,7 @@
               },
               onEachFeature: function (feature, layer) {
                 layer.bindPopup(
-                "<div class='text-center'><b class='text-center'>AIS</b></div>" +
+                "<h6 class='text-center'>AIS</h6>" +
                 "<b>MMSI:</b> " + (feature.properties?.mmsi?.toString() || "<i>Niet bekend</i>")  +
                 "</br><b>Schipnaam:</b> " + (feature.properties?.name?.toString() || "<i>Niet bekend</i>") +
                 "</br><b>Koers:</b> " + (feature.properties?.course?.toString() || "<i>Niet bekend</i>") +
