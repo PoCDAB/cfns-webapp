@@ -59,11 +59,10 @@
           var datasets = new L.GeoJSON.AJAX("{% url 'ais-data' %}", {
               onEachFeature: function (feature, layer) {
                 layer.bindPopup(
-                "<b>AIS</b>" +
-                //"</br>mmsi: " + feature.properties?.mmsi.toString() +
-                //"</br>Schipnaam: " + feature.properties?.name.toString() +
-                //"</br>" + feature.properties?.updated_at.toString()
-                JSON.stringify(feature.properties,null,'</br>')
+                "<div class='text-center'><b class='text-center'>AIS</b></div>" +
+                "</br><b>MMSI:</b> " + (feature.properties?.mmsi?.toString() || "<i>Niet bekend</i>")  +
+                "</br><b>Schipnaam:</b> " + (feature.properties?.name?.toString() || "<i>Niet bekend</i>") +
+                "</br><b>Laatste ping:</b> </br>" + (feature.properties?.updated_at?.toString() || "<i>Niet bekend</i>") 
               );
             }
           }).addTo(map);

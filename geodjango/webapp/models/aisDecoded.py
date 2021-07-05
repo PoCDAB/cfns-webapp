@@ -14,12 +14,13 @@ class aisDecoded(BaseModel):
     )
 
     mmsi = models.IntegerField(null=True)
-    name = models.CharField(
+    name = models.CharField('Achternaam',
         max_length=128,
+        blank=True,
         null=True
     )
-    geom = gismodels.PointField(null=True)
-    course = models.FloatField(null=True)
+    geom = gismodels.PointField('Locatie', null=True, blank=True,)
+    course = models.FloatField('Koers', null=True, blank=True,)
     objects = GeoManager()
 
     def __unicode__(self):

@@ -9,7 +9,3 @@ from .contactView import contactView
 
 from .errors import *
 
-# datasets (for the GIS/geomap)
-from .datasets.decoded_ais_dataset import decoded_ais_dataset
-from .datasets.dab_dataset import dab_dataset
-

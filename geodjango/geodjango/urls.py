@@ -26,7 +26,7 @@ from djgeojson.views import GeoJSONLayerView
 
 from webapp.models import aisDecoded
 
-from webapp import views, API
+from webapp import views, API, datasets
 
 # Routers provide an easy way of automatically determining the URL conf.
 # This way we setup the API urls
@@ -53,6 +53,6 @@ urlpatterns = [
     url(r'^geoview/$', views.geomapView, name='geoview'),
     url(r'^send-dab/$', views.send_dab_view, name='send-dab'),
     #datasets
-    url(r'^ais-data/$', views.decoded_ais_dataset, name='ais-data'),
-    url(r'^dab-data/$', views.dab_dataset, name='dab-data'),
+    url(r'^ais-data/$', datasets.decoded_ais_dataset, name='ais-data'),
+    url(r'^dab-data/$', datasets.dab_dataset, name='dab-data'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
