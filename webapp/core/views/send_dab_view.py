@@ -1,6 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from re import search
+
+import json
+from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
 
 from ..forms import SelectDABType, SendDABForm_message, SendDABForm_point, SendDABForm_circle, SendDABForm_polygon
 from ..models import dabModel
@@ -13,9 +17,6 @@ def send_dab_view(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         startform = SelectDABType(request.POST)
-                
-        for p in request.POST:
-            print(p,  request.POST[p])
 
         if "messagetype" in request.POST or  ("message" in request.POST and "ship_id" in request.POST):
             messagetype = int(request.POST["messagetype"])
@@ -34,11 +35,7 @@ def send_dab_view(request):
             if startform.is_valid():
                 # check whether it's valid:
                 if form and form.is_valid():
-                    # process the data in form.cleaned_data as required
-                    # ...
-                    # redirect to a new URL:
                     dabmessage = dabModel.objects.create(message=request.POST["message"], message_type=int(request.POST["messagetype"]), ship_id=request.POST["ship_id"])
-
                     createGeoNotification(dabmessage, request.POST)
 
                     return  render(request, 'send_dab.html', {'startform': startform, 'form': form, 'info_msg': 'DAB+ has been send!', 'info_type': 'alert-success'})

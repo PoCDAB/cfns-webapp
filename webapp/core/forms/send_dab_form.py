@@ -22,7 +22,7 @@ class SendDABForm_message(forms.Form):
 class SendDABForm_point(forms.Form):
     ship_id = forms.CharField(label='Schip identifier', max_length=256)
     message = forms.CharField(label='DAB message', max_length=256)
-    point = forms.PointField(label='Locatie')
+    point = forms.PointField(label='Locatie', widget=forms.OSMWidget(attrs=settings.LEAFLET_CONFIG))
 
     class Meta:
         widgets = {'PointField': settings.LEAFLET_CONFIG}
@@ -30,7 +30,7 @@ class SendDABForm_point(forms.Form):
 class SendDABForm_circle(forms.Form):
     ship_id = forms.CharField(label='Schip identifier', max_length=256)
     message = forms.CharField(label='DAB message', max_length=256)
-    point = forms.PointField(label='Locatie')
+    point = forms.PointField(label='Locatie', widget=forms.OSMWidget(attrs=settings.LEAFLET_CONFIG))
     radius = forms.IntegerField(label='Radius (meters)')
 
     class Meta:
@@ -39,7 +39,7 @@ class SendDABForm_circle(forms.Form):
 class SendDABForm_polygon(forms.Form):
     ship_id = forms.CharField(label='Schip identifier', max_length=256)
     message = forms.CharField(label='DAB message', max_length=256)
-    polygon = forms.PolygonField(label='Polygoon')
+    polygon = forms.PolygonField(label='Polygoon', widget=forms.OSMWidget(attrs=settings.LEAFLET_CONFIG))
 
     class Meta:
         widgets = {'PointField': settings.LEAFLET_CONFIG}

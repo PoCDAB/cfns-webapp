@@ -28,11 +28,11 @@ class geoMessageModel(BaseModel):
         verbose_name_plural = 'Geo notifications'
 
 class geoPointModel(geoMessageModel):
-    location = gismodels.PointField('Pivot', null=True, blank=True,)
+    location = gismodels.PointField('Pivot', null=True, blank=True)
 
 class geoCircleModel(geoMessageModel):
-    location = gismodels.PointField('Pivot', null=True, blank=True,)
+    location = gismodels.PointField('Pivot', null=True, blank=True)
     radius = models.DecimalField(null=True, blank=True, max_digits=20, decimal_places=2)
 
 class geoPolygonModel(geoMessageModel):
-    polygon = gismodels.PolygonField(null=True, blank=True,)
+    polygon = gismodels.PolygonField(null=True, blank=True)

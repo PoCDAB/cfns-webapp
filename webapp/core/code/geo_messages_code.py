@@ -1,5 +1,7 @@
-from django.contrib.gis.geos import Point
+import json
+from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
 from ..models import geoMessageModel, geoPointModel, geoCircleModel, geoPolygonModel
+from re import search
 
 def createGeoNotification(dabmessage, POSTdata):
     if dabmessage.message_type == 0:
@@ -8,31 +10,26 @@ def createGeoNotification(dabmessage, POSTdata):
             message = dabmessage.message,
         )
     elif dabmessage.message_type == 1:
-        print("Point")
         return geoPointModel.objects.create(
             dab = dabmessage,
             message = dabmessage.message,
-            location = POSTdata["point"],
+            location = format_pointstr_from_osmwidget(POSTdata['point'], Point),
         )
     elif dabmessage.message_type == 2:
-        print("Radius")
         return geoCircleModel.objects.create(
             dab = dabmessage,
             message = dabmessage.message,
-            location = POSTdata["point"],
+            location = format_pointstr_from_osmwidget(POSTdata['point'], Point),
             radius = POSTdata["radius"],
         )
     elif dabmessage.message_type == 3:
-        print("Polygon")
         return geoPolygonModel.objects.create(
             dab = dabmessage,
             message = dabmessage.message,
-            polygon = POSTdata["polygon"],
+            polygon = format_pointstr_from_osmwidget(POSTdata['polygon'], Polygon),
         )
     else:
         return None
-
-
 
 def alterGeoNotification(message_id, aisEncoded = None, aisDecoded = None):
     notification = geoMessageModel.objects.get(id=message_id)
@@ -41,3 +38,21 @@ def alterGeoNotification(message_id, aisEncoded = None, aisDecoded = None):
     if aisDecoded is not None:
         notification.aisDecoded = aisDecoded
     notification.save()
+
+def format_pointstr_from_osmwidget(osm_output, type):
+    srid = 3857
+    c = find_between(osm_output, ':[', ']}').split(',')
+
+    if type is Point:
+        return"SRID=" + str(srid) + ";POINT(" + c[0] + " " + c[1] + ")"
+    elif type is Polygon:
+        c = str(c).replace("['[[", '(').replace("]]']", ')').replace("]', '[", ', ').replace("', '", ' ')
+        return "SRID=" + str(srid) + ";POLYGON(" + c + ")"
+
+def find_between( s, first, last ):
+    try:
+        start = s.index( first ) + len( first )
+        end = s.index( last, start )
+        return s[start:end]
+    except ValueError:
+        return ""
