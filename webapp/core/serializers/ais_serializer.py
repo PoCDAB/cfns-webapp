@@ -7,7 +7,7 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         encodedAIS = aisEncodedModel.objects.create(**validated_data)
         decodedAIS = {}
-        decodedAIS['encodedAIS'] = encodedAIS
+        decodedAIS['aisEncoded'] = encodedAIS
         msg = decode_msg(validated_data['message'])
         if 'mmsi' in msg:
             decodedAIS['mmsi'] = msg['mmsi']
