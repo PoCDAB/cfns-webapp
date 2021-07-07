@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load leaflet_tags %}
+
+{% block title %}
+  <title>Send DAB+</title>
+{% endblock %}
+
+{% block head %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+    {{ form.media }}
+
+    <script type="text/javascript" src="{% static '/js/leaflet.ajax.js' %}"></script>
+{% endblock head %}
+
+{% block body-fluid %}
+<h2 class="text-center">Verstuur DAB naar een specifiek schip</h2>
+</br>
+{% if info_msg %}
+    <div class="container text-center alert {{ info_type }}" role="alert">
+        {{ info_msg }}
+    </div>
+{% endif %}
+</br>
+
+<div class="d-flex flex-wrap">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-2">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Wat voor type DAB bericht wilt u versturen?</h5>
+                </br>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in startform %}
+                        {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </br></br>
+                    <button onClick="window.location=window.location.assign(document.URL)" class="btn btn-primary">Opnieuw</button>
+                    <button type="submit" class="btn btn-primary">Kies Type</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <form method="post">
+            {% csrf_token %}
+            {% if form.subject.errors %}
+                <ol role="alertdialog">
+                    {% for error in form.subject.errors %}
+                    <li role="alert"><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                </ol>
+                {% endif %}
+
+                {% if form %}
+                <input type="hidden" name="messagetype" value="{{ request.POST.messagetype }}" >
+                <div class="card text-center">
+                    <div class="card-body">
+                        {% for field in form %}
+                            <table class="w-100">
+                                <tr class="w-100 row">
+                                    <div class="fieldWrapper form-group" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+                                    <td class="col-lg-3">
+                                        {{ field.label_tag }}{% if field.field.required %}<span class="required">*</span>{% endif %}
+                                        </td>
+                                        <td class="col-lg-9">
+                                            {{ field }}
+                                        </td>
+                                    </div>
+                                </tr>
+                            </table>
+                            {% if field.help_text %}
+                            <p class="help">{{ field.help_text|safe }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </br>
+                        <button type="submit" class="btn btn-primary">Verstuur DAB</button>
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+
+
+
+{% endblock %}
