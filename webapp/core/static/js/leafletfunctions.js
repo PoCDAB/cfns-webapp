@@ -15,9 +15,9 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
     if (popupfields != null) {
         for (const [key, value] of Object.entries(popupfields)) {
             console.log(feature?.properties?.[key])
-            text += "<b>" + value + ":</b> " + (feature?.properties?.[key].toString() || "<i>Niet bekend</i>") + "</br>"
+            text += "<b>" + value + ":</b> " + (feature?.properties?.[key]?.toString() || "<i>Niet bekend</i>") + "</br>"
         }
-        text += "<b>Location:</b> </br>&nbsp;" + (feature?.geometry?.coordinates.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</br>"
+        text += "<b>Location:</b> </br>&nbsp;" + (feature?.geometry?.coordinates?.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</br>"
     } else {
         text +=  JSON.stringify(feature.properties,null,'</br>')
         text +=  JSON.stringify(feature.geometry,null,'</br>')
