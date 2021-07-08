@@ -14,6 +14,7 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
     }
     if (popupfields != null) {
         for (const [key, value] of Object.entries(popupfields)) {
+            console.log(feature?.properties?.[key])
             text += "<b>" + value + ":</b> " + (feature?.properties?.[key].toString() || "<i>Niet bekend</i>") + "</br>"
         }
         text += "<b>Location:</b> </br>&nbsp;" + (feature?.geometry?.coordinates.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</br>"
@@ -35,7 +36,6 @@ function pointToLayer(feature, latlng, fa_icon, image_path, color, rotationcorre
         }
 
         if (isCircle) {
-            console.log(feature.properties?.radius)
             return L.circle(latlng, { radius: feature.properties?.radius, color: color})
         } else {
             return L.marker(latlng, { icon: imgIcon(image_path), icon: icon, rotationAngle: (feature.properties?.course || 0) + rotationcorrection })

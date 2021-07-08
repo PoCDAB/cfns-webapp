@@ -24,8 +24,13 @@
     addDataset({
       url:"{% url 'ais-data' %}",
       popuptitle:'AIS',
-      fa_icon:'fa-location-arrow',
-      color:'darkblue',
+      popupfields: {
+        'pk': 'ID',               //database name, name to be displayed
+        'name': 'Schipnaam',      //database name, name to be displayed
+        'mmsi': 'MMSI',           //database name, name to be displayed
+        'course': 'Koers',
+        'updated_at': 'Laatste ping',
+      },
       rotationcorrection:-45
     }
     ).addTo(map);
@@ -34,11 +39,11 @@
       url:"{% url 'ais-data' %}",
       popuptitle:'AIS',
       popupfields: {
-        'pk': 'ID',
-        'name': 'Schipnaam',    //database name, name to be displayed
-        'mmsi': 'MMSI',          //database name, name to be displayed
-        'course': 'Koers',
-        'updated_at': 'Laatste ping',
+        'pk': 'ID',                     //database name, name to be displayed
+        'name': 'Schipnaam',            //database name, name to be displayed
+        'mmsi': 'MMSI',                 //database name, name to be displayed
+        'course': 'Koers',              //database name, name to be displayed
+        'updated_at': 'Laatste ping',   //database name, name to be displayed
       },
       fa_icon:'fa-location-arrow',
       color:'darkblue',
