@@ -21,19 +21,6 @@
   function map_init (map, options) {
     // Use Leaflet API here
 
-    addDataset({
-      url:"{% url 'ais-data' %}",
-      popuptitle:'AIS',
-      popupfields: {
-        'pk': 'ID',               //database name, name to be displayed
-        'name': 'Schipnaam',      //database name, name to be displayed
-        'mmsi': 'MMSI',           //database name, name to be displayed
-        'course': 'Koers',
-        'updated_at': 'Laatste ping',
-      },
-      rotationcorrection:-45
-    }
-    ).addTo(map);
     // Add AIS data
     addDataset({
       url:"{% url 'ais-data' %}",
