@@ -24,6 +24,9 @@
     addDataset({
       url:"{% url 'ais-data' %}",
       popuptitle:'AIS',
+      fa_icon:'fa-location-arrow',
+      color:'darkblue',
+      rotationcorrection:-45
     }
     ).addTo(map);
     // Add AIS data
@@ -39,12 +42,12 @@
       },
       fa_icon:'fa-location-arrow',
       color:'darkblue',
-      rotationcorrection:-45}
-    ).addTo(map);
+      rotationcorrection:-45
+    }).addTo(map);
     
     // Add points data
-    addDataset(
-      {url:"{% url 'geo-point-data' %}",
+    addDataset({
+      url:"{% url 'geo-point-data' %}",
       popuptitle:'Melding',
       popupfields: {
         'pk': 'ID',
