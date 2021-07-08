@@ -21,8 +21,6 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
         text +=  JSON.stringify(feature.properties,null,'</br>')
         text +=  JSON.stringify(feature.geometry,null,'</br>')
     }
-    text +=  JSON.stringify(feature.properties,null,'</br>')
-
     layer.bindPopup(text)
 };
 

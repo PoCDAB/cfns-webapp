@@ -21,6 +21,11 @@
   function map_init (map, options) {
     // Use Leaflet API here
 
+    addDataset({
+      url:"{% url 'ais-data' %}",
+      popuptitle:'AIS',
+    }
+    ).addTo(map);
     // Add AIS data
     addDataset({
       url:"{% url 'ais-data' %}",
