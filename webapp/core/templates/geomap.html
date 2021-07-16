@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load leaflet_tags %}
+
+{% block title %}
+  <title>Geoview</title>
+{% endblock %}
+
+{% block head %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/geoview.css' %}">
+    <script type="text/javascript" src="{% static '/js/leaflet.ajax.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/leaflet.rotateMarker.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/leafletfunctions.js' %}"></script>
+{% endblock %}
+
+{% block body-fluid %}
+<script>
+  function map_init (map, options) {
+    // Use Leaflet API here
+
+    // Add AIS data
+    addDataset({
+      url:"{% url 'ais-data' %}",
+      popuptitle:'AIS',
+      popupfields: {
+        'pk': 'ID',                     //database name, name to be displayed
+        'name': 'Schipnaam',            //database name, name to be displayed
+        'mmsi': 'MMSI',                 //database name, name to be displayed
+        'course': 'Koers',              //database name, name to be displayed
+        'updated_at': 'Laatste ping',   //database name, name to be displayed
+      },
+      fa_icon:'fa-location-arrow',
+      color:'darkblue',
+      rotationcorrection:-45
+    }).addTo(map);
+    
+    // Add points data
+    addDataset({
+      url:"{% url 'geo-point-data' %}",
+      popuptitle:'Melding',
+      popupfields: {
+        'pk': 'ID',
+      },
+      fa_icon:'fa-map-pin',
+      color:'black'
+    }).addTo(map);
+    
+    // Add circles data
+    addDataset({
+      url:"{% url 'geo-circle-data' %}",
+      popuptitle:'CIRKEL',
+      popupfields: {
+        'pk': 'ID',
+        'radius': 'Straal',
+      },
+      fa_icon:'fa-exclamation-triangle',
+      color:'black',
+      isCircle: true,
+    }).addTo(map);
+    
+    // Add polygons data
+    addDataset({
+      url:"{% url 'geo-polygon-data' %}",
+      popuptitle:'Zoekgebied',
+      popupfields:{
+        'pk': 'ID',
+      }
+    }).addTo(map);
+  }
+</script>
+
+  <div class="d-flex flex-wrap">
+    <div class="col-lg-2">
+      <h3 class="m-2">Filters:</h3>
+      <form method="post">
+        {% csrf_token %}
+        <table class="d-flex justify-content-center">
+          {% if form.subject.errors %}
+            <ol role="alertdialog">
+                {% for error in form.subject.errors %}
+                <li role="alert"><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+            </ol>
+            {% endif %}
+    
+            <table class="table table-hover geofilter">
+              <tbody>
+            {% for field in form %}
+                <tr class="m-0 p-0">
+                  <td class="col-lg-1 checkbox">
+                    {{ field }}
+
+                    {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                  </td>
+                  <td class="m-0 p-0 col-lg-11">
+                    <label>{{ field.label }}</label>
+                  </td>
+                </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+        <button class="btn btn-success w-100" type="submit">Toepassen</button>
+      </form>
+    </div>
+    <div class="col-lg-8">
+      {% leaflet_map "geoview" callback="window.map_init" %}
+    </div>
+    <div class="col-lg-2">
+      <h3 class="m-2">Legenda:</h3>
+      <table class="table">
+        <tr class="m-0 p-0">
+          <td class="col-lg-1">
+            <i class="fa fa-location-arrow"></i>
+          </td>
+          <td class="m-0 p-0 col-lg-11 align-middle">
+            Schip
+          </td>
+        </tr>
+        <tr class="m-0 p-0">
+          <td class="col-lg-1">
+            <i class="fa fa-map-pin"></i>
+          </td>
+          <td class="m-0 p-0 col-lg-11 align-middle">
+            Melding: bericht
+          </td>
+        </tr>
+        <tr class="m-0 p-0">
+          <td class="col-lg-1">
+            <i class="fa fa-exclamation-triangle"></i>
+          </td>
+          <td class="m-0 p-0 col-lg-11 align-middle">
+            Melding: gevaar
+          </td>
+        </tr>
+      </table>
+
+      </br></br>
+      <div>
+        <b>Groepen waar <i>{{ user.username }}</i> onderdeel van uit maakt:</b>
+        <ul>
+            {% for value in user.groups.all %}
+                <li>{{ value.name }}</li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}

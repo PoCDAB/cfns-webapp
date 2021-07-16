@@ -47,9 +47,9 @@ Type in the (Linux) command line.
 	service postgresql status
 
 ### migrate
-	cd geodjango/
+	cd webapp/
 	python3 manage.py makemigrations
-	python3 manage.py makemigrations webapp
+	python3 manage.py makemigrations core
 	python3 manage.py migrate
 
 #### Make superuser
@@ -60,11 +60,4 @@ Type in the (Linux) command line.
 > Password: admin
 
 ### Run app
-	python3 manage.py runserver
-
-### If 'World borders' (127.0.0.1/admin) is empty. Do:
-	python3 manage.py shell
-	from webapp import load
-	load.run()
-	exit()
 	python3 manage.py runserver
