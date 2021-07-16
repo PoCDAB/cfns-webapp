@@ -92,12 +92,12 @@ WSGI_APPLICATION = 'geodjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432"),
+        "ENGINE": os.environ.get("DB_ENGINE", "django.contrib.gis.db.backends.postgis"),
+        "NAME": os.environ.get("DB_DATABASE", "postgis"),
+        "USER": os.environ.get("DB_USER", "user"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
+        'HOST': os.environ.get("DB_HOST", "db"), # Name of postgres docker container
+        "PORT": os.environ.get("DB_PORT", "5432"),
     },
 }
 
@@ -142,6 +142,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# GDAL
+#GDAL_LIBRARY_PATH = ""
+
 # Leaflet config
 LEAFLET_CONFIG = {
     'SPATIAL_EXTENT': (-3.5, 50.5, 8.0, 62.0), # max west, max south, max east, max north
@@ -152,3 +155,6 @@ LEAFLET_CONFIG = {
     'DEFAULT_PRECISION': 6,
     'ATTRIBUTION_PREFIX': 'Powered by CFNS'
 }
+
+GDAL_LIBRARY_PATH=r"/usr/lib/libgdal.so.27"
+GEOS_LIBRARY_PATH=r"/usr/lib/libgeos_c.so.1.13.3"

@@ -1,6 +1,5 @@
 # pull official base image
-FROM python:alpine
-#FROM ubuntu:20.04
+FROM python:3.9.6-alpine3.13
 
 RUN apk update && apk upgrade \
     && apk add postgresql-client \
@@ -13,10 +12,6 @@ RUN apk update && apk upgrade \
         gettext-dev \
     && apk add --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
         libcrypto1.1 \
-    # && apk add --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    #     gdal \
-    #     geos \
-    #     proj4 \
     && apk add --no-cache \
                --upgrade \
                --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
@@ -31,23 +26,19 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONIOENCODING=UTF-8
 
-
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
 # set work directory
 WORKDIR /usr/src/app
 
-# install psycopg2 dependencies
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev build-base 
-
 # install dependencies
-RUN pip install --upgrade pip
-#COPY ./installation.sh .
-#RUN sh installation.sh
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy project
 COPY . .
+
+#RUN ["python3", "manage.py", "collectstatic", "--no-input"]
+#RUN ["python3", "manage.py", "migrate"]
+#CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
+# docker image build -t python .
+# docker container run -p 8000:8000 python
