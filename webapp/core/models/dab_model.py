@@ -11,3 +11,6 @@ class dabModel(BaseModel):
     class Meta:
         verbose_name = 'DAB message'
         verbose_name_plural = 'DAB messages'
+
+    def natural_key(self):
+        return {'id': self.id, 'message_id':self.message_id, 'message_type':self.message_type, 'ship_id':self.ship_id, 'message':self.message}

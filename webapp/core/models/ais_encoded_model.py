@@ -16,3 +16,7 @@ class aisEncodedModel(BaseModel):
     class Meta:
         verbose_name = 'Encoded AIS message'
         verbose_name_plural = 'Encoded AIS messages'
+    
+        
+    def natural_key(self):
+        return {'id': self.id, 'received_from':self.received_from, 'received_at':self.received_at, 'message':self.message}

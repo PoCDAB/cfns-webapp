@@ -32,12 +32,17 @@ class geoMessageModel(models.Model):
     class Meta:
         abstract = True
 
+    def natural_key(self):
+        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message}
+
 class geoPointModel(geoMessageModel):
     location = gismodels.PointField('Pivot', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Geo Point Message'
         verbose_name_plural = 'Geo Point Messages'
+    def natural_key(self):
+        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message, 'location':self.location}
 
 class geoCircleModel(geoMessageModel):
     location = gismodels.PointField('Pivot', null=True, blank=True)
@@ -46,6 +51,8 @@ class geoCircleModel(geoMessageModel):
     class Meta:
         verbose_name = 'Geo Circle Message'
         verbose_name_plural = 'Geo Circle Messages'
+    def natural_key(self):
+        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message, 'location':self.location, 'radius':self.radius}
 
 class geoPolygonModel(geoMessageModel):
     polygon = gismodels.PolygonField(null=True, blank=True)
@@ -53,3 +60,5 @@ class geoPolygonModel(geoMessageModel):
     class Meta:
         verbose_name = 'Geo Polygon Message'
         verbose_name_plural = 'Geo Polygon Messages'
+    def natural_key(self):
+        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message, 'polygon':self.polygon}

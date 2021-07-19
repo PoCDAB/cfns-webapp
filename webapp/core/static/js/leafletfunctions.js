@@ -13,11 +13,23 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
         text += "<h6 class='text-center'><b>" + popuptitle + "</b></h6></br>"
     }
     if (popupfields != null) {
+        console.log(feature?.properties)
         for (const [key, value] of Object.entries(popupfields)) {
-            console.log(key + ": " +  feature?.properties?.[key])
-            text += "<b>" + value + ":</b> " + (feature?.properties?.[key]?.toString() || "<i>Niet bekend</i>") + "</br>"
+            newkey = null
+            if (key.includes(".")) {
+                subpropertie = feature?.properties?.[key.split(".")[0]]
+                for (var i = 1; i < key.split(".").length; i++) {
+                    nextKey = key.split(".")[i]
+                    subpropertie = subpropertie[nextKey]
+                }
+                text += "<b>" + value + ":</b> " + (subpropertie?.toString() || "<i>Niet bekend</i>") + "</br>"
+
+            } else {
+                text += "<b>" + value + ":</b> " + (feature?.properties?.[key]?.toString() || "<i>Niet bekend</i>") + "</br>"
+            }
         }
         text += "<b>Location:</b> </br>&nbsp;" + (feature?.geometry?.coordinates?.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</br>"
+
     } else {
         text +=  JSON.stringify(feature.properties,null,'</br>')
         text +=  JSON.stringify(feature.geometry,null,'</br>')

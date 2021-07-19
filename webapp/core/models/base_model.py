@@ -11,3 +11,6 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+            
+    def natural_key(self):
+        return {'id': self.id, 'created_at': self.created_at, 'updated_at': self.updated_at}
