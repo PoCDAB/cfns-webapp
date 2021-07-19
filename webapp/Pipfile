@@ -3,20 +3,17 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-[dev-packages]
-
 [packages]
-django = "*"
-djangorestframework = "*"
-django-cors-headers = "*"
-psycopg2-binary = "*"
-django-bootstrap4 = "*"
-django-fontawesome-5 = "*"
-djangorestframework = "*"
-django-leaflet = "*"
-wheel = "*"
-pyais = "*"
-django-geojson = "*"
+Django = "==3.2"
+psycopg2-binary = "==2.8.6"
+django-bootstrap4 = "==3.0.1"
+django-fontawesome-5 = "==1.0.18"
+djangorestframework = "==3.12.2"
+django-leaflet = "==0.28.1"
+pyais = "==1.6.1"
+django-geojson = "==3.2.0"
+
+[dev-packages]
 
 [requires]
 python_version = "3.9"

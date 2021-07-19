@@ -29,7 +29,7 @@ STATICFILES_DIRS = [
 SECRET_KEY = os.environ.get("SECRET_KEY", "silencio_por_favor")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=True))
+DEBUG = os.environ.get("DEBUG", default=True)
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(" ")
 
@@ -153,6 +153,6 @@ LEAFLET_CONFIG = {
 }
 
 # Path to POSTGIS dependencys, ment for Docker
-if DEBUG is False:
+if str(DEBUG) == "False":
     GDAL_LIBRARY_PATH=r"/usr/lib/libgdal.so.27"
     GEOS_LIBRARY_PATH=r"/usr/lib/libgeos_c.so.1.13.3"
