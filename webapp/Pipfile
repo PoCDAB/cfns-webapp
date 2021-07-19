@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+psycopg2-binary = "*"
+django-bootstrap4 = "*"
+django-fontawesome-5 = "*"
+djangorestframework = "*"
+django-leaflet = "*"
+wheel = "*"
+pyais = "*"
+django-geojson = "*"
+
+[requires]
+python_version = "3.9"

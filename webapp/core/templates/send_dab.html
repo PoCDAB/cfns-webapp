@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block head %}
-    {% leaflet_js %}
-    {% leaflet_css %}
+    {% leaflet_js plugins="forms" %}
+    {% leaflet_css plugins="forms" %}
     {{ form.media }}
 
     <script type="text/javascript" src="{% static '/js/leaflet.ajax.js' %}"></script>

@@ -15,17 +15,23 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "silencio_por_favor")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = int(os.environ.get("DEBUG", default=True))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(" ")
 
 
 # Application definition
@@ -94,10 +100,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": os.environ.get("DB_ENGINE", "django.contrib.gis.db.backends.postgis"),
-        "NAME": os.environ.get("DB_DATABASE", "postgis"),
-        "USER": os.environ.get("DB_USER", "user"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "password"),
-        'HOST': os.environ.get("DB_HOST", "db"), # Name of postgres docker container
+        "NAME": os.environ.get("DB_DATABASE", "gis_db"),
+        "USER": os.environ.get("DB_USER", "postgres"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
+        'HOST': os.environ.get("DB_HOST"), # Name of postgres docker container
         "PORT": os.environ.get("DB_PORT", "5432"),
     },
 }
@@ -134,20 +140,11 @@ USE_L10N = True
 
 USE_TZ = False
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-# Leaflet config
+# Leaflet MAP config
 LEAFLET_CONFIG = {
     'SPATIAL_EXTENT': (-3.5, 50.5, 8.0, 62.0), # max west, max south, max east, max north
     'DEFAULT_CENTER': (52.5, 3.5),
-    'DEFAULT_ZOOM': 8,
+    'DEFAULT_ZOOM': 6,
     'MIN_ZOOM': 6,
     'MAX_ZOOM': 16,
     'DEFAULT_PRECISION': 6,
@@ -155,5 +152,7 @@ LEAFLET_CONFIG = {
     'NO_GLOBALS': False,
 }
 
-GDAL_LIBRARY_PATH=r"/usr/lib/libgdal.so.27"
-GEOS_LIBRARY_PATH=r"/usr/lib/libgeos_c.so.1.13.3"
+# Path to POSTGIS dependencys, ment for Docker
+if DEBUG is False:
+    GDAL_LIBRARY_PATH=r"/usr/lib/libgdal.so.27"
+    GEOS_LIBRARY_PATH=r"/usr/lib/libgeos_c.so.1.13.3"

@@ -39,9 +39,13 @@ networks:
 volumes:
   postgres_data:
 
+## START: ##
 # docker-compose up
-# DELETE ALL: docker system prune -a --volumes
 
+## INITIAL START: ##
 # docker-compose up -d
 # docker exec -it web python manage.py migrate
 # docker exec -it web python manage.py createsuperuser
+
+## DELETE ALL: ##
+# docker system prune -a --volumes

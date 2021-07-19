@@ -1,27 +1,8 @@
 from django.contrib import admin
-from ..models import geoMessageModel, geoPointModel, geoCircleModel, geoPolygonModel
+from leaflet.admin import LeafletGeoAdmin
+from ..models import geoPointModel, geoCircleModel, geoPolygonModel
 
-class baseGeoMessageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded')
-    list_filter = ()
-
-    fieldsets = [
-        ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
-        ("Linked to:", {'fields': ['dab', 'aisEncoded', 'aisDecoded']}),
-        ("Message:", {'fields': ['message']}),
-    ]
-
-    search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
-    ordering = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
-    readonly_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
-    filter_horizontal = ()
-
-    class Meta:
-        model = geoMessageModel
-        fields = '__all__'
-
-
-class geoMessagePointNotificationAdmin(admin.ModelAdmin):
+class geoMessagePointNotificationAdmin(LeafletGeoAdmin):
     list_display = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded')
     list_filter = ()
 
@@ -42,7 +23,7 @@ class geoMessagePointNotificationAdmin(admin.ModelAdmin):
         fields = '__all__'
 
 
-class geoMessageCircleNotificationAdmin(admin.ModelAdmin):
+class geoMessageCircleNotificationAdmin(LeafletGeoAdmin):
     list_display = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded')
     list_filter = ()
 
@@ -62,7 +43,7 @@ class geoMessageCircleNotificationAdmin(admin.ModelAdmin):
         model = geoCircleModel
         fields = '__all__'
 
-class geoMessagePolygonNotificationAdmin(admin.ModelAdmin):
+class geoMessagePolygonNotificationAdmin(LeafletGeoAdmin):
     list_display = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded')
     list_filter = ()
 

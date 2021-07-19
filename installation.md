@@ -30,6 +30,7 @@ Type in the (Linux) command line.
 ## Afterwards installation
 ### Create database
 	sudo passwd postgres
+	postgres
 	su - postgres
 	createdb gis_db
 	psql gis_db

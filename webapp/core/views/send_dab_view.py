@@ -1,12 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from re import search
 
-import json
-from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
-
-from ..forms import SelectDABType, SendDABForm_message, SendDABForm_point, SendDABForm_circle, SendDABForm_polygon
+from ..forms import SelectDABType, SendDABForm_point, SendDABForm_circle, SendDABForm_polygon
 from ..models import dabModel
 from ..code import createGeoNotification
 
@@ -22,8 +18,6 @@ def send_dab_view(request):
             messagetype = int(request.POST["messagetype"])
 
             form = None
-            if messagetype == 0:
-                form = SendDABForm_message(request.POST)
             if messagetype == 1:
                 form = SendDABForm_point(request.POST)
             if messagetype == 2:

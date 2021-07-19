@@ -1,8 +1,8 @@
 from django.contrib import admin
 from ..models import aisEncodedModel, aisDecodedModel
+from leaflet.admin import LeafletGeoAdmin
 
 class aisEncodedAdmin(admin.ModelAdmin):
-
     list_display = ('id', 'received_from', 'message',)
     list_filter = ()
 
@@ -20,7 +20,7 @@ class aisEncodedAdmin(admin.ModelAdmin):
         model = aisEncodedModel
         fields = '__all__'
 
-class aisDecodedAdmin(admin.ModelAdmin):
+class aisDecodedAdmin(LeafletGeoAdmin):
 
     list_display = ('id', 'aisEncoded', 'mmsi', 'name', 'geom', 'course')
     list_filter = ()

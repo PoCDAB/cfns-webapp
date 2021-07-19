@@ -1,6 +1,7 @@
 # pull official base image
 FROM python:3.9.6-alpine3.13
 
+# Add packages for the Postgresql extend POSTGIS; library
 RUN apk update && apk upgrade \
     && apk add postgresql-client \
         postgresql-dev \
@@ -18,8 +19,7 @@ RUN apk update && apk upgrade \
         geos \
         proj \
         gdal \
-        binutils \
-    && pip install pipenv
+        binutils
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -28,6 +28,11 @@ ENV PYTHONIOENCODING=UTF-8
 
 # set work directory
 WORKDIR /usr/src/app
+
+# setup python virtual envirment
+RUN pip install pipenv
+COPY Pipfile Pipfile.lock ./
+RUN pipenv install
 
 # install dependencies
 COPY ./requirements.txt .
