@@ -15,7 +15,7 @@ class geoMessagePointNotificationAdmin(LeafletGeoAdmin):
 
     search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
     ordering = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
-    readonly_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
+    readonly_fields = ('id', 'created_at', 'updated_at',)# 'dab', 'aisEncoded', 'aisDecoded',)
     filter_horizontal = ()
 
     class Meta:
@@ -36,7 +36,7 @@ class geoMessageCircleNotificationAdmin(LeafletGeoAdmin):
 
     search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
     ordering = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
-    readonly_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
+    readonly_fields = ('id', 'created_at', 'updated_at', )#'dab', 'aisEncoded', 'aisDecoded',)
     filter_horizontal = ()
 
     class Meta:
@@ -56,7 +56,7 @@ class geoMessagePolygonNotificationAdmin(LeafletGeoAdmin):
 
     search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
     ordering = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
-    readonly_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisEncoded', 'aisDecoded',)
+    readonly_fields = ('id', 'created_at', 'updated_at',)# 'dab', 'aisEncoded', 'aisDecoded',)
     filter_horizontal = ()
 
     class Meta:

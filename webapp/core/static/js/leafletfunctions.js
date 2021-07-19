@@ -13,20 +13,23 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
         text += "<h6 class='text-center'><b>" + popuptitle + "</b></h6></br>"
     }
     if (popupfields != null) {
-        console.log(feature?.properties)
         for (const [key, value] of Object.entries(popupfields)) {
-            newkey = null
-            if (key.includes(".")) {
-                subpropertie = feature?.properties?.[key.split(".")[0]]
-                for (var i = 1; i < key.split(".").length; i++) {
-                    nextKey = key.split(".")[i]
-                    subpropertie = subpropertie[nextKey]
+            result = null
+            if (key.includes(".") && typeof feature?.properties[key] === 'object' && feature?.properties[key] !== null) {
+                subpropertie = feature?.properties[key.split(".")[0]]
+                if (subpropertie && subpropertie !== null) {
+                    for (var i = 1; i < key.split(".").length; i++) {
+                        nextKey = key.split(".")[i]
+                        subpropertie = subpropertie[nextKey]
+                    }
+                    result = subpropertie
                 }
-                text += "<b>" + value + ":</b> " + (subpropertie?.toString() || "<i>Niet bekend</i>") + "</br>"
-
+            } else if (typeof feature?.properties[key] === 'object' && feature?.properties[key] !== null) {
+                result = "Ok!"
             } else {
-                text += "<b>" + value + ":</b> " + (feature?.properties?.[key]?.toString() || "<i>Niet bekend</i>") + "</br>"
+                result = feature?.properties?.[key]
             }
+            text += "<b>" + value + ":</b> " + (result?.toString() || "<i>Niet bekend</i>") + "</br>"
         }
         text += "<b>Location:</b> </br>&nbsp;" + (feature?.geometry?.coordinates?.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</br>"
 

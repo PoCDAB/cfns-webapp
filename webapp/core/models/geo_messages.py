@@ -15,17 +15,20 @@ class geoMessageModel(models.Model):
     dab = models.OneToOneField(
         dabModel,
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        blank=True
     )
     aisEncoded = models.OneToOneField(
         aisEncodedModel,
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        blank=True
     )
     aisDecoded = models.OneToOneField(
         aisDecodedModel,
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        blank=True
     )
     message = models.CharField(max_length=256)
 
