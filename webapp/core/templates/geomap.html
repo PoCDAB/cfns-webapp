@@ -42,8 +42,8 @@
       url:"{% url 'geo-point-data' %}",
       popuptitle:'Melding',
       popupfields: {
-        'pk': 'ID',
-        'dab': 'DAB',
+        'pk': 'ID',                 //database name, name to be displayed
+        'dab': 'DAB',               //database name, name to be displayed
         'aisEncoded': 'AIS encoded',
         'aisDecoded': 'AIS decoded',
         'dab.ship_id': 'Schip naam',
@@ -62,9 +62,10 @@
       url:"{% url 'geo-circle-data' %}",
       popuptitle:'CIRKEL',
       popupfields: {
-        'pk': 'ID',
+        'pk': 'ID',                   //database name, name to be displayed
+        'dab.ship_id': 'Schip naam',  //database name, name to be displayed
+        'message': 'Bericht',         //database name, name to be displayed
         'radius': 'Straal',
-        'message': 'Bericht',
         'dab': 'Dab',
         'aisDecoded': 'Ais',
       },
@@ -78,8 +79,9 @@
       url:"{% url 'geo-polygon-data' %}",
       popuptitle:'Zoekgebied',
       popupfields:{
-        'pk': 'ID',
-        'message': 'Bericht',
+        'pk': 'ID',                   //database name, name to be displayed
+        'dab.ship_id': 'Schip naam',  //database name, name to be displayed
+        'message': 'Bericht',         //database name, name to be displayed
         'dab': 'Dab',
         'aisDecoded': 'Ais',
       }
