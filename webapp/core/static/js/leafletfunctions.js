@@ -1,26 +1,32 @@
 function addDataset({url, popuptitle, popupfields = null, fa_icon = null, image_path = null, color = null, rotationcorrection = 0, isCircle=false}) {
     return new L.GeoJSON.AJAX(url, {
-        pointToLayer: function (feature, latlng) { return pointToLayer(feature, latlng, fa_icon, image_path, color, rotationcorrection, isCircle)},
+        pointToLayer: function (feature, latlng) {
+            return pointToLayer(feature, latlng, fa_icon, image_path, color, rotationcorrection, isCircle)
+        },
         onEachFeature: function (feature, layer) {
             onEachFeature(feature, layer, popuptitle, popupfields)
-        }
+        },
     });  
 }
 
 function onEachFeature(feature, layer, popuptitle, popupfields) {
-    text = ''
+    text = '<table class="table table-striped">'
     if (popuptitle != null) {
-        text += "<h6 class='text-center'><b>" + popuptitle + "</b></h6></br>"
+        text += "<h6 class='text-center'><b>" + popuptitle + "</b></h6>"
     }
+    text +="<tbody>"
     if (popupfields != null) {
         for (const [key, value] of Object.entries(popupfields)) {
             result = null
-            if (key.includes(".") && typeof feature?.properties[key] === 'object' && feature?.properties[key] !== null) {
+            if (key.includes(".")) {
                 subpropertie = feature?.properties[key.split(".")[0]]
+                console.log(subpropertie)
+
                 if (subpropertie && subpropertie !== null) {
                     for (var i = 1; i < key.split(".").length; i++) {
                         nextKey = key.split(".")[i]
                         subpropertie = subpropertie[nextKey]
+                        console.log(subpropertie)
                     }
                     result = subpropertie
                 }
@@ -29,15 +35,19 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
             } else {
                 result = feature?.properties?.[key]
             }
-            text += "<b>" + value + ":</b> " + (result?.toString() || "<i>Niet bekend</i>") + "</br>"
+            text += "<tr><th>" + value + ":</th><td>" + (result?.toString() || "<i>Niet bekend</i>") + "</td></tr>"
         }
-        text += "<b>Location:</b> </br>&nbsp;" + (feature?.geometry?.coordinates?.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</br>"
+        text += "<tr><th>Location:</th><td>" + (feature?.geometry?.coordinates?.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</td></tr>"
 
     } else {
         text +=  JSON.stringify(feature.properties,null,'</br>')
         text +=  JSON.stringify(feature.geometry,null,'</br>')
     }
-    layer.bindPopup(text)
+    text += '<tbody></table>'
+    layer.bindPopup(text, {
+        maxWidth : 560,
+        minWidth: 250
+    });
 };
 
 // Edits the point on the layer. Add icon, image or circle at point x,y

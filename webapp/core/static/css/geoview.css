@@ -18,3 +18,13 @@ form table label {
 form table input {
     cursor: pointer;
 }
+
+.leaflet-popup-content {
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.leaflet-popup-content .table td, .leaflet-popup-content .table th {
+    padding: 2px 5px;
+    font-size: 10pt;
+}
