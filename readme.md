@@ -1,10 +1,17 @@
 # CFNS webapp
 Webapplication made in Django, with GeoDjango and as database: PostgreSQL extented with PostGIS
 
-## Install required software:
+## Start up project (via Docker):
+Go into linux (type 'wsl' in Windows)
+
+	1. docker-compose up
+
+
+
+## Start up project (via python):
+#### Install required software:
 Follow [installation.md](installation.md)
 
-## Start up project:
 #### Activate environment:
 Go into linux (type 'wsl' in Windows)
 
