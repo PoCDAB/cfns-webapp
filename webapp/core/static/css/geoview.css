@@ -28,3 +28,7 @@ form table input {
     padding: 2px 5px;
     font-size: 10pt;
 }
+
+#ui-datepicker-div {
+    left: 1% !important;
+}

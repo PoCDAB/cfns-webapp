@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from ..forms import SelectDABType, SendDABForm_point, SendDABForm_circle, SendDABForm_polygon
 from ..models import dabModel
-from ..code import createGeoNotification
+from ..controllers import createGeoData
 
 from django.conf import settings
 
@@ -30,7 +30,7 @@ def send_dab_view(request):
                 # check whether it's valid:
                 if form and form.is_valid():
                     dabmessage = dabModel.objects.create(message=request.POST["message"], message_type=int(request.POST["messagetype"]), ship_id=request.POST["ship_id"])
-                    createGeoNotification(dabmessage, request.POST)
+                    createGeoData(dabmessage, request.POST)
 
                     return  render(request, 'send_dab.html', {'startform': startform, 'form': form, 'info_msg': 'DAB+ has been send!', 'info_type': 'alert-success'})
                 else:

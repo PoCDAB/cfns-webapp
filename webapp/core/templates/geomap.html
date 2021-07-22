@@ -10,14 +10,19 @@
 {% block head %}
     {% leaflet_js %}
     {% leaflet_css %}
+    <!-- Local CSS -->
     <link rel="stylesheet" type="text/css" href="{% static '/css/geoview.css' %}">
+    <!-- Jquery -->
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Local Javascript -->
     <script type="text/javascript" src="{% static '/js/leaflet.ajax.js' %}"></script>
-    <script type="text/javascript" src="{% static '/js/leaflet.rotateMarker.js' %}"></script>
-    <script type="text/javascript" src="{% static '/js/leafletfunctions.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/leaflet_rotateMarker.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/leaflet_functions.js' %}"></script>
 {% endblock %}
 
 {% block body-fluid %}
-<script>
+<script type="text/javascript">
   function map_init (map, options) {
     // Use Leaflet API here
 
@@ -92,82 +97,134 @@
   }
 </script>
 
-  <div class="d-flex flex-wrap">
-    <div class="col-lg-2">
-      <h3 class="m-2">Filters:</h3>
-      <form method="post">
-        {% csrf_token %}
-        <table class="d-flex justify-content-center">
-          {% if form.subject.errors %}
-            <ol role="alertdialog">
-                {% for error in form.subject.errors %}
-                <li role="alert"><strong>{{ error|escape }}</strong></li>
-                {% endfor %}
-            </ol>
-            {% endif %}
-    
-            <table class="table table-hover geofilter">
-              <tbody>
-            {% for field in form %}
-                <tr class="m-0 p-0">
-                  <td class="col-lg-1 checkbox">
-                    {{ field }}
+<script type="text/javascript">
+  var jqOld = jQuery.noConflict();
+  jqOld(function() {
+    options = {
+      dateFormat: 'dd/mm/yy'
+    };
+    jqOld("#datepicker_from").datepicker(options);
+    jqOld("#datepicker_till").datepicker(options);
+  });
+  ( function($) {
+    $(document).ready(function() {
+      document.getElementById("datepicker_from").defaultValue = getCurrentTime();
+      document.getElementById("datepicker_till").defaultValue = getCurrentTime();
+    });
+	}) ( jQuery );
 
-                    {% if field.help_text %}
-                      <p class="help">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                  </td>
-                  <td class="m-0 p-0 col-lg-11">
-                    <label>{{ field.label }}</label>
-                  </td>
-                </tr>
-          {% endfor %}
-        </tbody>
-        </table>
-        <button class="btn btn-success w-100" type="submit">Toepassen</button>
-      </form>
-    </div>
-    <div class="col-lg-8">
-      {% leaflet_map "geoview" callback="window.map_init" %}
-    </div>
-    <div class="col-lg-2">
-      <h3 class="m-2">Legenda:</h3>
-      <table class="table">
-        <tr class="m-0 p-0">
-          <td class="col-lg-1">
-            <i class="fa fa-location-arrow"></i>
-          </td>
-          <td class="m-0 p-0 col-lg-11 align-middle">
-            Schip
-          </td>
-        </tr>
-        <tr class="m-0 p-0">
-          <td class="col-lg-1">
-            <i class="fa fa-map-pin"></i>
-          </td>
-          <td class="m-0 p-0 col-lg-11 align-middle">
-            Melding: bericht
-          </td>
-        </tr>
-        <tr class="m-0 p-0">
-          <td class="col-lg-1">
-            <i class="fa fa-exclamation-triangle"></i>
-          </td>
-          <td class="m-0 p-0 col-lg-11 align-middle">
-            Melding: gevaar
-          </td>
-        </tr>
-      </table>
+  function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 
-      </br></br>
-      <div>
-        <b>Groepen waar <i>{{ user.username }}</i> onderdeel van uit maakt:</b>
-        <ul>
-            {% for value in user.groups.all %}
-                <li>{{ value.name }}</li>
-            {% endfor %}
-        </ul>
+  // Function creates date NOW in corrent format.
+  function getCurrentTime() {
+    let d = new Date();
+    let ye = new Intl.DateTimeFormat('nl-NL', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('nl-NL', { month: '2-digit' }).format(d);
+    let da = new Intl.DateTimeFormat('nl-NL', { day: '2-digit' }).format(d);
+    return da +"/"+ mo +"/"+ ye
+  }
+</script>
+
+
+<div class="d-flex flex-wrap">
+  <div class="col-lg-2">
+    <h3 class="m-2">Filters:</h3>
+    <form method="post">
+      {% csrf_token %}
+
+      <h6 class="m-2">Selecteer data op datum:</h6>
+      <div class="input-group date" id="datetimepicker_from" data-target-input="nearest">
+        <div class="input-group date" class="input-group-append" data-provide="datepicker" data-toggle="datetimepicker">
+
+          <h6 class="col-lg-2 m-2">Van:</h6>
+          <input type="text" id="datepicker_from" class="col-lg-10 form-control">
+        </div>
       </div>
+      <div class="input-group date" id="datetimepicker_till" data-target-input="nearest">
+        <div class="input-group date" class="input-group-append" data-provide="datepicker" data-toggle="datetimepicker">
+          <h6 class="col-lg-2 m-2">Tot:</h6>
+          <input type="text" id="datepicker_till" class="col-lg-10 form-control">
+        </div>
+      </div>
+
+      <table class="d-flex justify-content-center">
+        {% if form.subject.errors %}
+          <ol role="alertdialog">
+              {% for error in form.subject.errors %}
+              <li role="alert"><strong>{{ error|escape }}</strong></li>
+              {% endfor %}
+          </ol>
+          {% endif %}
+  
+          <h6 class="m-2">Selecteer data filter:</h6>
+          <table class="table table-hover geofilter">
+            <tbody>
+          {% for field in form %}
+            {% if field.label != 'date_till' and field.label != 'date_from' %}
+              <tr class="m-0 p-0">
+                <td class="col-lg-1 checkbox">
+                  {{ field }}
+
+                  {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                  {% endif %}
+                </td>
+                <td class="m-0 p-0 col-lg-11">
+                  <label>{{ field.label }}</label>
+                </td>
+              </tr>
+            {% endif %}
+        {% endfor %}
+      </tbody>
+      </table>
+      <button class="btn btn-primary w-100" type="submit">Toepassen</button>
+    </form>
+  </div>
+  <div class="col-lg-8">
+    {% leaflet_map "geoview" callback="window.map_init" %}
+  </div>
+  <div class="col-lg-2">
+    <h3 class="m-2">Legenda:</h3>
+    <table class="table">
+      <tr class="m-0 p-0">
+        <td class="col-lg-1">
+          <i class="fa fa-location-arrow"></i>
+        </td>
+        <td class="m-0 p-0 col-lg-11 align-middle">
+          Schip
+        </td>
+      </tr>
+      <tr class="m-0 p-0">
+        <td class="col-lg-1">
+          <i class="fa fa-map-pin"></i>
+        </td>
+        <td class="m-0 p-0 col-lg-11 align-middle">
+          Melding: bericht
+        </td>
+      </tr>
+      <tr class="m-0 p-0">
+        <td class="col-lg-1">
+          <i class="fa fa-exclamation-triangle"></i>
+        </td>
+        <td class="m-0 p-0 col-lg-11 align-middle">
+          Melding: gevaar
+        </td>
+      </tr>
+    </table>
+
+    </br></br>
+    <div>
+      <b>Groepen waar <i>{{ user.username }}</i> onderdeel van uit maakt:</b>
+      <ul>
+          {% for value in user.groups.all %}
+              <li>{{ value.name }}</li>
+          {% endfor %}
+      </ul>
     </div>
   </div>
+</div>
 {% endblock %}
