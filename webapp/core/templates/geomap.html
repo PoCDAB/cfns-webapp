@@ -132,21 +132,21 @@
 
 <div class="d-flex flex-wrap">
   <div class="col-lg-2">
-    <h3 class="m-2">Filters:</h3>
+    <h3 class="m-3 text-center"> <i class="fas fa-filter"> Filters</h3>
     <form method="post">
       {% csrf_token %}
 
-      <h6 class="m-2">Selecteer data op datum:</h6>
+      <h6 class="m-2">Data datepicker:</h6>
       <div class="input-group date" id="datetimepicker_from" data-target-input="nearest">
         <div class="input-group date" class="input-group-append" data-provide="datepicker" data-toggle="datetimepicker">
 
-          <h6 class="col-lg-2 m-2">Van:</h6>
+          <h6 class="col-lg-2 m-2">From:</h6>
           <input type="text" id="datepicker_from" class="col-lg-10 form-control">
         </div>
       </div>
       <div class="input-group date" id="datetimepicker_till" data-target-input="nearest">
         <div class="input-group date" class="input-group-append" data-provide="datepicker" data-toggle="datetimepicker">
-          <h6 class="col-lg-2 m-2">Tot:</h6>
+          <h6 class="col-lg-2 m-2">Till:</h6>
           <input type="text" id="datepicker_till" class="col-lg-10 form-control">
         </div>
       </div>
@@ -160,7 +160,7 @@
           </ol>
           {% endif %}
   
-          <h6 class="m-2">Selecteer data filter:</h6>
+          <h6 class="m-2">Select data stream:</h6>
           <table class="table table-hover geofilter">
             <tbody>
           {% for field in form %}
@@ -188,14 +188,14 @@
     {% leaflet_map "geoview" callback="window.map_init" %}
   </div>
   <div class="col-lg-2">
-    <h3 class="m-2">Legenda:</h3>
+    <h3 class="m-2">Map Legend:</h3>
     <table class="table">
       <tr class="m-0 p-0">
         <td class="col-lg-1">
           <i class="fa fa-location-arrow"></i>
         </td>
         <td class="m-0 p-0 col-lg-11 align-middle">
-          Schip
+          Ship
         </td>
       </tr>
       <tr class="m-0 p-0">
@@ -203,7 +203,7 @@
           <i class="fa fa-map-pin"></i>
         </td>
         <td class="m-0 p-0 col-lg-11 align-middle">
-          Melding: bericht
+          Message
         </td>
       </tr>
       <tr class="m-0 p-0">
@@ -211,7 +211,7 @@
           <i class="fa fa-exclamation-triangle"></i>
         </td>
         <td class="m-0 p-0 col-lg-11 align-middle">
-          Melding: gevaar
+          Important Message
         </td>
       </tr>
     </table>

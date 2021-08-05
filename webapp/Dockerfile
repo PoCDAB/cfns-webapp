@@ -23,8 +23,8 @@ RUN apk update \
         proj \
         gdal \
         binutils
- 
- # setup python virtual envirment
+
+# setup python virtual envirment
 RUN pip install pipenv
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install
