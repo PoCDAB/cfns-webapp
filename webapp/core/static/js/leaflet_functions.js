@@ -1,15 +1,15 @@
-function addDataset({url, popuptitle, popupfields = null, fa_icon = null, image_path = null, color = null, rotationcorrection = 0, isCircle=false}) {
+function addDataset({url, popuptitle, popupfields = null, fa_icon = null, color = null, image_path = null, show_position = false, rotationcorrection = 0, isCircle = false}) {
     return new L.GeoJSON.AJAX(url, {
         pointToLayer: function (feature, latlng) {
-            return pointToLayer(feature, latlng, fa_icon, image_path, color, rotationcorrection, isCircle)
+            return pointToLayer(feature, latlng, fa_icon, color, image_path, rotationcorrection, isCircle)
         },
         onEachFeature: function (feature, layer) {
-            onEachFeature(feature, layer, popuptitle, popupfields)
+            onEachFeature(feature, layer, popuptitle, popupfields, show_position)
         },
     });  
 }
 
-function onEachFeature(feature, layer, popuptitle, popupfields) {
+function onEachFeature(feature, layer, popuptitle, popupfields, show_position) {
     text = '<table class="table table-striped">'
     if (popuptitle != null) {
         text += "<h6 class='text-center'><b>" + popuptitle + "</b></h6>"
@@ -20,13 +20,10 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
             result = null
             if (key.includes(".")) {
                 subpropertie = feature?.properties[key.split(".")[0]]
-                console.log(subpropertie)
-
                 if (subpropertie && subpropertie !== null) {
                     for (var i = 1; i < key.split(".").length; i++) {
                         nextKey = key.split(".")[i]
                         subpropertie = subpropertie[nextKey]
-                        console.log(subpropertie)
                     }
                     result = subpropertie
                 }
@@ -35,10 +32,12 @@ function onEachFeature(feature, layer, popuptitle, popupfields) {
             } else {
                 result = feature?.properties?.[key]
             }
+            console.log(key, result)
             text += "<tr><th>" + value + ":</th><td>" + (result?.toString() || "<i>Niet bekend</i>") + "</td></tr>"
         }
-        text += "<tr><th>Location:</th><td>" + (feature?.geometry?.coordinates?.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</td></tr>"
-
+        if (show_position) {
+            text += "<tr><th>Location:</th><td>" + (feature?.geometry?.coordinates?.toString().replaceAll(',',',</br>&nbsp;') || "<i>Niet bekend</i>") + "</td></tr>"
+        }
     } else {
         text +=  JSON.stringify(feature.properties,null,'</br>')
         text +=  JSON.stringify(feature.geometry,null,'</br>')
@@ -61,9 +60,9 @@ function pointToLayer(feature, latlng, fa_icon, image_path, color, rotationcorre
         }
 
         if (isCircle) {
-            return L.circle(latlng, { radius: feature.properties?.radius, color: color})
+            return L.circle(latlng, { icon: icon, radius: feature.properties?.radius, color: color})
         } else {
-            return L.marker(latlng, { icon: imgIcon(image_path), icon: icon, rotationAngle: (feature.properties?.course || 0) + rotationcorrection })
+            return L.marker(latlng, { icon: icon, rotationAngle: (feature.properties?.course || 0) + rotationcorrection })
         }
     } else {
         return L.marker(latlng)
@@ -82,7 +81,7 @@ function imgIcon(img_path) {
 }
 
 // Add Fontawesome icon via fontawesome_icon with some color
-function faIcon(fontawesome_icon, color) {
+function faIcon(fontawesome_icon, color = 'white') {
     html = '<i class="fa '+fontawesome_icon+' fa-3x" style="color:'+color+'; text-align: center;width:100%"></i>'
     return L.divIcon({
       html: html,

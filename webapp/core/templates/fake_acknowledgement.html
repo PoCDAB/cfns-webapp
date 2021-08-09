@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load fontawesome_5 %}
+
+{% block title %}
+  <title>Fake Acknowledgement</title>
+{% endblock %}
+
+{% block body %}
+<div class="container text-center alert alert-warning" role="alert">
+    This page is a MOCK page. That means that this page only exists to simulate/fake an acknowledgement.
+</div>
+
+<h2 class="text-center">Click on the AIS of LoRaWAN button to simulate/fake an acknowledgement.</h2>
+</br>
+
+{% if info_msg %}
+    <div class="container text-center alert {{ info_type }}" role="alert">
+        {{ info_msg }}
+    </div>
+{% endif %}
+</br>
+
+<div class="d-flex flex-wrap">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">(DAB) ID</th>
+                <th scope="col">(DAB) Message ID</th>
+                <th scope="col">(DAB) Message Type</th>
+                <th scope="col">(DAB) Ship ID</th>
+                <th scope="col">(DAB) Messsage</th>
+                <th scope="col" class="text-center">AIS</th>
+                <th scope="col" class="text-center">LoRaWAN</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for object in all_objects %}
+                <tr>
+                    <td scope="row">{{ object.dab.id }}</td>
+                    <td>{{ object.dab.message_id }}</td>
+                    <td>{{ object.dab.message_type }}</td>
+                    <td>{{ object.dab.ship_id }}</td>
+                    <td>{{ object.dab.message }}</td>
+                    <td  class="text-center">
+                        {% if not object.aisDecoded %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="dab_id" value="{{ object.dab.id }}" readonly>
+                            <input type="hidden"name="ack_type" value="ais" readonly>
+                            <input class="btn btn-info" type="submit" value="Ack AIS">
+                        </form>
+                        {% else %}
+                            {% fa5_icon 'check' %}
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if not object.lorawan %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="dab_id" value="{{ object.dab.id }}" readonly>
+                            <input type="hidden"name="ack_type" value="lorawan" readonly>
+                            <input class="btn btn-info" type="submit" value="Ack LoRaWAN">
+                        </form>
+                        {% else %}
+                            {% fa5_icon 'check' %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

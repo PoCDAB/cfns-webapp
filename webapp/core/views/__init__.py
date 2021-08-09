@@ -5,7 +5,8 @@ from .contact_view import contactView
 from .login_view import loginView, loggedoutView
 from .profile_view import profileView
 from .geomap_view import geomapView
-from .send_dab_view import send_dab_view
+from .send_dab_view import sendDabView
+from .fake_acknowledgement_view import fakeAcknowledgementView
 
 from .errors import *
 

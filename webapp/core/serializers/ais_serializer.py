@@ -5,9 +5,7 @@ from ..models import aisEncodedModel, aisDecodedModel
 
 class aisSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
-        encodedAIS = aisEncodedModel.objects.create(**validated_data)
         decodedAIS = {}
-        decodedAIS['aisEncoded'] = encodedAIS
         msg = decode_msg(validated_data['message'])
         if 'mmsi' in msg:
             decodedAIS['mmsi'] = msg['mmsi']
@@ -17,9 +15,8 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
             decodedAIS['geom'] = Point(msg['lon'], msg['lat'])
         if 'course' in msg:
             decodedAIS['course'] = msg['course']
-        aisDecodedModel.objects.create(**decodedAIS)
-        return encodedAIS
+        return decodedAIS
 
     class Meta:
-        model = aisEncodedModel
-        fields = ['id', 'received_from', 'received_at', 'message', 'created_at', 'updated_at']
+        model = aisDecodedModel
+        fields = ['id', 'received_from','message', 'received_at', 'mmsi', 'name', 'geom', 'course', 'created_at', 'updated_at']

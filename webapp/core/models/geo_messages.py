@@ -3,9 +3,10 @@ from django.contrib.gis.db import models as gismodels
 from datetime import datetime
 import pytz
 from .base_model import BaseModel
+from .fontawesome_model import FontAwesomeIcon
 from .dab_model import dabModel
-from .ais_encoded_model import aisEncodedModel
 from .ais_decoded_model import aisDecodedModel
+from .lorawan_model import lorawanModel
 
 class geoMessageModel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -18,25 +19,27 @@ class geoMessageModel(models.Model):
         null=True,
         blank=True
     )
-    aisEncoded = models.OneToOneField(
-        aisEncodedModel,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
-    )
     aisDecoded = models.OneToOneField(
         aisDecodedModel,
         on_delete=models.CASCADE,
         null=True,
         blank=True
     )
-    message = models.CharField(max_length=256)
+    lorawan = models.OneToOneField(
+        lorawanModel,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    font_awesome_icon = FontAwesomeIcon()
+    font_awesome_iconcolor = models.CharField(max_length=256)
 
     class Meta:
         abstract = True
 
     def natural_key(self):
-        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message}
+        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan}
 
 class geoPointModel(geoMessageModel):
     location = gismodels.PointField('Pivot', null=True, blank=True)
@@ -45,7 +48,7 @@ class geoPointModel(geoMessageModel):
         verbose_name = 'Geo Point Message'
         verbose_name_plural = 'Geo Point Messages'
     def natural_key(self):
-        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message, 'location':self.location}
+        return {'id': self.id, 'dab':self.dab,  'ais':self.aisDecoded, 'lorawan': self.lorawan, 'location':self.location}
 
 class geoCircleModel(geoMessageModel):
     location = gismodels.PointField('Pivot', null=True, blank=True)
@@ -55,7 +58,7 @@ class geoCircleModel(geoMessageModel):
         verbose_name = 'Geo Circle Message'
         verbose_name_plural = 'Geo Circle Messages'
     def natural_key(self):
-        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message, 'location':self.location, 'radius':self.radius}
+        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan, 'location':self.location, 'radius':self.radius}
 
 class geoPolygonModel(geoMessageModel):
     polygon = gismodels.PolygonField(null=True, blank=True)
@@ -64,4 +67,4 @@ class geoPolygonModel(geoMessageModel):
         verbose_name = 'Geo Polygon Message'
         verbose_name_plural = 'Geo Polygon Messages'
     def natural_key(self):
-        return {'id': self.id, 'dab':self.dab, 'aisEncoded':self.aisEncoded, 'aisDecoded':self.aisDecoded, 'message':self.message, 'polygon':self.polygon}
+        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan, 'polygon':self.polygon}

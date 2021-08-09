@@ -31,11 +31,11 @@
       url:"{% url 'ais-data' %}",
       popuptitle:'AIS',
       popupfields: {
-        'pk': 'ID',                     //database name, name to be displayed
-        'name': 'Schipnaam',            //database name, name to be displayed
-        'mmsi': 'MMSI',                 //database name, name to be displayed
-        'course': 'Koers',              //database name, name to be displayed
-        'updated_at': 'Laatste ping',   //database name, name to be displayed
+        'pk': 'ID',                     //database name: name to be displayed
+        'name': 'Schipnaam',            //database name: name to be displayed
+        'mmsi': 'MMSI',                 //database name: name to be displayed
+        'course': 'Koers',              //database name: name to be displayed
+        'updated_at': 'Laatste ping',   //database name: name to be displayed
       },
       fa_icon:'fa-location-arrow',
       color:'darkblue',
@@ -47,20 +47,16 @@
       url:"{% url 'geo-point-data' %}",
       popuptitle:'Melding',
       popupfields: {
-        'pk': 'ID',                 //database name, name to be displayed
-        'dab': 'DAB',               //database name, name to be displayed
-        'aisEncoded': 'AIS encoded',
-        'aisDecoded': 'AIS decoded',
+        'pk': 'ID',                     //database name: name to be displayed
         'dab.ship_id': 'Schip naam',
-        'dab.message': 'Bericht',
-        'aisEncoded.message': 'Ais Encoded Message',
-        'aisDecoded.aisEncoded.message': 'Ais Encoded Message via decoded',
+        'dab': 'DAB',
+        'aisDecoded': 'AIS',
         'lorawan': 'LoRaWAN',
-        'created_at': 'Ontvangen om',
         'updated_at': 'Laaste update',
       },
       fa_icon:'fa-map-pin',
-      color:'black'
+      color:'black',
+      show_position: true,
     }).addTo(map);
     
     // Add circles data
@@ -68,17 +64,18 @@
       url:"{% url 'geo-circle-data' %}",
       popuptitle:'CIRKEL',
       popupfields: {
-        'pk': 'ID',                   //database name, name to be displayed
-        'dab.ship_id': 'Schip naam',  //database name, name to be displayed
-        'message': 'Bericht',         //database name, name to be displayed
-        'radius': 'Straal',
+        'pk': 'ID',                   //database name: name to be displayed
+        'dab.ship_id': 'Schip naam',
         'dab': 'Dab',
         'aisDecoded': 'Ais',
         'lorawan': 'LoRaWAN',
+        'radius': 'Diameter',
+        'updated_at': 'Laaste update',
       },
       fa_icon:'fa-exclamation-triangle',
-      color:'black',
-      isCircle: true,
+      color:'orange',
+      isCircle:true,
+      show_position: true,
     }).addTo(map);
     
     // Add polygons data
@@ -87,12 +84,13 @@
       popuptitle:'Zoekgebied',
       popupfields:{
         'pk': 'ID',                   //database name, name to be displayed
-        'dab.ship_id': 'Schip naam',  //database name, name to be displayed
-        'message': 'Bericht',         //database name, name to be displayed
+        'dab.ship_id': 'Schip naam',
         'dab': 'Dab',
         'aisDecoded': 'Ais',
         'lorawan': 'LoRaWAN',
-      }
+        'updated_at': 'Laaste update',
+      },
+      show_position: true,
     }).addTo(map);
   }
 </script>

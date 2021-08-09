@@ -7,5 +7,5 @@ from ..models import aisDecodedModel
 @login_required
 def decodedAisDataset(request):
     objs = aisDecodedModel.objects.all().order_by('mmsi', '-updated_at').distinct('mmsi')
-    decoded_ais_messages = serialize('geojson', objs, use_natural_foreign_keys=True, use_natural_primary_keys=True)
+    decoded_ais_messages = serialize('geojson', objs)
     return HttpResponse(decoded_ais_messages, content_type='json')
