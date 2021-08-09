@@ -1,6 +1,8 @@
 {% load static %}
 {% load fontawesome_5 %}
 
+<link rel="stylesheet" type="text/css" href="{% static '/css/header.css' %}">
+
 <header class="p-3 bg-dark text-white">
   <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     <div class="col-12 col-lg-1"></div>
@@ -15,7 +17,7 @@
 
     <ul class="d-flex nav col-12 col-lg-4 justify-content-start">
       {% for key, value in nav_menu.items %}
-        <li><a href="{% url key %}" {% if request.resolver_match.url_name == key %}class="nav-link px-2 text-secondary"{% else %}class="nav-link px-2 text-white"{% endif %}>{{ value }}</a></li>
+        <li><a href="{% url key %}" {% if request.resolver_match.url_name == key %}class="nav-link px-2 text-secondary"{% else %}class="nav-link px-2 text-primair"{% endif %}>{{ value }}</a></li>
       {% endfor %}
     </ul>
 
