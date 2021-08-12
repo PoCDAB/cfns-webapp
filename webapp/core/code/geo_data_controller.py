@@ -8,7 +8,11 @@ from re import search
 # Function creates GeoData object in database. Switches between different kind of GeoTypes
 ##
 def createGeoData(dabmessage, POSTdata):
-    if dabmessage.message_type == 1:
+    if dabmessage.message_type == 0:
+        return geoMessageModel.objects.create(
+            dab = dabmessage,
+        )
+    elif dabmessage.message_type == 1:
         return geoPointModel.objects.create(
             dab = dabmessage,
             location = POSTdata['point'],
@@ -30,7 +34,7 @@ def createGeoData(dabmessage, POSTdata):
 ##
 # Function can alter a GeoData object. Add new technologie
 ##
-def  alterGeoData(parent, object):
+def alterGeoData(parent, object):
     if type(object) is aisDecodedModel:
         parent.aisDecoded = object
     if type(object) is lorawanModel:

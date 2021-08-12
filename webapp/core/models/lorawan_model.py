@@ -13,7 +13,7 @@ class lorawanModel(BaseModel):
         blank=True,
         null=True
     )
-    msg = models.IntegerField('Message',
+    msg = models.CharField('Message',
         blank=True,
         null=True
     )

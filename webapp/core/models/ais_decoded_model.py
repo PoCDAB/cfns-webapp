@@ -11,7 +11,7 @@ class aisDecodedModel(aisEncodedModel):
         blank=True,
         null=True
     )
-    geom = gismodels.PointField('Location', null=True, blank=True,)
+    geom = gismodels.PointField('Location (x,y)', null=True, blank=True,)
     course = models.FloatField('Course', null=True, blank=True,)
     objects = GeoManager()
 

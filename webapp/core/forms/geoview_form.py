@@ -3,10 +3,9 @@ from datetime import datetime
 
 class GeoviewForm(forms.Form):
     DAB = forms.BooleanField(label="DAB+ (done, but connection with hardware missing)", required=False)
-    AIS = forms.BooleanField(label="AIS (work-in-progress)", required=False)
+    AIS = forms.BooleanField(label="AIS", required=False)
     LoRaWAN = forms.BooleanField(label="LoRaWAN (work-in-progress)", required=False)
-    four_G = forms.BooleanField(label="4G (coming later)", required=False)
-    five_G = forms.BooleanField(label="5G (coming later)", required=False)
+    LTE = forms.BooleanField(label="LTE (coming soon)", required=False)
 
     date_from = forms.DateTimeField(
         label='date_from',

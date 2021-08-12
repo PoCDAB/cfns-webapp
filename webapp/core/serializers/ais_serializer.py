@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from django.contrib.gis.geos import Point
 from pyais import decode_msg
-from ..models import aisEncodedModel, aisDecodedModel
+from ..models import aisDecodedModel
 
 class aisSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
-        decodedAIS = {}
+        decodedAIS = aisDecodedModel(**validated_data)
         msg = decode_msg(validated_data['message'])
         if 'mmsi' in msg:
             decodedAIS['mmsi'] = msg['mmsi']
@@ -19,4 +19,4 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = aisDecodedModel
-        fields = ['id', 'received_from','message', 'received_at', 'mmsi', 'name', 'geom', 'course', 'created_at', 'updated_at']
+        fields = ['id', 'received_from', 'received_at', 'message','mmsi', 'name', 'geom', 'course', 'ack', 'msg', 'rssi', 'created_at', 'updated_at']

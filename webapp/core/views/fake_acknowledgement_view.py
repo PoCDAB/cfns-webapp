@@ -4,7 +4,7 @@ import json
 from ..models import dabModel, aisDecodedModel, lorawanModel
 from ..models import geoPointModel, geoCircleModel, geoPolygonModel
 
-from ..controllers import alterGeoData
+from ..code import alterGeoData
 
 @login_required(login_url='/login/')
 def fakeAcknowledgementView(request):

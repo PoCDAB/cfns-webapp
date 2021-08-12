@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from ..forms import SelectDABType, SendDABForm_message, SendDABForm_point, SendDABForm_circle, SendDABForm_polygon
 from ..models import dabModel
-from ..controllers import createGeoData
+from ..code import createGeoData
 
 from django.conf import settings
 
