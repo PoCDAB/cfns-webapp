@@ -1,7 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+  <title>Contact us</title>
+{% endblock %}
+
 {% block body %}
-    <h2>Neem contact op met CFNS</h2>
+    <h2 class="text-center">Contact us</h2>
+
+    <p>Get in touch with CFNS</p>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form method="post" class="row">
+                <table class="w-100">
+                    <tbody>
+                        {% for field in form %}
+                            {% csrf_token %}
+                            <tr class="row">
+                                <td class="col-6">
+                                    {{ field.label }}
+                                </td>
+                                <td class="col-6">
+                                    {{ field }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="col text-center">
+                    <br><br><br>
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    {% if info_msg %}
+    <div class="container text-center alert {{ info_type }}" role="alert">
+        {{ info_msg }}
+    </div>
+    {% endif %}
 
 {% endblock %}

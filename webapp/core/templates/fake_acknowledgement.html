@@ -49,7 +49,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="dab_id" value="{{ object.dab.id }}" readonly>
                             <input type="hidden"name="ack_type" value="ais" readonly>
-                            <input class="btn btn-info" type="submit" value="Ack AIS">
+                            <input class="btn btn-primary" type="submit" value="Ack AIS">
                         </form>
                         {% else %}
                             {% fa5_icon 'check' %}
@@ -61,7 +61,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="dab_id" value="{{ object.dab.id }}" readonly>
                             <input type="hidden"name="ack_type" value="lorawan" readonly>
-                            <input class="btn btn-info" type="submit" value="Ack LoRaWAN">
+                            <input class="btn btn-primary" type="submit" value="Ack LoRaWAN">
                         </form>
                         {% else %}
                             {% fa5_icon 'check' %}

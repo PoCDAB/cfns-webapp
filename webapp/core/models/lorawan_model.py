@@ -15,7 +15,8 @@ class lorawanModel(BaseModel):
     )
     msg = models.CharField('Message',
         blank=True,
-        null=True
+        null=True,
+        max_length=256,
     )
     rssi = models.IntegerField(blank=True, null=True)
     hdop = models.IntegerField(blank=True, null=True)

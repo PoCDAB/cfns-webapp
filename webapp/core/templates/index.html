@@ -2,21 +2,45 @@
 {% load static %}
 
 {% block body %}
-    <h2>Home page of the Connectivity Fieldlab North Sea webapp</h2>
+    <h2 class="text-center">Changing the future of Maritime Connectivity</h2>
+    
     </br>
-    <p>
-        The initiative for a fieldlab first arose during a project for the Coastguard Netherlands in 2017 and 2018, called Breedband Noordzee (Broadband North Sea).
-        It examined the possibilities to be expected over the next five years to obtain broadband connectivity at sea.
-        The study defined broadband solutions for the maritime environment and broadly identified the Coast Guard's current and future needs for digital connectivity.
-    </p>
-    <p>
-        In addition to satellite connections, Wi-Fi, DAB+ and VDES, 5G in the 700 MHz band was identified as an important contender to provide a lot of the required broadband in near future for the operational area of the Coast Guard, maybe even for the entire Dutch continental shelf.
-        Extra attention was paid to the territorial waters, for which, according to this study, 5G coverage could (technically) easily be obtained for the public mobile networks from land, when this long-range spectrum would become available in 2020.
-    </p>
-    <p>
-        In 2018, RWS-Sea and Delta(, part of the Dutch Ministry of Infrastructure and Water Management -see organogram -) took on the task of making a more specific inventory of the Coastguard's connectivity needs and broadend the scope (I&W-) department-wide, primarily aimed at support of its public tasks. This has resulted in a study entitled "Outlook for the Information Provisioning North Sea 2020-2040" (download here, in Dutch).
-        The sensors used to protect the coast and water quality, Air Traffic Control and other sensors are included in the scope, and also the decommissioning of the oil and gas platforms that are still hosting most of these.
-        Rijkswaterstaat produced a very informative and nice looking infographics for the intended Connectivity Fieldlab North Sea, you can download here.
-        Do you join us?
-    </p>
+
+    <div class="row">
+        <table class="col-12">
+            <thead>
+                <tr>
+                    <th scope="col"><h5>Why better connectivity becomes mandatory:</h5></th>
+                    <th scope="col"><h5>All we need is to take action by planning the future together – today!</h5></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-6">
+                        <!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/GZ4zj0o32P0"></iframe>
+                        </div>
+                    </td>
+                    <td class="col-6">
+                        <!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/478822204?h=f5ca70aa88"></iframe>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br><br>
+    
+    <h2 class="text-center">What we do and why do we need you?</h2>
+
+    <div class="row justify-content-center">
+        <p>Commissioned by Rijkswaterstaat, Ministry of Infrastructure and Water Management of the Netherlands, i-River is looking for other partners to setup a Community Fieldlab for maritime validation of wireless communication solutions in the North Sea. It's mission consists of fully digital connected territorial waters and EEZ by 2030. New: download the CFNS-flyer with more info (Dutch + English) or read further about the CFNS on this website.</p>
+
+        <img class="img-fluid" src="{% static '/img/CFNS_infochart_home.png' %}" alt="Info chart">
+    </div>
+
 {% endblock %}

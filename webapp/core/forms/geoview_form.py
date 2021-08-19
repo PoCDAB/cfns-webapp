@@ -5,7 +5,7 @@ class GeoviewForm(forms.Form):
     DAB = forms.BooleanField(label="DAB+ (done, but connection with hardware missing)", required=False)
     AIS = forms.BooleanField(label="AIS", required=False)
     LoRaWAN = forms.BooleanField(label="LoRaWAN (work-in-progress)", required=False)
-    LTE = forms.BooleanField(label="LTE (coming soon)", required=False)
+    LTE = forms.BooleanField(label="2G+ (coming soon)", required=False)
 
     date_from = forms.DateTimeField(
         label='date_from',
