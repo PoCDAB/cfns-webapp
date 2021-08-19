@@ -1,9 +1,7 @@
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from ..models import dabModel
 from ..models import geoPointModel, geoCircleModel, geoPolygonModel
-import json
 
 # Retrieve DAB dataset from the database (for the GIS/geomap)
 @login_required

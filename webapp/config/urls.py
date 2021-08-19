@@ -29,6 +29,7 @@ api_router = routers.DefaultRouter()
 # api_router.register(r'groups', API.GroupViewSet)
 api_router.register(r'ais', API.AisViewSet)
 api_router.register(r'dab', API.DabViewSet)
+api_router.register(r'lorawan', API.lorawanViewSet)
 
 # Errors handlers
 handler404 = 'core.views.handler404'
