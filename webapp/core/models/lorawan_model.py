@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.gis.db import models as gismodels
 from django.db.models import Manager as GeoManager
 from .base_model import BaseModel
-from .ais_encoded_model import aisEncodedModel
-import json
 
 class lorawanModel(BaseModel):
     geom = gismodels.PointField('Location', null=True, blank=True,)
