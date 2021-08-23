@@ -8,13 +8,13 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
         decodedAIS = aisDecodedModel(**validated_data)
         msg = decode_msg(validated_data['message'])
         if 'mmsi' in msg:
-            decodedAIS['mmsi'] = msg['mmsi']
+            setattr(decodedAIS, 'mmsi', msg['mmsi'])
         if 'shipname' in msg:
-            decodedAIS['name'] = msg['shipname']
+            setattr(decodedAIS, 'name', msg['shipname'])
         if 'lat' and 'lon' in msg:
-            decodedAIS['geom'] = Point(msg['lon'], msg['lat'])
+            setattr(decodedAIS, 'geom', Point(msg['lon'], msg['lat']))
         if 'course' in msg:
-            decodedAIS['course'] = msg['course']
+            setattr(decodedAIS, 'course', msg['course'])
         return decodedAIS
 
     class Meta:
