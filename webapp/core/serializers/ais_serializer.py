@@ -7,6 +7,8 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         decodedAIS = aisDecodedModel(**validated_data)
         msg = decode_msg(validated_data['message'])
+        for m in msg:
+            print(m, msg[m])
         if 'mmsi' in msg:
             setattr(decodedAIS, 'mmsi', msg['mmsi'])
         if 'shipname' in msg:
