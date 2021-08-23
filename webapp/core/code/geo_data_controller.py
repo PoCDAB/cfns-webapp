@@ -11,22 +11,26 @@ def createGeoData(dabmessage, POSTdata):
     if dabmessage.message_type == 0:
         return geoMessageModel.objects.create(
             dab = dabmessage,
+            message = POSTdata['message'],
         )
     elif dabmessage.message_type == 1:
         return geoPointModel.objects.create(
             dab = dabmessage,
             location = POSTdata['point'],
+            message = POSTdata['message'],
         )
     elif dabmessage.message_type == 2:
         return geoCircleModel.objects.create(
             dab = dabmessage,
             location = POSTdata['point'],
             radius = POSTdata["radius"],
+            message = POSTdata['message'],
         )
     elif dabmessage.message_type == 3:
         return geoPolygonModel.objects.create(
             dab = dabmessage,
             polygon = POSTdata['polygon'],
+            message = POSTdata['message'],
         )
     else:
         return None

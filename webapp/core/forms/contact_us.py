@@ -1,9 +1,16 @@
 from django import forms
 
+# iterable
+list_interested =(
+    ("1", "Yes"),
+    ("2", "No"),
+    ("3", "Maybe"),
+)
+
 class contactForm(forms.Form):
     name = forms.CharField(label="Name", required=True)
     email = forms.EmailField(label="E-mail", required=True)
-    intrested = forms.ChoiceField(label="Interested to get involved?", required=True)
+    interested = forms.ChoiceField(label="Interested to get involved?", required=True, choices = list_interested)
     message = forms.CharField(label="Message", required=True)
-    attachments   = forms.ImageField(label="Attachments")
-    newsletter = forms.BooleanField(label="Subscribe to newsletter")
+    attachments   = forms.ImageField(label="Attachments", required=False)
+    newsletter = forms.BooleanField(label="I want to receive the CFNS newsletter when available", required=False)

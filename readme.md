@@ -21,3 +21,5 @@ Go into linux (type 'wsl' in Windows)
 
 #### Startup django project:
 	1. python3 manage.py runserver
+
+@Daniël Geerts, 2021

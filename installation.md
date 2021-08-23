@@ -62,3 +62,6 @@ Type in the (Linux) command line.
 
 ### Run app
 	python3 manage.py runserver
+
+
+@Daniël Geerts, 2021

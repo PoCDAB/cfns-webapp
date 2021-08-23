@@ -8,7 +8,7 @@ from .dab_model import dabModel
 from .ais_decoded_model import aisDecodedModel
 from .lorawan_model import lorawanModel
 
-class geoMessageModel(models.Model):
+class geoModel(models.Model):
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -38,33 +38,43 @@ class geoMessageModel(models.Model):
     class Meta:
         abstract = True
 
-    def natural_key(self):
-        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan}
 
-class geoPointModel(geoMessageModel):
+class geoMessageModel(geoModel):
+    message = models.CharField(max_length=64)
+
+    class Meta:
+        verbose_name = 'Geo Message'
+        verbose_name_plural = 'Geo Messages'
+    def natural_key(self):
+        return {'id': self.id, 'dab':self.dab,  'ais':self.aisDecoded, 'lorawan': self.lorawan, 'message': self.message}
+
+class geoPointModel(geoModel):
     location = gismodels.PointField('Pivot', null=True, blank=True)
+    message = models.CharField(max_length=64)
 
     class Meta:
         verbose_name = 'Geo Point Message'
         verbose_name_plural = 'Geo Point Messages'
     def natural_key(self):
-        return {'id': self.id, 'dab':self.dab,  'ais':self.aisDecoded, 'lorawan': self.lorawan, 'location':self.location}
+        return {'id': self.id, 'dab':self.dab,  'ais':self.aisDecoded, 'lorawan': self.lorawan, 'location':self.location, 'message': self.message}
 
-class geoCircleModel(geoMessageModel):
+class geoCircleModel(geoModel):
     location = gismodels.PointField('Pivot', null=True, blank=True)
     radius = models.DecimalField(null=True, blank=True, max_digits=20, decimal_places=2)
-    
+    message = models.CharField(max_length=64)
+
     class Meta:
         verbose_name = 'Geo Circle Message'
         verbose_name_plural = 'Geo Circle Messages'
     def natural_key(self):
-        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan, 'location':self.location, 'radius':self.radius}
+        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan, 'location':self.location, 'radius':self.radius, 'message': self.message}
 
-class geoPolygonModel(geoMessageModel):
+class geoPolygonModel(geoModel):
     polygon = gismodels.PolygonField(null=True, blank=True)
+    message = models.CharField(max_length=64)
 
     class Meta:
         verbose_name = 'Geo Polygon Message'
         verbose_name_plural = 'Geo Polygon Messages'
     def natural_key(self):
-        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan, 'polygon':self.polygon}
+        return {'id': self.id, 'dab':self.dab, 'ais':self.aisDecoded, 'lorawan': self.lorawan, 'polygon':self.polygon, 'message': self.message}

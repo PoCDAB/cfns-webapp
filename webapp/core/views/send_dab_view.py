@@ -13,41 +13,23 @@ def sendDabView(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         startform = SelectDABType(request.POST)
+        if startform.is_valid():
+            if "messagetype" in request.POST or ("message" in request.POST and "ship_id" in request.POST):
+                messagetype = int(request.POST["messagetype"])
+           
+                # check whether first form is valid:
+                form = getCorrectForm(messagetype, request.POST)
 
-        if "messagetype" in request.POST or ("message" in request.POST and "ship_id" in request.POST):
-            messagetype = int(request.POST["messagetype"])
-            
-            form = None
-
-            if messagetype == 0:
-                form = SendDABForm_message(request.POST)
-            if messagetype == 1:
-                form = SendDABForm_point(request.POST)
-            if messagetype == 2:
-                form = SendDABForm_circle(request.POST)
-            if messagetype == 3:
-                form = SendDABForm_polygon(request.POST)
-            
-            # check whether first form is valid:
-            if startform.is_valid():
                 # check whether it's valid:
                 if form and form.is_valid():
-                    message = None
-
-                    if messagetype == 0:
-                        message = request.POST["message"]
-                    if messagetype == 1:
-                        message = request.POST["point"]
-                    if messagetype == 2:
-                        message = request.POST["point"]
-                        message += ";" + request.POST["radius"]
-                    if messagetype == 3:
-                        message = request.POST["polygon"]
-                        
-                    dabmessage = dabModel.objects.create(message=message, message_type=int(request.POST["messagetype"]), ship_id=request.POST["ship_id"])
+                    # create a new DABmessage
+                    dabmessage = dabModel.objects.create(message=request.POST["message"], message_type=int(request.POST["messagetype"]), ship_id=request.POST["ship_id"])
+                    # create new GEOdata for the GIS view
                     createGeoData(dabmessage, request.POST)
+                    # clear form
+                    clearedform = getCorrectForm(messagetype)
 
-                    return  render(request, 'send_dab.html', {'startform': startform, 'form': form, 'info_msg': 'DAB+ has been send!', 'info_type': 'alert-success'})
+                    return  render(request, 'send_dab.html', {'startform': startform, 'form': clearedform, 'info_msg': 'DAB+ has been send!', 'info_type': 'alert-success'})
                 else:
                     if form and ("message" not in request.POST and "ship_id" not in request.POST):
                         return  render(request, 'send_dab.html', {'startform': startform, 'form': form})
@@ -55,3 +37,16 @@ def sendDabView(request):
         
     startform = SelectDABType()
     return render(request, 'send_dab.html', {'startform': startform})
+
+
+def getCorrectForm(messagetype, postRequest = None):
+    if messagetype == 0:
+        return SendDABForm_message(postRequest)
+    elif messagetype == 1:
+        return SendDABForm_point(postRequest)
+    elif messagetype == 2:
+        return SendDABForm_circle(postRequest)
+    elif messagetype == 3:
+        return SendDABForm_polygon(postRequest)
+    else:
+        return SendDABForm_message()

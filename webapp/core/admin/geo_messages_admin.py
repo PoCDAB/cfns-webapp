@@ -1,6 +1,25 @@
 from django.contrib import admin
 from leaflet.admin import LeafletGeoAdmin
-from ..models import geoPointModel, geoCircleModel, geoPolygonModel
+from ..models import geoMessageModel, geoPointModel, geoCircleModel, geoPolygonModel
+
+class geoMessageNotificationAdmin(LeafletGeoAdmin):
+    list_display = ('id', 'created_at', 'updated_at', 'dab', 'aisDecoded')
+    list_filter = ()
+
+    fieldsets = [
+        ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
+        ("Linked to:", {'fields': ['dab', 'aisDecoded', 'lorawan']}),
+        ("Message", {'fields': ['message']}),
+    ]
+
+    search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisDecoded', 'lorawan',)
+    ordering = ('id', 'dab', 'aisDecoded', 'lorawan')
+    readonly_fields = ('id', 'dab', 'aisDecoded', 'lorawan', 'created_at', 'updated_at',)
+    filter_horizontal = ()
+
+    class Meta:
+        model = geoMessageModel
+        fields = '__all__'
 
 class geoMessagePointNotificationAdmin(LeafletGeoAdmin):
     list_display = ('id', 'created_at', 'updated_at', 'dab', 'aisDecoded')
@@ -9,12 +28,12 @@ class geoMessagePointNotificationAdmin(LeafletGeoAdmin):
     fieldsets = [
         ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
         ("Linked to:", {'fields': ['dab', 'aisDecoded', 'lorawan']}),
-        ("Point", {'fields': ['location']}),
+        ("PointMessage", {'fields': ['message', 'location']}),
     ]
 
     search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisDecoded', 'lorawan',)
     ordering = ('id', 'dab', 'aisDecoded', 'lorawan')
-    readonly_fields = ('id', 'dab', 'aisDecoded', 'lorawan', 'created_at', 'updated_at',)# 'dab', 'aisDecoded',)
+    readonly_fields = ('id', 'dab', 'aisDecoded', 'lorawan', 'created_at', 'updated_at',)
     filter_horizontal = ()
 
     class Meta:
@@ -29,12 +48,12 @@ class geoMessageCircleNotificationAdmin(LeafletGeoAdmin):
     fieldsets = [
         ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
         ("Linked to:", {'fields': ['dab', 'aisDecoded', 'lorawan']}),
-        ("Circle", {'fields': ['location', 'radius']}),
+        ("CircleMessage", {'fields': ['message', 'location', 'radius']}),
     ]
 
     search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisDecoded', 'lorawan')
     ordering = ('id', 'dab', 'aisDecoded', 'lorawan')
-    readonly_fields = ('id', 'dab', 'aisDecoded', 'lorawan', 'created_at', 'updated_at', )#'dab', 'aisDecoded',)
+    readonly_fields = ('id', 'dab', 'aisDecoded', 'lorawan', 'created_at', 'updated_at', )
     filter_horizontal = ()
 
     class Meta:
@@ -48,12 +67,12 @@ class geoMessagePolygonNotificationAdmin(LeafletGeoAdmin):
     fieldsets = [
         ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
         ("Linked to:", {'fields': ['dab', 'aisDecoded', 'lorawan']}),
-        ("Polygon", {'fields': ['polygon']})
+        ("PolygonMessage", {'fields': ['message', 'polygon']})
     ]
 
     search_fields = ('id', 'created_at', 'updated_at', 'dab', 'aisDecoded', 'lorawan')
     ordering = ('id', 'dab', 'aisDecoded', 'lorawan')
-    readonly_fields = ('id', 'dab', 'aisDecoded', 'lorawan', 'created_at', 'updated_at',)# 'dab', 'aisDecoded',)
+    readonly_fields = ('id', 'dab', 'aisDecoded', 'lorawan', 'created_at', 'updated_at',)
     filter_horizontal = ()
 
     class Meta:

@@ -6,7 +6,7 @@ from ..models import geoMessageModel, geoPointModel, geoCircleModel, geoPolygonM
 message_types = [
     (0, 'Message'), # message
     (1, 'Locatie'), # x,y
-    (2, 'Locatie + radius'), # x,y,radius
+    (2, 'Locatie + diameter'), # x,y,diameter
     (3, 'Polygoon'), # x1,x2,y1,y2
 ]
 
@@ -29,6 +29,7 @@ class SendDABForm_message(forms.Form):
 
 class SendDABForm_point(forms.Form):
     ship_id = forms.CharField(label='Schip identifier', max_length=256)
+    message = forms.CharField(label='Message', max_length=64)
     point = forms.PointField(label='Locatie', widget=LeafletWidget(attrs=LEAFLET_WIDGET_ATTRS))
 
     class Meta:
@@ -36,14 +37,16 @@ class SendDABForm_point(forms.Form):
 
 class SendDABForm_circle(forms.Form):
     ship_id = forms.CharField(label='Schip identifier', max_length=256)
+    radius = forms.IntegerField(label='Diameter (in meters)')
+    message = forms.CharField(label='Message', max_length=64)
     point = forms.PointField(label='Locatie', widget=LeafletWidget(attrs=LEAFLET_WIDGET_ATTRS))
-    radius = forms.IntegerField(label='Radius (meters)')
 
     class Meta:
         model = geoCircleModel
 
 class SendDABForm_polygon(forms.Form):
     ship_id = forms.CharField(label='Schip identifier', max_length=256)
+    message = forms.CharField(label='Message', max_length=64)
     polygon = forms.PolygonField(label='Polygoon', widget=LeafletWidget(attrs=LEAFLET_WIDGET_ATTRS))
 
     class Meta:

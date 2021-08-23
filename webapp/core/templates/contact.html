@@ -6,13 +6,24 @@
 {% endblock %}
 
 {% block body %}
+<style>
+    .inputfield input[type=text], .inputfield input[type=email], .inputfield select {
+        width: 100%;
+    }
+</style>
     <h2 class="text-center">Contact us</h2>
 
-    <p>Get in touch with CFNS</p>
-
+    <br>
+    {% if info_msg %}
+        <div class="container text-center alert {{ info_type }}" role="alert">
+            {{ info_msg }}
+        </div>
+    {% endif %}
+    <br>
+    
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-1"></div>
+        <div class="col-10">
             <form method="post" class="row">
                 <table class="w-100">
                     <tbody>
@@ -21,9 +32,12 @@
                             <tr class="row">
                                 <td class="col-6">
                                     {{ field.label }}
+                                    {{ field.required }}
                                 </td>
                                 <td class="col-6">
-                                    {{ field }}
+                                    <div class="inputfield w-100 text-left">
+                                        {{ field }}
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -35,13 +49,6 @@
                 </div>
             </form>
         </div>
-        <div class="col-2"></div>
+        <div class="col-1"></div>
     </div>
-
-    {% if info_msg %}
-    <div class="container text-center alert {{ info_type }}" role="alert">
-        {{ info_msg }}
-    </div>
-    {% endif %}
-
 {% endblock %}
