@@ -10,12 +10,16 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
         for m in msg:
             print(m, msg[m])
         if 'mmsi' in msg:
+            print(True)
             setattr(decodedAIS, 'mmsi', msg['mmsi'])
         if 'shipname' in msg:
+            print(True)
             setattr(decodedAIS, 'name', msg['shipname'])
         if 'lat' and 'lon' in msg:
+            print(True)
             setattr(decodedAIS, 'geom', Point(msg['lon'], msg['lat']))
         if 'course' in msg:
+            print(True)
             setattr(decodedAIS, 'course', msg['course'])
         return decodedAIS
 
