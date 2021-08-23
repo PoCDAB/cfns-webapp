@@ -23,6 +23,7 @@
 
 {% block body-fluid %}
 <script type="text/javascript">
+
   function map_init (map, options) {
     // Use Leaflet API here
 
@@ -45,7 +46,7 @@
     // Add points data
     addDataset({
       url:"{% url 'geo-point-data' %}",
-      popuptitle:'Melding',
+      popuptitle:'Point',
       popupfields: {
         'pk': 'ID',                     //database name: name to be displayed
         'dab.ship_id': 'Schip naam',
@@ -63,7 +64,7 @@
     // Add circles data
     addDataset({
       url:"{% url 'geo-circle-data' %}",
-      popuptitle:'CIRKEL',
+      popuptitle:'Cirkel',
       popupfields: {
         'pk': 'ID',                   //database name: name to be displayed
         'dab.ship_id': 'Schip naam',
@@ -83,7 +84,7 @@
     // Add polygons data
     addDataset({
       url:"{% url 'geo-polygon-data' %}",
-      popuptitle:'Zoekgebied',
+      popuptitle:'Polygon',
       popupfields:{
         'pk': 'ID',                   //database name, name to be displayed
         'dab.ship_id': 'Schip naam',
@@ -95,9 +96,8 @@
       },
     }).addTo(map);
   }
-</script>
 
-<script type="text/javascript">
+  // Add beautiful date picker
   var jqOld = jQuery.noConflict();
   jqOld(function() {
     options = {
@@ -108,27 +108,20 @@
   });
   ( function($) {
     $(document).ready(function() {
-      document.getElementById("datepicker_from").defaultValue = getCurrentTime();
+      document.getElementById("datepicker_from").defaultValue = getCurrentTime(-7);
       document.getElementById("datepicker_till").defaultValue = getCurrentTime();
     });
 	}) ( jQuery );
-
-  function addDays(date, days) {
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
   // Function creates date NOW in corrent format.
-  function getCurrentTime() {
+  function getCurrentTime(days = 0) {
     let d = new Date();
+    d.setDate(d.getDate() + days);
     let ye = new Intl.DateTimeFormat('nl-NL', { year: 'numeric' }).format(d);
     let mo = new Intl.DateTimeFormat('nl-NL', { month: '2-digit' }).format(d);
     let da = new Intl.DateTimeFormat('nl-NL', { day: '2-digit' }).format(d);
     return da +"/"+ mo +"/"+ ye
   }
 </script>
-
 
 <div class="d-flex flex-wrap">
   <div class="col-lg-2">
