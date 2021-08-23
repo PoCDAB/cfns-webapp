@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
-        return User(**validated_data)
+        return User.objects.create(**validated_data)
 
     class Meta:
         model = User
@@ -14,7 +14,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
-        return Group(**validated_data)
+        return Group.objects.create(**validated_data)
 
     class Meta:
         model = Group

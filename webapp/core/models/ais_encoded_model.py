@@ -3,6 +3,7 @@ from .base_model import BaseModel
 from django.utils import timezone
 
 class aisEncodedModel(BaseModel):
+    
     received_from = models.CharField(
         max_length=128,
     )
@@ -12,6 +13,9 @@ class aisEncodedModel(BaseModel):
     message = models.CharField(
         max_length=256,
     )
+
+    class Meta:
+        abstract = True
 
     class Meta:
         verbose_name = 'Encoded AIS message'

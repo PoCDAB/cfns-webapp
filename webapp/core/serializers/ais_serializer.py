@@ -5,7 +5,7 @@ from ..models import aisDecodedModel
 
 class aisSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
-        decodedAIS = aisDecodedModel(**validated_data)
+        decodedAIS = aisDecodedModel.objects.create(**validated_data)
         msg = decode_msg(validated_data['message'])
         if 'mmsi' in msg:
             setattr(decodedAIS, 'mmsi', msg['mmsi'])
@@ -15,6 +15,7 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
             setattr(decodedAIS, 'geom', Point(msg['lon'], msg['lat']))
         if 'course' in msg:
             setattr(decodedAIS, 'course', msg['course'])
+        decodedAIS.save()
         return decodedAIS
 
     class Meta:
