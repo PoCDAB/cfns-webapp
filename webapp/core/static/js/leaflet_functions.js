@@ -32,7 +32,6 @@ function onEachFeature(feature, layer, popuptitle, popupfields, show_position) {
             } else {
                 result = feature?.properties?.[key]
             }
-            console.log(key, result)
             text += "<tr><th>" + value + ":</th><td>" + (result?.toString() || "<i>Niet bekend</i>") + "</td></tr>"
         }
         if (show_position) {
