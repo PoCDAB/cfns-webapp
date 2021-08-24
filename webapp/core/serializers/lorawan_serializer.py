@@ -32,7 +32,6 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         print("LORAWAN create: ", validated_data)
-        print(validated_data.data)
         print(validated_data["data"])
         #data = validated_data.pop('data')
        # print(data)
