@@ -25,23 +25,30 @@
 <script type="text/javascript">
 
   function map_init (map, options) {
-    // Use Leaflet API here
+    // Filter variables
+    var ais_filter = '{{form.AIS}}';
+    var dab_filter = '{{form.DAB}}';
+
+    console.log(ais_filter)
+    console.log(dab_filter)
 
     // Add AIS data
-    addDataset({
-      url:"{% url 'ais-data' %}",
-      popuptitle:'AIS',
-      popupfields: {
-        'pk': 'ID',                     //database name: name to be displayed
-        'name': 'Schipnaam',            //database name: name to be displayed
-        'mmsi': 'MMSI',                 //database name: name to be displayed
-        'course': 'Koers',              //database name: name to be displayed
-        'updated_at': 'Laatste ping',   //database name: name to be displayed
-      },
-      fa_icon:'fa-location-arrow',
-      color:'darkblue',
-      rotationcorrection:-45
-    }).addTo(map);
+    if (ais_filter.includes('checked')) {
+      addDataset({
+        url:"{% url 'ais-data' %}",
+        popuptitle:'AIS',
+        popupfields: {
+          'pk': 'ID',                     //database name: name to be displayed
+          'name': 'Schipnaam',            //database name: name to be displayed
+          'mmsi': 'MMSI',                 //database name: name to be displayed
+          'course': 'Koers',              //database name: name to be displayed
+          'updated_at': 'Laatste ping',   //database name: name to be displayed
+        },
+        fa_icon:'fa-location-arrow',
+        color:'darkblue',
+        rotationcorrection:-45
+      }).addTo(map);
+    }
     
     // Add points data
     addDataset({
