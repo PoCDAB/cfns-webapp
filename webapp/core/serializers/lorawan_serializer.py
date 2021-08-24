@@ -36,29 +36,16 @@ class contextSerializer(serializers.Serializer):
 ####
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
     #data = dataSerializer(read_only=True, source="*")
-    context = contextSerializer(read_only=True, many=True,source="*")
+    rssi = serializers.ReadOnlyField(source='data.uplink_message.rx_metadata[0].rssi')
+    lat = serializers.ReadOnlyField(source='data.uplink_message.decoded_payload.lat')
+    lon = serializers.ReadOnlyField(source='data.uplink_message.decoded_payload.lon')
+    alt = serializers.ReadOnlyField(source='data.uplink_message.decoded_payload.alt')
+    hdop = serializers.ReadOnlyField(source='data.uplink_message.decoded_payload.hdop')
 
     def create(self, validated_data):
-        #rx_metadata = validated_data.pop('data').pop('uplink_message').pop('rx_metadata')
-        #frm_payload = validated_data.pop('data').pop('uplink_message').pop('frm_payload')
         print("LORAWAN create: ", validated_data)
-        context = get_object_or_404(ContextModel, tentant_id=validated_data.get('tentant_id'))
-
-        for d in context:
-            print(d, context[d])
-        #for d in rx_metadata:
-            #print(d, rx_metadata[d])
-        #for d in frm_payload:
-            #print(d, frm_payload[d])
-        for d in validated_data:
-            print(d, validated_data[d])
 
         lora_obj = lorawanModel.objects.create(**validated_data)
-        #lora_obj['geom'] = Point(frm_payload['lat'], frm_payload['lon'])
-        #lora_obj['hdop'] = frm_payload['hdop']
-        #lora_obj['alt'] = frm_payload['alt']
-        #lora_obj['rssi'] = rx_metadata['rssi']
-
         return lora_obj
 
     class Meta:
