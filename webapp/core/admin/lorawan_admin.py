@@ -12,7 +12,7 @@ class lorawanAdmin(admin.ModelAdmin):
 
     search_fields = ('id', 'ack', 'msg', 'rssi', 'hdop', 'alt')
     ordering = ('id', 'ack', 'msg', 'rssi', 'hdop', 'alt', 'created_at', 'updated_at',)
-    readonly_fields = ('id', 'created_at', 'updated_at',)
+    readonly_fields = ('id', 'created_at', 'updated_at', 'received_at', )
     filter_horizontal = ()
 
     class Meta:
