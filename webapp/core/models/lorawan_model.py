@@ -20,7 +20,7 @@ class lorawanModel(BaseModel):
     hdop = models.IntegerField(blank=True, null=True)
     alt = models.IntegerField(blank=True, null=True)
 
-    received_at = models.DateTimeField(auto_now=True)
+    received_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         verbose_name = 'LoRaWAN message'
