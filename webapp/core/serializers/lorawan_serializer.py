@@ -61,3 +61,4 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = lorawanModel
+        fields = '__all__'
