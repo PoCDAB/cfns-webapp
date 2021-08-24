@@ -42,4 +42,4 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = lorawanModel
-        fields = ['received_at', 'geom', 'ack', 'msg', 'rssi', 'hdop', 'alt']
+        fields = ['received_at', 'data', 'geom', 'ack', 'msg', 'rssi', 'hdop', 'alt']
