@@ -1,28 +1,28 @@
 from rest_framework import serializers
 from django.contrib.gis.geos import Point
-from ..models import lorawanModel
+from ..models import lorawanModel, DataModel, UplinkMessageModel, DecodedPayloadModel
 
 # decoded-payload field in uplink_message in the JSON
-class frmPayloadSerializer(serializers.Serializer):
+class DecodedPayloadSerializer(serializers.Serializer):
     class Meta:
+        model = DecodedPayloadModel
         fields = ['alt', 'hdop', 'lat', 'lon']
-
-# Uplink_message field in data in the JSON
-class rxMetadataSerializer(serializers.Serializer):
-    class Meta:
-        fields = ['rssi']
 
 # Data field in the JSON
 class uplinkMessageSerializer(serializers.Serializer):
-    rx_metadata = rxMetadataSerializer(many=True, source="*")
-    frm_payload = frmPayloadSerializer(source="*")
+    DecodedPayloadModel = DecodedPayloadSerializer(source="*")
+
     class Meta:
-        fields = ['rx_metadata', 'frm-payload']
+        model = UplinkMessageModel
+        fields = '__all__'
 
 # Data field in the JSON
 class dataSerializer(serializers.Serializer):
-    received_at = serializers.DateTimeField()
-    ##uplink_message = uplinkMessageSerializer(source="*")
+    uplink_message = uplinkMessageSerializer(source="*")
+
+    class Meta:
+        model = DataModel
+        fields = '__all__'
 
 ###
 # Top layer of JSON
