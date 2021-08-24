@@ -22,7 +22,7 @@ class dataSerializer(serializers.Serializer):
 
     class Meta:
         model = DataModel
-        fields = ['@type', 'type', 'received_at',]
+        fields = ['type', 'received_at',]
 
 ###
 # Top layer of JSON
