@@ -58,3 +58,6 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         #lora_obj['rssi'] = rx_metadata['rssi']
 
         return lora_obj
+
+    class Meta:
+        model = lorawanModel
