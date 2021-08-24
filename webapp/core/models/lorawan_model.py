@@ -25,3 +25,10 @@ class lorawanModel(BaseModel):
     class Meta:
         verbose_name = 'LoRaWAN message'
         verbose_name_plural = 'LoRaWAN messages'
+
+class ContextModel(gismodels.Model):
+    tentant_id = models.CharField(
+        blank=True,
+        null=True,
+        max_length=256,
+    )

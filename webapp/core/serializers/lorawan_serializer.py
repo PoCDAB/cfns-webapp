@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.gis.geos import Point
-from ..models import lorawanModel
+from django.shortcuts import get_object_or_404
+from ..models import lorawanModel, ContextModel
 
 # decoded-payload field in uplink_message in the JSON
 class frmPayloadSerializer(serializers.Serializer):
@@ -27,20 +28,21 @@ class dataSerializer(serializers.Serializer):
 # Data field in the JSON
 class contextSerializer(serializers.Serializer):
     class Meta:
+        model = ContextModel
         fields = ['tentant-id']
 
 ###
 # Top layer of JSON
 ####
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
-    #data = dataSerializer(source="*")
-    context = contextSerializer(many=True,source="*")
+    #data = dataSerializer(read_only=True, source="*")
+    context = contextSerializer(read_only=True, many=True,source="*")
 
     def create(self, validated_data):
         #rx_metadata = validated_data.pop('data').pop('uplink_message').pop('rx_metadata')
         #frm_payload = validated_data.pop('data').pop('uplink_message').pop('frm_payload')
         print("LORAWAN create: ", validated_data)
-        context = validated_data.pop('context')
+        context = get_object_or_404(ContextModel, title=validated_data.data.get('context'))
 
         for d in context:
             print(d, context[d])
