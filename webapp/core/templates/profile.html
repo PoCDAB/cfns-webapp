@@ -23,6 +23,22 @@
         <li>Session Started at: {{ user.last_login }}</li>
         <li>Joined at: {{ user.date_joined }}</li>
     </ul>
-    <br>
+    <br><br>
+    {% if b64code %}
+        <p>Base64 Authorization code: <input type="text" value="{{b64code}}" size="40" readonly> </p>
+    {% else %}
+        <form method="post" class="form-group">
+            {% csrf_token %}
+            <p>Enter password to view Base64 Authorization code: {{ form.password }} </p>
+        </form>
+    {% endif %}
+
+    {% if info_msg %}
+        <div class="container text-center alert {{ info_type }}" role="alert">
+            {{ info_msg }}
+        </div>
+    {% endif %}
+
+    <br><br><br>
     <p>You may <a href="{% url 'logout' %}">logout here</a>.</p>
 {% endblock %}
