@@ -29,7 +29,7 @@ class dataSerializer(serializers.Serializer):
 class contextSerializer(serializers.Serializer):
     class Meta:
         model = ContextModel
-        fields = ['tentant-id']
+        fields = '__all__'
 
 ###
 # Top layer of JSON
@@ -42,7 +42,7 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         #rx_metadata = validated_data.pop('data').pop('uplink_message').pop('rx_metadata')
         #frm_payload = validated_data.pop('data').pop('uplink_message').pop('frm_payload')
         print("LORAWAN create: ", validated_data)
-        context = get_object_or_404(ContextModel, title=validated_data.data.get('context'))
+        context = get_object_or_404(ContextModel, tentant_id=validated_data.get('tentant_id'))
 
         for d in context:
             print(d, context[d])
