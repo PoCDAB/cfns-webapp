@@ -17,8 +17,8 @@ class lorawanModel(BaseModel):
         max_length=256,
     )
     rssi = models.IntegerField(blank=True, null=True)
-    hdop = models.IntegerField(blank=True, null=True)
-    alt = models.IntegerField(blank=True, null=True)
+    hdop = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
+    alt = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
 
     received_at = models.DateTimeField(blank=True, null=True)
 
