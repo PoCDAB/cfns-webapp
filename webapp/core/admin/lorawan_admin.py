@@ -7,7 +7,7 @@ class lorawanAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
-        ("LoRaWAN Model", {'fields': ['ack', 'msg', 'rssi', 'hdop', 'alt', 'geom']}),
+        ("LoRaWAN Model", {'fields': ['received_at', 'ack', 'msg', 'rssi', 'hdop', 'alt', 'geom']}),
     ]
 
     search_fields = ('id', 'ack', 'msg', 'rssi', 'hdop', 'alt')
