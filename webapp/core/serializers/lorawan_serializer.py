@@ -22,22 +22,32 @@ class dataSerializer(serializers.Serializer):
 
     class Meta:
         model = DataModel
-        fields = '__all__'
+        fields = ['@type', 'type', 'received_at',]
 
 ###
 # Top layer of JSON
 ####
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
-    #data = dataSerializer(source="*")
+    data = dataSerializer(source="*")
 
     def create(self, validated_data):
         print("LORAWAN create: ", validated_data)
+
         print(validated_data["data"])
-        #data = validated_data.pop('data')
-       # print(data)
+        print(self)
+        print(self.fields)
+        data_set_serializer = self.fields['data']
+        print(data_set_serializer)
+
+        data_validated_data = validated_data.pop('data')
+        print(data_validated_data)
+
+        newDataObj = data_set_serializer.create(data_validated_data)
+        print(newDataObj)
+
         lora_obj = lorawanModel.objects.create(**validated_data)
         return lora_obj
 
     class Meta:
         model = lorawanModel
-        fields = '__all__'
+        fields = ['id', 'created_at', 'updated_at', 'geom', 'ack', 'msg', 'rssi', 'hdop', 'alt', 'received_at', 'data']

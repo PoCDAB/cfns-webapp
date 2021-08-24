@@ -19,7 +19,7 @@ class UplinkMessageModel(gismodels.Model):
     decoded_payload = models.ForeignKey(DecodedPayloadModel, on_delete=models.CASCADE, blank=True, null=True)
 
 class DataModel(gismodels.Model):
-    type = models.CharField(max_length=256)
+    type = models.CharField(related_name='@type', max_length=256)
     received_at = models.DateTimeField(blank=True, null=True)
 
     uplink_message = models.ForeignKey(UplinkMessageModel, on_delete=models.CASCADE, blank=True, null=True)
