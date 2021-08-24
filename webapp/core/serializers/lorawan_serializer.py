@@ -18,7 +18,7 @@ class uplinkMessageSerializer(serializers.Serializer):
 
 # Data field in the JSON
 class dataSerializer(serializers.Serializer):
-    uplink_message = uplinkMessageSerializer(source="*")
+    #uplink_message = uplinkMessageSerializer(source="*")
 
     class Meta:
         model = DataModel
@@ -28,7 +28,7 @@ class dataSerializer(serializers.Serializer):
 # Top layer of JSON
 ####
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
-    data = dataSerializer()
+    data = dataSerializer(source="*")
 
     def create(self, validated_data):
         print("LORAWAN create: ", validated_data)
