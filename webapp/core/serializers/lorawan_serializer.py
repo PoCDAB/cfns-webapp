@@ -41,7 +41,8 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         print("=================== DONE ===========================")
 
         lora_obj = lorawanModel.objects.create(**validated_data)
-        print(lora_obj)
+        lora_obj.alt = decoded_payload["alt"]
+        print('lora_obj.alt', lora_obj.alt)
         return lora_obj
 
     class Meta:
