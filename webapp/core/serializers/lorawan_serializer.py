@@ -32,7 +32,7 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         print("=== self ===")
         print(self)
         print("=== context ===")
-        print(self.context)
+        print(self.context["request"].data)
         print("=== data 1 ===")
         print(self.data)
         print("=== data 2 ===")
