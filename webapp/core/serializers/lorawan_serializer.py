@@ -38,9 +38,6 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
                         gateway_obj.save()
                         lora_obj.gateways.add(gateway_obj)
             lora_obj.save()
-        else:
-            print("Something went wrong with the lorawanSerializer")
-            return None
         return lora_obj
 
     class Meta:
