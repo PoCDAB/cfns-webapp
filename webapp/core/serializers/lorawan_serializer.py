@@ -29,9 +29,13 @@ class dataSerializer(serializers.Serializer):
 ####
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
+        print("=== self ===")
+        print(self)
         print("=== fields ===")
         print(self.fields)
-        print("=== data ===")
+        print("=== data 1 ===")
+        print(self.data)
+        print("=== data 2 ===")
         print(self.fields["data"])
         print("=== uplink_message ===")
         print(self.fields["data"]["uplink_message"])
