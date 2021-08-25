@@ -25,8 +25,8 @@ class DataModel(gismodels.Model):
     uplink_message = models.ForeignKey(UplinkMessageModel, on_delete=models.CASCADE, blank=True, null=True)
 
 class lorawanModel(BaseModel):
-    geom = gismodels.PointField('Location', null=True, blank=True,)
-    objects = GeoManager()
+    #geom = gismodels.PointField('Location', null=True, blank=True,)
+    #objects = GeoManager()
 
     ack = models.IntegerField('Acknowledgement',
         blank=True,
@@ -43,7 +43,7 @@ class lorawanModel(BaseModel):
 
     received_at = models.DateTimeField(blank=True, null=True)
 
-    data = models.ForeignKey(DataModel, on_delete=models.CASCADE, blank=True, null=True)
+    #data = models.ForeignKey(DataModel, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = 'LoRaWAN message'
