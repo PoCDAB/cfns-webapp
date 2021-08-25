@@ -28,9 +28,7 @@
     // Filter variables
     var ais_filter = '{{form.AIS}}';
     var lorawan_filter = '{{form.LoRaWAN}}';
-
-    console.log(ais_filter)
-    console.log(lorawan_filter)
+    var custom_filter = '{{form.custom}}';
 
     // Add AIS data
     if (ais_filter.includes('checked')) {
@@ -70,58 +68,60 @@
       }).addTo(map);
     }
     
-    // Add points data
-    addDataset({
-      url:"{% url 'geo-point-data' %}",
-      popuptitle:'Point',
-      popupfields: {
-        'pk': 'ID',                     //database name: name to be displayed
-        'dab.ship_id': 'Schip naam',
-        'dab': 'DAB',
-        'aisDecoded': 'AIS',
-        'lorawan': 'LoRaWAN',
-        'message': 'Bericht',
-        'updated_at': 'Laaste update',
-      },
-      fa_icon:'fa-map-pin',
-      color:'black',
-      show_position: true,
-    }).addTo(map);
-    
-    // Add circles data
-    addDataset({
-      url:"{% url 'geo-circle-data' %}",
-      popuptitle:'Cirkel',
-      popupfields: {
-        'pk': 'ID',                   //database name: name to be displayed
-        'dab.ship_id': 'Schip naam',
-        'dab': 'Dab',
-        'aisDecoded': 'Ais',
-        'lorawan': 'LoRaWAN',
-        'radius': 'Diameter (in meters)',
-        'message': 'Bericht',
-        'updated_at': 'Laaste update',
-      },
-      fa_icon:'fa-exclamation-triangle',
-      color:'orange',
-      isCircle:true,
-      show_position: true,
-    }).addTo(map);
-    
-    // Add polygons data
-    addDataset({
-      url:"{% url 'geo-polygon-data' %}",
-      popuptitle:'Polygon',
-      popupfields:{
-        'pk': 'ID',                   //database name, name to be displayed
-        'dab.ship_id': 'Schip naam',
-        'dab': 'Dab',
-        'aisDecoded': 'Ais',
-        'lorawan': 'LoRaWAN',
-        'message': 'Bericht',
-        'updated_at': 'Laaste update',
-      },
-    }).addTo(map);
+    if (custom_filter.includes('checked')) {
+      // Add points data
+      addDataset({
+        url:"{% url 'geo-point-data' %}",
+        popuptitle:'Point',
+        popupfields: {
+          'pk': 'ID',                     //database name: name to be displayed
+          'dab.ship_id': 'Schip naam',
+          'dab': 'DAB',
+          'aisDecoded': 'AIS',
+          'lorawan': 'LoRaWAN',
+          'message': 'Bericht',
+          'updated_at': 'Laaste update',
+        },
+        fa_icon:'fa-map-pin',
+        color:'black',
+        show_position: true,
+      }).addTo(map);
+      
+      // Add circles data
+      addDataset({
+        url:"{% url 'geo-circle-data' %}",
+        popuptitle:'Cirkel',
+        popupfields: {
+          'pk': 'ID',                   //database name: name to be displayed
+          'dab.ship_id': 'Schip naam',
+          'dab': 'Dab',
+          'aisDecoded': 'Ais',
+          'lorawan': 'LoRaWAN',
+          'radius': 'Diameter (in meters)',
+          'message': 'Bericht',
+          'updated_at': 'Laaste update',
+        },
+        fa_icon:'fa-exclamation-triangle',
+        color:'orange',
+        isCircle:true,
+        show_position: true,
+      }).addTo(map);
+      
+      // Add polygons data
+      addDataset({
+        url:"{% url 'geo-polygon-data' %}",
+        popuptitle:'Polygon',
+        popupfields:{
+          'pk': 'ID',                   //database name, name to be displayed
+          'dab.ship_id': 'Schip naam',
+          'dab': 'Dab',
+          'aisDecoded': 'Ais',
+          'lorawan': 'LoRaWAN',
+          'message': 'Bericht',
+          'updated_at': 'Laaste update',
+        },
+      }).addTo(map);
+    }
   }
 
   // Add beautiful date picker

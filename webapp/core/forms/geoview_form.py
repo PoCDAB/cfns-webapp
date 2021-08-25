@@ -6,6 +6,7 @@ class GeoviewForm(forms.Form):
     AIS = forms.BooleanField(label="AIS", required=False, initial=True)
     LoRaWAN = forms.BooleanField(label="LoRaWAN", required=False, initial=True)
     LTE = forms.BooleanField(label="Mobile Network (2G+) (coming soon)", required=False)
+    custom = forms.BooleanField(label="Custom messages", required=False, initial=True)
 
     date_from = forms.DateTimeField(
         label='date_from',
