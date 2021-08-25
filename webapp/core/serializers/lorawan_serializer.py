@@ -42,6 +42,9 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
 
         lora_obj = lorawanModel.objects.create(**validated_data)
         lora_obj.alt = decoded_payload["alt"]
+        lora_obj.hdop = decoded_payload["hdop"]
+        lora_obj.geom = Point(decoded_payload["lat"], decoded_payload["lon"])
+
         print('lora_obj.alt', lora_obj.alt)
         return lora_obj
 
