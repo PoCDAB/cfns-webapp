@@ -34,9 +34,10 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         print("=== context ===")
         print(self.context)
         print("=== data 1 ===")
-        print(self.data["end_device_ids"])
-        print("=== data 2 ===")
         print(self.data)
+        print("=== data 2 ===")
+        for d in self.data:
+            print(d)
         print("=================== DONE ===========================")
 
         lora_obj = lorawanModel.objects.create(**validated_data)
