@@ -9,7 +9,6 @@ class gatewayModel(BaseModel):
     gateway_id = models.CharField(blank=True, null=True, max_length=256,)
     gateway_eui = models.CharField(blank=True, null=True, max_length=256,)
 
-
 class lorawanModel(BaseModel):
     ack = models.IntegerField('Acknowledgement',
         blank=True,
@@ -20,10 +19,8 @@ class lorawanModel(BaseModel):
         null=True,
         max_length=256,
     )
-    hdop = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
-    alt = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
-
-    gateways = models.ManyToManyField(gatewayModel)
+    hdop = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=16)
+    alt = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=16)
 
     geom = gismodels.PointField('Location', null=True, blank=True,)
     objects = GeoManager()
@@ -31,3 +28,7 @@ class lorawanModel(BaseModel):
     class Meta:
         verbose_name = 'LoRaWAN message'
         verbose_name_plural = 'LoRaWAN messages'
+
+class lorawanGatewayConnectionModel(BaseModel):
+    lorawan = models.ForeignKey(lorawanModel, on_delete=models.CASCADE, null=True, blank=True)
+    gateway = models.ForeignKey(gatewayModel, on_delete=models.CASCADE, null=True, blank=True)

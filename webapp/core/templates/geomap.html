@@ -27,10 +27,10 @@
   function map_init (map, options) {
     // Filter variables
     var ais_filter = '{{form.AIS}}';
-    var dab_filter = '{{form.DAB}}';
+    var lorawan_filter = '{{form.LoRaWAN}}';
 
     console.log(ais_filter)
-    console.log(dab_filter)
+    console.log(lorawan_filter)
 
     // Add AIS data
     if (ais_filter.includes('checked')) {
@@ -45,8 +45,28 @@
           'updated_at': 'Laatste ping',   //database name: name to be displayed
         },
         fa_icon:'fa-location-arrow',
-        color:'darkblue',
-        rotationcorrection:-45
+        color:'black',
+        rotationcorrection:-45,
+        show_position: true,
+      }).addTo(map);
+    }
+
+    // Add LoRaWAN data
+    if (lorawan_filter.includes('checked')) {
+      addDataset({
+        url:"{% url 'lorawan-data' %}",
+        popuptitle:'LoRaWAN',
+        popupfields: {
+          'pk': 'ID',                       //database name: name to be displayed
+          'hdop': 'HDOP',                   //database name: name to be displayed
+          'alt': 'ALT',                     //database name: name to be displayed
+          'msg': 'Message',                 //database name: name to be displayed
+          'ack': 'Acknowledgement',         //database name: name to be displayed
+          'updated_at': 'Laatste ping',     //database name: name to be displayed
+        },
+        fa_icon:'fa-wifi',
+        color:'black',
+        show_position: true,
       }).addTo(map);
     }
     
