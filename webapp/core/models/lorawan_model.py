@@ -30,5 +30,5 @@ class lorawanModel(BaseModel):
         verbose_name_plural = 'LoRaWAN messages'
 
 class lorawanGatewayConnectionModel(BaseModel):
-    lorawan = models.ForeignKey(lorawanModel, on_delete=models.CASCADE)
-    gateway = models.ForeignKey(gatewayModel, on_delete=models.CASCADE)
+    lorawan = models.ForeignKey(lorawanModel, on_delete=models.CASCADE, null=True, blank=True)
+    gateway = models.ForeignKey(gatewayModel, on_delete=models.CASCADE, null=True, blank=True)
