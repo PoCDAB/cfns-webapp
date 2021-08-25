@@ -4,9 +4,20 @@ from ..models import lorawanModel, gatewayModel, lorawanGatewayConnectionModel
 class gatewaymodelInline(admin.TabularInline):
     model = gatewayModel
 
+    list_display = ('rssi', 'snr', 'gateway_id', 'gateway_eui')
+
+    fields = ('rssi', 'snr', 'gateway_id', 'gateway_eui')
+    readonly_fields = ('rssi', 'snr', 'gateway_id', 'gateway_eui')
+
+
 class lorawanGatewayConnectionModelInline(admin.TabularInline):
     model = lorawanGatewayConnectionModel
     inlines = (gatewaymodelInline,)
+
+    list_display = ('lorawan', 'gateway')
+
+    fields = ('lorawan', 'gateway')
+    readonly_fields = ('lorawan', 'gateway')
 
 class lorawanAdmin(admin.ModelAdmin):
     list_display = ('id', 'ack', 'msg', 'hdop', 'alt', 'geom')
