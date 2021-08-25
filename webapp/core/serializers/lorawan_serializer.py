@@ -19,7 +19,7 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         print("============== decoded payload keys OK")
         #lat = allJSONData["uplink_message"]["decoded_payload"]["lat"]
         #lon = allJSONData["uplink_message"]["decoded_payload"]["lon"]
-        lora_obj.geom = Point(allJSONData["uplink_message"]["decoded_payload"]["lat"], allJSONData["uplink_message"]["decoded_payload"]["lon"])  # x = lon, y = lat
+        #lora_obj.geom = Point(allJSONData["uplink_message"]["decoded_payload"]["lat"], allJSONData["uplink_message"]["decoded_payload"]["lon"])  # x = lon, y = lat
         lora_obj.alt = allJSONData["uplink_message"]["decoded_payload"]["alt"]
         lora_obj.hdop = allJSONData["uplink_message"]["decoded_payload"]["hdop"]
 
