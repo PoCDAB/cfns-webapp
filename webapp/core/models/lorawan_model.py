@@ -22,7 +22,7 @@ class lorawanModel(BaseModel):
     hdop = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
     alt = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
 
-    gateways = models.ManyToManyField(gatewayModel)
+    #gateways = models.ManyToManyField(gatewayModel)
 
     geom = gismodels.PointField('Location', null=True, blank=True,)
     objects = GeoManager()

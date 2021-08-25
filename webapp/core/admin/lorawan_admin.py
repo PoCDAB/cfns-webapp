@@ -8,12 +8,12 @@ class lorawanAdmin(admin.ModelAdmin):
     fieldsets = [
         ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
         ("LoRaWAN Model", {'fields': ['ack', 'msg', 'hdop', 'alt', 'geom']}),
-        ("Gateways", {'fields': ['gateways']}),
+        #("Gateways", {'fields': ['gateways']}),
     ]
 
     search_fields = ('id', 'ack', 'msg', 'hdop', 'alt', 'gateways')
     ordering = ('id', 'ack', 'msg', 'hdop', 'alt', 'created_at', 'updated_at',)
-    readonly_fields = ('id', 'created_at', 'updated_at', 'gateways')
+    readonly_fields = ('id', 'created_at', 'updated_at', )#'gateways')
     filter_horizontal = ()
 
     class Meta:
