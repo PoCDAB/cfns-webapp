@@ -31,14 +31,17 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         allJSONData = self.context["request"].data
 
+        decoded_payload = allJSONData["uplink_message"]["decoded_payload"]
+
         print("=== context ===")
-        print('alt', allJSONData["uplink_message"]["decoded_payload"]["alt"])
-        print('hdop', allJSONData["uplink_message"]["decoded_payload"]["hdop"])
-        print('lat', allJSONData["uplink_message"]["decoded_payload"]["lat"])
-        print('lon', allJSONData["uplink_message"]["decoded_payload"]["lon"])
+        print('alt', decoded_payload["alt"])
+        print('hdop', decoded_payload["hdop"])
+        print('lat', decoded_payload["lat"])
+        print('lon', decoded_payload["lon"])
         print("=================== DONE ===========================")
 
         lora_obj = lorawanModel.objects.create(**validated_data)
+        print(lora_obj)
         return lora_obj
 
     class Meta:
