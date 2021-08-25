@@ -45,7 +45,7 @@
           'updated_at': 'Laatste ping',   //database name: name to be displayed
         },
         fa_icon:'fa-location-arrow',
-        color:'orange',
+        color:'black',
         rotationcorrection:-45,
         show_position: true,
       }).addTo(map);
@@ -55,15 +55,17 @@
     if (lorawan_filter.includes('checked')) {
       addDataset({
         url:"{% url 'lorawan-data' %}",
-        popuptitle:'AIS',
+        popuptitle:'LoRaWAN',
         popupfields: {
-          'pk': 'ID',                     //database name: name to be displayed
-          'hdop': 'HDOP',            //database name: name to be displayed
-          'alt': 'ALT',                 //database name: name to be displayed
-          'updated_at': 'Laatste ping',   //database name: name to be displayed
+          'pk': 'ID',                       //database name: name to be displayed
+          'hdop': 'HDOP',                   //database name: name to be displayed
+          'alt': 'ALT',                     //database name: name to be displayed
+          'msg': 'Message',                 //database name: name to be displayed
+          'ack': 'Acknowledgement',         //database name: name to be displayed
+          'updated_at': 'Laatste ping',     //database name: name to be displayed
         },
-        fa_icon:'fa-sensor-on',
-        color:'orange',
+        fa_icon:'fa-router',
+        color:'black',
         show_position: true,
       }).addTo(map);
     }
