@@ -1,5 +1,12 @@
 from django.contrib import admin
-from ..models import dabModel
+from ..models import lorawanModel, gatewayModel, lorawanGatewayConnectionModel
+
+class gatewaymodelInline(admin.TabularInline):
+    model = gatewayModel
+
+class lorawanGatewayConnectionModelInline(admin.TabularInline):
+    model = lorawanGatewayConnectionModel
+    inlines = (gatewaymodelInline,)
 
 class lorawanAdmin(admin.ModelAdmin):
     list_display = ('id', 'ack', 'msg', 'hdop', 'alt', 'geom')
@@ -16,5 +23,7 @@ class lorawanAdmin(admin.ModelAdmin):
     readonly_fields = ('id', 'created_at', 'updated_at', )#'gateways')
     filter_horizontal = ()
 
+    inlines = (lorawanGatewayConnectionModelInline,)
+
     class Meta:
-        model = dabModel
+        model = lorawanModel
