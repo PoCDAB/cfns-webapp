@@ -28,7 +28,7 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
                         gateway_obj = gatewayModel.objects.create()
                         gateway_obj.rssi = gateway["rssi"]
                         gateway_obj.snr = gateway["snr"]
-                        gateway_ids_keys = ('gateway_id', 'gateway_eui')
+                        gateway_ids_keys = ('gateway_id', 'eui')
                         if set(gateway_ids_keys).issubset(gateway["gateway_ids"]):
                             print(" ==============3================= issubset(gateway[gateway_ids]")
                             gateway_obj.gateway_id = gateway["gateway_ids"]["gateway_id"]
