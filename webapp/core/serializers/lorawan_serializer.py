@@ -9,19 +9,19 @@ from ..models import lorawanModel, gatewayModel
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         allJSONData = self.context["request"].data
-        lora_obj = lorawanModel.objects.create(**validated_data)
         print("============== START lora serializer")
-        decoded_payload = allJSONData["uplink_message"]["decoded_payload"]
-        decoded_payload_keys = ('lat', 'lon', 'alt', 'hdop')
+        #decoded_payload = allJSONData["uplink_message"]["decoded_payload"]
+        #decoded_payload_keys = ('lat', 'lon', 'alt', 'hdop')
         print("============== decoded payload OK")
 
-        if decoded_payload: #and set(decoded_payload_keys).issubset(decoded_payload):
+        if allJSONData["uplink_message"]["decoded_payload"]: #and set(decoded_payload_keys).issubset(decoded_payload):
+            lora_obj = lorawanModel.objects.create(**validated_data)
             print("============== decoded payload keys OK")
-            lat = decoded_payload["lat"]
-            lon = decoded_payload["lon"]
+            lat = allJSONData["uplink_message"]["decoded_payload"]["lat"]
+            lon = allJSONData["uplink_message"]["decoded_payload"]["lon"]
             lora_obj.geom = Point(lon, lat)  # x = lon, y = lat
-            lora_obj.alt = decoded_payload["alt"]
-            lora_obj.hdop = decoded_payload["hdop"]
+            lora_obj.alt = allJSONData["uplink_message"]["decoded_payload"]["alt"]
+            lora_obj.hdop = allJSONData["uplink_message"]["decoded_payload"]["hdop"]
 
             # rx_metadata =  allJSONData["uplink_message"]["rx_metadata"]
             # print("============== rx_metadata OK")
@@ -38,7 +38,8 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
             #             gateway_obj.save()
             #             lora_obj.gateways.add(gateway_obj)
             lora_obj.save()
-        return lora_obj
+            return lora_obj
+        return None
 
     class Meta:
         model = lorawanModel
