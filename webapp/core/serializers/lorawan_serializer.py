@@ -10,11 +10,14 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         allJSONData = self.context["request"].data
 
         decoded_payload = allJSONData["uplink_message"]["decoded_payload"]
-        decoded_payload_keys = ('lat', 'lon', 'alt', 'hdop')
+        decoded_payload_keys = ('lat', 'lon', 'alt', 'hdop', 'ack', 'msg')
         if decoded_payload and set(decoded_payload_keys).issubset(decoded_payload):
             lora_obj = lorawanModel.objects.create(**validated_data)
             lora_obj.alt = decoded_payload["alt"]
             lora_obj.hdop = decoded_payload["hdop"]
+            lora_obj.ack = decoded_payload["ack"]
+            lora_obj.msg = decoded_payload["msg"]
+
             lora_obj.geom = Point(decoded_payload["lon"], decoded_payload["lat"])  # x = lon, y = lat
             lora_obj.save()
 
