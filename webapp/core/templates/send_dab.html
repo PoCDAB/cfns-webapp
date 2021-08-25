@@ -16,7 +16,7 @@
 {% endblock head %}
 
 {% block body-fluid %}
-<h2 class="text-center">Verstuur DAB naar een specifiek schip</h2>
+<h2 class="text-center">Send DAB tp specific ship</h2>
 </br>
 {% if info_msg %}
     <div class="container text-center alert {{ info_type }}" role="alert">
@@ -30,7 +30,7 @@
     <div class="col-lg-2">
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Wat voor type DAB bericht wilt u versturen?</h5>
+                <h5 class="card-title">What message do you want to send?</h5>
                 </br>
                 <form method="post">
                     {% csrf_token %}
@@ -41,7 +41,7 @@
                         {% endif %}
                     {% endfor %}
                     </br></br>
-                    <button onClick="window.location=window.location.assign(document.URL)" class="btn btn-primary">Opnieuw</button>
+                    <button onClick="window.location=window.location.assign(document.URL)" class="btn btn-primary">Clear</button>
                     <button type="submit" class="btn btn-primary">Kies Type</button>
                 </form>
             </div>
@@ -81,7 +81,7 @@
                             {% endif %}
                         {% endfor %}
                         </br>
-                        <button type="submit" class="btn btn-primary">Verstuur DAB</button>
+                        <button type="submit" class="btn btn-primary">Send DAB</button>
                     </div>
                 </div>
             {% endif %}

@@ -8,7 +8,7 @@
 {% block body %}
 <div class="row justify-content-md-center align-items-center mb-5">
   <div class="col-auto">
-    <h3>Login bij CFNS geoviewer</h3>
+    <h3>Login at CFNS webapp</h3>
   </div>
 </div>
 <div class="row justify-content-md-center align-items-center">
@@ -17,22 +17,22 @@
       {% csrf_token %}
       <table class="w-100">
         <tr>
-          <td class="text-right">Gebruikersnaam:</td>
+          <td class="text-right">Username:</td>
           <td>{{ form.username }}</td>
         </tr>
         <tr>
-          <td class="text-right">Wachtwoord:</td>
+          <td class="text-right">Password:</td>
           <td>{{ form.password }}</td>
         </tr>
       </table>
       </br>
-      <button type="submit" class="btn btn-primary">Inloggen</button>
+      <button type="submit" class="btn btn-primary">Login</button>
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
     
     {% if form.errors %}
       <div  class="alert alert-danger" role="alert">
-        Uw gebruikersnaam en/of wachtwoord komt niet overeen. Probeer opnieuw.
+        The username and/or password u entered doesn't match with the ones in the database. Try again.
       </div>
     {% endif %}
   </div>

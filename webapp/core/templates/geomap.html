@@ -37,10 +37,10 @@
         popuptitle:'AIS',
         popupfields: {
           'pk': 'ID',                     //database name: name to be displayed
-          'name': 'Schipnaam',            //database name: name to be displayed
+          'name': 'Ship name',            //database name: name to be displayed
           'mmsi': 'MMSI',                 //database name: name to be displayed
-          'course': 'Koers',              //database name: name to be displayed
-          'updated_at': 'Laatste ping',   //database name: name to be displayed
+          'course': 'Course',              //database name: name to be displayed
+          'updated_at': 'Last ping',   //database name: name to be displayed
         },
         fa_icon:'fa-location-arrow',
         color:'black',
@@ -60,7 +60,7 @@
           'alt': 'Altitude',                     //database name: name to be displayed
           'msg': 'Message',                 //database name: name to be displayed
           'ack': 'Acknowledgement',         //database name: name to be displayed
-          'updated_at': 'Laatste ping',     //database name: name to be displayed
+          'updated_at': 'Last ping',     //database name: name to be displayed
         },
         fa_icon:'fa-wifi',
         color:'black',
@@ -75,12 +75,12 @@
         popuptitle:'Point',
         popupfields: {
           'pk': 'ID',                     //database name: name to be displayed
-          'dab.ship_id': 'Schip naam',
-          'dab': 'DAB',
+          'dab.ship_id': 'Ship name',
+          'dab': 'DAB+',
           'aisDecoded': 'AIS',
           'lorawan': 'LoRaWAN',
-          'message': 'Bericht',
-          'updated_at': 'Laaste update',
+          'message': 'Message',
+          'updated_at': 'Last update',
         },
         fa_icon:'fa-map-pin',
         color:'black',
@@ -93,13 +93,13 @@
         popuptitle:'Cirkel',
         popupfields: {
           'pk': 'ID',                   //database name: name to be displayed
-          'dab.ship_id': 'Schip naam',
-          'dab': 'Dab',
-          'aisDecoded': 'Ais',
+          'dab.ship_id': 'Ship name',
+          'dab': 'DAB+',
+          'aisDecoded': 'AIS',
           'lorawan': 'LoRaWAN',
           'radius': 'Diameter (in meters)',
-          'message': 'Bericht',
-          'updated_at': 'Laaste update',
+          'message': 'Message',
+          'updated_at': 'Last update',
         },
         fa_icon:'fa-exclamation-triangle',
         color:'orange',
@@ -113,12 +113,12 @@
         popuptitle:'Polygon',
         popupfields:{
           'pk': 'ID',                   //database name, name to be displayed
-          'dab.ship_id': 'Schip naam',
-          'dab': 'Dab',
-          'aisDecoded': 'Ais',
+          'dab.ship_id': 'Ship name',
+          'dab': 'DAB+',
+          'aisDecoded': 'AIS',
           'lorawan': 'LoRaWAN',
-          'message': 'Bericht',
-          'updated_at': 'Laaste update',
+          'message': 'Message',
+          'updated_at': 'Last update',
         },
       }).addTo(map);
     }
@@ -246,7 +246,7 @@
 
     </br></br>
     <div>
-      <b>Groepen waar <i>{{ user.username }}</i> onderdeel van uit maakt:</b>
+      <b>Groups '<i>{{ user.username }}</i>' is part of:</b>
       <ul>
           {% for value in user.groups.all %}
               <li>{{ value.name }}</li>
