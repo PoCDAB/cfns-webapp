@@ -12,7 +12,7 @@ class aisSerializer(serializers.HyperlinkedModelSerializer):
         if 'shipname' in msg:
             setattr(decodedAIS, 'name', msg['shipname'])
         if 'lat' and 'lon' in msg:
-            setattr(decodedAIS, 'geom', Point(msg['lon'], msg['lat']))
+            setattr(decodedAIS, 'geom', Point(msg['lon'], msg['lat'])) # x = lon, y = lat
         if 'course' in msg:
             setattr(decodedAIS, 'course', msg['course'])
         decodedAIS.save()
