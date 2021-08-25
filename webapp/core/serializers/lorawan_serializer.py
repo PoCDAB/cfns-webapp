@@ -17,17 +17,20 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
             lora_obj.hdop = decoded_payload["hdop"]
             lora_obj.geom = Point(decoded_payload["lon"], decoded_payload["lat"])  # x = lon, y = lat
             lora_obj.save()
+            print(" ===============1================", lora_obj)
 
             rx_metadata = allJSONData["uplink_message"]["rx_metadata"]
             if rx_metadata:
-                gateway_keys = ('rssi', 'snr')
+                gateway_keys = ('rssi', 'snr', 'gateway_ids')
                 for gateway in rx_metadata:
                     if gateway and set(gateway_keys).issubset(gateway):
+                        print(" ==============2================= issubset(gateway")
                         gateway_obj = gatewayModel.objects.create()
                         gateway_obj.rssi = gateway["rssi"]
                         gateway_obj.snr = gateway["snr"]
                         gateway_ids_keys = ('gateway_id', 'gateway_eui')
                         if set(gateway_ids_keys).issubset(gateway["gateway_ids"]):
+                            print(" ==============3================= issubset(gateway[gateway_ids]")
                             gateway_obj.gateway_id = gateway["gateway_ids"]["gateway_id"]
                             gateway_obj.gateway_eui = gateway["gateway_ids"]["eui"]
                         gateway_obj.save()
