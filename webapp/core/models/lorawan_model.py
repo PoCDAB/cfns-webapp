@@ -19,8 +19,8 @@ class lorawanModel(BaseModel):
         null=True,
         max_length=256,
     )
-    hdop = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
-    alt = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=2)
+    hdop = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=16)
+    alt = models.DecimalField(blank=True, null=True, max_digits=19, decimal_places=16)
 
     geom = gismodels.PointField('Location', null=True, blank=True,)
     objects = GeoManager()
