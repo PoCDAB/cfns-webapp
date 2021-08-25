@@ -2,10 +2,10 @@ from django import forms
 from datetime import datetime    
 
 class GeoviewForm(forms.Form):
-    DAB = forms.BooleanField(label="DAB+ (done, but connection with hardware missing)", required=False)
+    DAB = forms.BooleanField(label="DAB+ (Connection with hardware missing)", required=False)
     AIS = forms.BooleanField(label="AIS", required=False, initial=True)
-    LoRaWAN = forms.BooleanField(label="LoRaWAN (work-in-progress)", required=False, initial=True)
-    LTE = forms.BooleanField(label="2G+ (coming soon)", required=False)
+    LoRaWAN = forms.BooleanField(label="LoRaWAN", required=False, initial=True)
+    LTE = forms.BooleanField(label="Mobile Network (2G+) (coming soon)", required=False)
 
     date_from = forms.DateTimeField(
         label='date_from',
