@@ -15,7 +15,7 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
             lora_obj = lorawanModel.objects.create(**validated_data)
             lora_obj.alt = decoded_payload["alt"]
             lora_obj.hdop = decoded_payload["hdop"]
-            lora_obj.geom = Point(decoded_payload["lat"], decoded_payload["lon"])
+            lora_obj.geom = Point(decoded_payload["lon"], decoded_payload["lat"])  # x = lon, y = lat
             lora_obj.save()
 
             rx_metadata = allJSONData["uplink_message"]["rx_metadata"]
