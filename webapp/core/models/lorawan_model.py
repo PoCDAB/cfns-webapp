@@ -5,7 +5,7 @@ from .base_model import BaseModel
 
 
 class DecodedPayloadModel(gismodels.Model):
-    alt = models.IntegerField(max_length=256)
+    alt = models.IntegerField()
     hdop = models.DecimalField(max_digits=19, decimal_places=2)
     lat = models.DecimalField(max_digits=19, decimal_places=2)
     lon = models.DecimalField(max_digits=19, decimal_places=2)
