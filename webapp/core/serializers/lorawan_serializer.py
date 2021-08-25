@@ -29,14 +29,16 @@ class dataSerializer(serializers.Serializer):
 ####
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
+        print("=== fields ===")
+        print(self.fields)
         print("=== data ===")
-        print(self["data"])
+        print(self.fields["data"])
         print("=== uplink_message ===")
-        print(self["data"]["uplink_message"])
+        print(self.fields["data"]["uplink_message"])
         print("=== decoded_payload ===")
-        print(self["data"]["uplink_message"]["decoded_payload"])
+        print(self.fields["data"]["uplink_message"]["decoded_payload"])
         print("====== data_set_serializer ======")
-        print(self["data"]["uplink_message"]["rx_metadata"])
+        print(self.fields["data"]["uplink_message"]["rx_metadata"])
         print("=================== DONE ===========================")
 
         lora_obj = lorawanModel.objects.create(**validated_data)
