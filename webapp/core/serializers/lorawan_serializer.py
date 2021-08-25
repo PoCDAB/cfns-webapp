@@ -28,12 +28,12 @@ class dataSerializer(serializers.Serializer):
 # Top layer of JSON
 ####
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
-    data = dataSerializer(source="*")
+    #data = dataSerializer(source="*")
 
     def create(self, validated_data):
         print("LORAWAN create: ", validated_data)
 
-        print(validated_data["data"])
+        #print(validated_data["data"])
         print(self)
         print(self.fields)
         data_set_serializer = self.fields['data']
