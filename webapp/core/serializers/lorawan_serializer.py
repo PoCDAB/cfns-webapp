@@ -32,8 +32,8 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         print("=== self ===")
         print(self)
         print("=== for s in self ===")
-        for s in self:
-            print(s)
+        request_data = dict(self.get_serializer_context())
+        print(request_data)
         print("=================== DONE ===========================")
 
         lora_obj = lorawanModel.objects.create(**validated_data)
