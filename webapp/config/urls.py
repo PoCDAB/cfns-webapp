@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^fake-acknowledgement/$', views.fakeAcknowledgementView, name='fake-acknowledgement'),
     #datasets
     url(r'^dataset/ais/$', datasets.decodedAisDataset, name='ais-data'),
+    url(r'^dataset/lorawan/$', datasets.lorawanDataset, name='lorawan-data'),
     url(r'^dataset/geo-point/$', datasets.geoPointDataset, name='geo-point-data'),
     url(r'^dataset/geo-circle/$', datasets.geoCircleDataset, name='geo-circle-data'),
     url(r'^dataset/geo-polygon/$', datasets.geoPolygonDataset, name='geo-polygon-data'),
