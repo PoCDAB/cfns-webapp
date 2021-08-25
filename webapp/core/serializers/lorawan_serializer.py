@@ -34,8 +34,8 @@ class lorawanSerializer(serializers.HyperlinkedModelSerializer):
         print("=== context ===")
         print('alt', allJSONData["uplink_message"]["decoded_payload"]["alt"])
         print('hdop', allJSONData["uplink_message"]["decoded_payload"]["hdop"])
-        print('lat', allJSONData["uplink_message"]["decoded_payload"]["alt"])
-        print('lon', allJSONData["uplink_message"]["decoded_payload"]["alt"])
+        print('lat', allJSONData["uplink_message"]["decoded_payload"]["lat"])
+        print('lon', allJSONData["uplink_message"]["decoded_payload"]["lon"])
         print("=================== DONE ===========================")
 
         lora_obj = lorawanModel.objects.create(**validated_data)
