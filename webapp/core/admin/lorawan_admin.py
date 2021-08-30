@@ -1,4 +1,5 @@
 from django.contrib import admin
+from leaflet.admin import LeafletGeoAdmin
 from ..models import lorawanModel, gatewayModel, lorawanGatewayConnectionModel
 
 class gatewaymodelInline(admin.TabularInline):
@@ -19,19 +20,18 @@ class lorawanGatewayConnectionModelInline(admin.TabularInline):
     fields = ('lorawan', 'gateway')
     readonly_fields = ('lorawan', 'gateway')
 
-class lorawanAdmin(admin.ModelAdmin):
+class lorawanAdmin(LeafletGeoAdmin):
     list_display = ('id', 'ack', 'msg', 'hdop', 'alt', 'geom')
     list_filter = ()
 
     fieldsets = [
         ("BaseModel", {'fields': ['id', 'created_at', 'updated_at']}),
         ("LoRaWAN Model", {'fields': ['ack', 'msg', 'hdop', 'alt', 'geom']}),
-        #("Gateways", {'fields': ['gateways']}),
     ]
 
     search_fields = ('id', 'ack', 'msg', 'hdop', 'alt', 'gateways')
     ordering = ('id', 'ack', 'msg', 'hdop', 'alt', 'created_at', 'updated_at',)
-    readonly_fields = ('id', 'created_at', 'updated_at', )#'gateways')
+    readonly_fields = ('id', 'created_at', 'updated_at', )
     filter_horizontal = ()
 
     inlines = (lorawanGatewayConnectionModelInline,)
