@@ -10,6 +10,7 @@ message_types = [
     (3, 'Polygon'), # x1,x2,y1,y2
 ]
 
+# Form for DAB+ type selection
 class SelectDABType(forms.Form):
     messagetype = forms.IntegerField(label='Message Type', widget=forms.Select(choices=message_types))
 
@@ -19,7 +20,7 @@ LEAFLET_WIDGET_ATTRS = {
     'map_srid': 4326,
 }
 
-
+# Form to send message via DAB+
 class SendDABForm_message(forms.Form):
     ship_id = forms.CharField(label='Ship identifier', max_length=32)
     message = forms.CharField(label='Message', max_length=64)
@@ -27,6 +28,7 @@ class SendDABForm_message(forms.Form):
     class Meta:
         model = geoMessageModel
 
+# Form to send a Point via DAB+
 class SendDABForm_point(forms.Form):
     ship_id = forms.CharField(label='Ship identifier', max_length=256)
     message = forms.CharField(label='Message', max_length=64)
@@ -35,6 +37,7 @@ class SendDABForm_point(forms.Form):
     class Meta:
         model = geoPointModel
 
+# Form to send a Circle via DAB+
 class SendDABForm_circle(forms.Form):
     ship_id = forms.CharField(label='Ship identifier', max_length=256)
     message = forms.CharField(label='Message', max_length=64)
@@ -44,6 +47,7 @@ class SendDABForm_circle(forms.Form):
     class Meta:
         model = geoCircleModel
 
+# Form to send a Polygon via DAB+
 class SendDABForm_polygon(forms.Form):
     ship_id = forms.CharField(label='Ship identifier', max_length=256)
     message = forms.CharField(label='Message', max_length=64)

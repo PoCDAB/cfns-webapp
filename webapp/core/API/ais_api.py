@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 from ..serializers import aisSerializer
 from ..models import aisDecodedModel
- 
+
+# Viewset for AIS, related to the API
 class AisViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows AIS to be added, viewed or edited.

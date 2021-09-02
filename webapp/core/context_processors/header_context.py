@@ -1,3 +1,4 @@
+# Define the nav menu of the webapplication, located at the header
 def header_context(request):
     nav_menu = {}
     nav_menu['nav_menu'] = {}

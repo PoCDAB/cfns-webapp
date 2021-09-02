@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from ..forms import contactForm
 
+# returns the contact template with the contactform
 def contactView(request):
     if request.method == 'POST':
         form = contactForm(request.POST)

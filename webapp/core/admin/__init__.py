@@ -15,6 +15,7 @@ admin.site.register(aisDecodedModel, aisDecodedAdmin)
 admin.site.register(dabModel, dabAdmin)
 admin.site.register(lorawanModel, lorawanAdmin)
 
+# Register DB models for the ADMIN view of the geographic points on the GIS map 
 admin.site.register(geoMessageModel, geoMessageNotificationAdmin)
 admin.site.register(geoPointModel, geoMessagePointNotificationAdmin)
 admin.site.register(geoCircleModel, geoMessageCircleNotificationAdmin)

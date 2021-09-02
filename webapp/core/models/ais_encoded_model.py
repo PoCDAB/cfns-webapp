@@ -2,8 +2,8 @@ from django.db import models
 from .base_model import BaseModel
 from django.utils import timezone
 
+# Database model for encoded AIS
 class aisEncodedModel(BaseModel):
-    
     received_from = models.CharField(
         max_length=128,
     )

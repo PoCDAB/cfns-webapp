@@ -6,6 +6,7 @@ from ..models import geoPointModel, geoCircleModel, geoPolygonModel
 
 from ..code import alterGeoData
 
+# returns fakeAcknowledgement template
 @login_required(login_url='/login/')
 def fakeAcknowledgementView(request):
     # if this is a POST request we need to process the form data
@@ -31,6 +32,7 @@ def fakeAcknowledgementView(request):
     
     return render(request, 'fake_acknowledgement.html', {'all_objects': objects })
 
+# returns the correct model through dab_id
 def getParentByDABid(dab_id):
     if geoPointModel.objects.filter(dab=dab_id):
         return geoPointModel.objects.get(dab=dab_id)

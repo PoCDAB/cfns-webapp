@@ -8,6 +8,7 @@ from ..code import createGeoData
 
 from django.conf import settings
 
+# returns the sen DAB+ template
 @login_required(login_url='/login/')
 def sendDabView(request):
     # if this is a POST request we need to process the form data
@@ -38,7 +39,7 @@ def sendDabView(request):
     startform = SelectDABType()
     return render(request, 'send_dab.html', {'startform': startform})
 
-
+# returns the correct model through dab_id
 def getCorrectForm(messagetype, postRequest = None):
     if messagetype == 0:
         return SendDABForm_message(postRequest)

@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 from ..serializers import lorawanSerializer
 from ..models import lorawanModel
- 
+
+# Viewset for LoRaWAN, related to the API
 class lorawanViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows AIS to be added, viewed or edited.

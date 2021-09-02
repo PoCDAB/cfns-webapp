@@ -1,12 +1,13 @@
 from django import forms
 
-# iterable
+# iterable for intrest of this project
 list_interested =(
     ("1", "Yes"),
     ("2", "No"),
     ("3", "Maybe"),
 )
 
+# Define Contact form at the Contact page
 class contactForm(forms.Form):
     name = forms.CharField(label="Name", required=True)
     email = forms.EmailField(label="E-mail", required=True)

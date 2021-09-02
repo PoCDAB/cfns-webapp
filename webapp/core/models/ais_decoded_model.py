@@ -3,7 +3,8 @@ from django.contrib.gis.db import models as gismodels
 from django.db.models import Manager as GeoManager
 from .ais_encoded_model import aisEncodedModel
 import json
-\
+
+# Database model for decoded AIS
 class aisDecodedModel(aisEncodedModel):
     mmsi = models.IntegerField(null=True)
     name = models.CharField('Shipname',

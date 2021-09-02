@@ -2,9 +2,8 @@ from rest_framework import serializers
 from django.contrib.gis.geos import Point
 from ..models import lorawanModel, gatewayModel, lorawanGatewayConnectionModel
 
-###
-# Top layer of JSON
-####
+# This LoRaWAN serializer is activated when an API call is received
+# It creates a new DB record for the LoRaWAN message and creates new records for the used gateway, inclusive a join record
 class lorawanSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         allJSONData = self.context["request"].data

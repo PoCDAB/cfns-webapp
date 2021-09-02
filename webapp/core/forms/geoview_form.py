@@ -1,6 +1,7 @@
 from django import forms
 from datetime import datetime    
 
+# Filters at the GIS webpage
 class GeoviewForm(forms.Form):
     DAB = forms.BooleanField(label="DAB+ (Connection with hardware missing)", required=False)
     AIS = forms.BooleanField(label="AIS", required=False, initial=True)

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from base64 import b64encode
 from ..forms import viewBase64AuthcodeForm
 
+# returns the profile template with the Base64Authentication code form
 @login_required(login_url='/login') #if not logged in redirect to /login
 def profileView(request):
     form = viewBase64AuthcodeForm(request.POST)

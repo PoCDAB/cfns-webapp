@@ -3,6 +3,8 @@ from django.contrib.gis.geos import Point
 from pyais import decode_msg
 from ..models import aisDecodedModel
 
+# This AIS serializer is activated when an API call is received
+# It decoded the AIS message and puts the correct fields into a new DB record
 class aisSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         decodedAIS = aisDecodedModel.objects.create(**validated_data)
