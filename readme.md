@@ -1,6 +1,11 @@
 # CFNS webapp
 Webapplication made in Django, with GeoDjango and as database: PostgreSQL extented with PostGIS
 
+This application is supposed to integrate with cfns-half-duplex. This is
+illustrated in the diagram below.
+
+![Integration with other CFNS systems](integration.png)
+
 ## (Easy method) Start up project (via Docker):
 Go into linux (type 'wsl' in Windows)
 
